@@ -1,0 +1,585 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Libre+Caslon+Display&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #0C0B0A;
+  --text-main: #FFFFFF;
+  --accent-purple: #6E5B98;
+  --light-purple: #DDD6F3;
+  --muted-text: #9E9B96;
+  --label-text: #86847F;
+  --glass-base: rgba(12, 11, 10, 0.85);
+  
+  /* Emil Design Engineering Tokens */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --tracking-sans: -0.5px;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-main);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Global button reset — strips browser-default outline/border that
+   causes the "black bar" on purchase / CTA buttons. */
+button {
+  outline: none;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent-purple);
+  outline-offset: 2px;
+}
+
+.font-serif {
+  font-family: 'Libre Caslon Display', serif;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+.font-sans {
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: -0.5px;
+}
+
+.glass-pill {
+  background: rgba(22, 20, 18, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
+}
+
+#site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+/* Progressive Blur Effect */
+#site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  bottom: -40px;
+  z-index: -1;
+  background: linear-gradient(to bottom, 
+    rgba(12, 11, 10, 1) 0%, 
+    rgba(12, 11, 10, 0.8) 50%, 
+    rgba(12, 11, 10, 0) 100%
+  );
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+  pointer-events: none;
+}
+
+.pressable {
+  transition: transform 160ms var(--ease-out);
+}
+
+.pressable:active {
+  transform: scale(0.97);
+}
+
+/* Dual-range price slider styling */
+.price-slider {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.price-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid var(--accent-purple);
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 0 0 4px rgba(110, 91, 152, 0.1);
+}
+
+.price-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid var(--accent-purple);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Card Hover Reveal Classes */
+.card-hover-blur {
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+
+.nicholson-transition {
+  transition: all var(--transition-speed) var(--ease-nav);
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(12px) scale(0.96); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s var(--ease-out) backwards;
+}
+
+/* Product detail page – dynamic background blur */
+.product-bg-blur {
+  filter: blur(40px) brightness(0.3);
+  transform: scale(1.2);
+}
+
+.product-img-blur {
+  filter: blur(48px);
+}
+
+/* Staggered animation delay utilities for card grids */
+.animation-delay-0 { animation-delay: 0ms; }
+.animation-delay-100 { animation-delay: 100ms; }
+.animation-delay-200 { animation-delay: 200ms; }
+.animation-delay-300 { animation-delay: 300ms; }
+.animation-delay-400 { animation-delay: 400ms; }
+.animation-delay-500 { animation-delay: 500ms; }
+.animation-delay-600 { animation-delay: 600ms; }
+.animation-delay-700 { animation-delay: 700ms; }
+.animation-delay-800 { animation-delay: 800ms; }
+.animation-delay-900 { animation-delay: 900ms; }
+
+/* FilterDrawer price track dynamic positioning */
+.price-track-active {
+  left: var(--track-left, 0%);
+  right: var(--track-right, 0%);
+}
+
+/* ==========================================
+   STACKED CATEGORY CARDS
+   ========================================== */
+.category-stack {
+  position: relative;
+  perspective: 800px;
+}
+
+.category-stack-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  overflow: hidden;
+  transition: transform 0.4s var(--ease-out), opacity 0.4s var(--ease-out);
+}
+
+.category-stack-card:nth-child(1) {
+  z-index: 3;
+  transform: rotate(0deg);
+}
+
+.category-stack-card:nth-child(2) {
+  z-index: 2;
+  transform: rotate(3deg) translateX(4px) translateY(4px);
+  opacity: 0.6;
+}
+
+.category-stack-card:nth-child(3) {
+  z-index: 1;
+  transform: rotate(6deg) translateX(8px) translateY(8px);
+  opacity: 0.35;
+}
+
+.category-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  z-index: 10;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-purple);
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--background);
+  box-shadow: 0 2px 8px rgba(110, 91, 152, 0.4);
+}
+
+/* ==========================================
+   PROFILE EDIT MODAL / OVERLAY
+   ========================================== */
+.profile-edit-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-edit-modal {
+  background: #161412;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 32px;
+  width: min(640px, 92vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+}
+
+/* Form field divider */
+.field-divider {
+  height: 0.5px;
+  background: rgba(255, 255, 255, 0.08);
+  width: 100%;
+}
+
+/* Image crop/rotate canvas area */
+.crop-area {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #0C0B0A;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================
+   CONFIRMATION DIALOG
+   ========================================== */
+.confirm-dialog {
+  background: #1A1814;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 32px;
+  width: min(400px, 90vw);
+  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================
+   TOAST NOTIFICATION
+   ========================================== */
+@keyframes toastFade {
+  0% { opacity: 0; transform: translate(-50%, 20px); }
+  15% { opacity: 1; transform: translate(-50%, 0); }
+  85% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, 20px); }
+}
+
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  background: #1A1814;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #4ADE80;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  animation: toastFade 2s ease-in-out forwards;
+}
+
+/* ==========================================
+   MOBILE BOTTOM NAV CONTAINER
+   Fixed to bottom; stacks search bar above nav pill.
+   Full-width minus 16px padding each side.
+   ========================================== */
+.mobile-nav-container {
+  position: fixed;
+  bottom: 24px;
+  /* Span the full viewport width so the search bar
+     can expand to left:16px / right:16px */
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  /* Pointer events only on children, not the transparent wrapper */
+  pointer-events: none;
+}
+
+.mobile-nav-container > * {
+  pointer-events: auto;
+}
+
+.mobile-bottom-pill {
+  background: rgba(22, 20, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border-radius: 99px;
+  padding: 0 20px;
+  height: 48px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  /* Pill must not stretch to full width */
+  width: auto;
+  flex-shrink: 0;
+}
+
+/* Invisible backdrop — full-screen, intercepts taps below search bar */
+.mobile-search-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99; /* below search bar (100) but above page content */
+  background: transparent;
+  cursor: default;
+  pointer-events: auto;
+}
+
+/* Search bar — always in DOM, positioned above nav pill */
+.mobile-search-bar {
+  /* Full width minus 16px each side — container already spans 100vw */
+  width: calc(100% - 32px);
+  /* Closed state */
+  transform-origin: center bottom;
+  transform: scaleX(0.15) scaleY(0.3) translateY(28px);
+  opacity: 0;
+  pointer-events: none;
+  /* Close animation (plays when removing --open class) */
+  transition: transform 280ms ease-in, opacity 280ms ease-in;
+}
+
+/* Guard: no animation on first render */
+.mobile-search-bar--no-transition {
+  transition: none !important;
+}
+
+/* Open state */
+.mobile-search-bar--open {
+  transform: scaleX(1) scaleY(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  /* Spring open */
+  transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 220ms ease;
+}
+
+.mobile-search-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(22, 20, 18, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border-radius: 99px;
+  padding: 0 16px;
+  height: 48px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+
+.mobile-search-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  outline: none;
+  border: none;
+}
+
+.mobile-search-input::placeholder {
+  color: #86847F;
+}
+
+.mobile-search-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #86847F;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.mobile-search-clear:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+/* ==========================================
+   MOBILE HEADER TABS — sticky with blur
+   ========================================== */
+.mobile-header-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(12, 11, 10, 0.8);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  padding: 12px 6px 8px;
+}
+
+.mobile-header-tabs::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: linear-gradient(to bottom, rgba(12, 11, 10, 0.6), transparent);
+  pointer-events: none;
+}
+
+.mobile-tab {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 900;
+  font-size: 17px;
+  letter-spacing: -0.5px;
+  color: var(--muted-text);
+  transition: color 0.2s var(--ease-out);
+  position: relative;
+  cursor: pointer;
+}
+
+.mobile-tab-active {
+  color: white;
+}
+
+.mobile-tab-count {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--label-text);
+  vertical-align: super;
+  margin-left: 1px;
+}
+
+/* ==========================================
+   PINTEREST MASONRY GRID (mobile)
+   ========================================== */
+.masonry-grid {
+  columns: 2;
+  column-gap: 12px;
+}
+
+.masonry-grid > * {
+  break-inside: avoid;
+  margin-bottom: 12px;
+}
+
+/* ==========================================
+   MOBILE PRODUCT SHEET — slide up from bottom
+   ========================================== */
+@keyframes sheetSlideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes sheetSlideDown {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+
+.product-sheet {
+  animation: sheetSlideUp 0.4s var(--ease-out) forwards;
+}
+
+.product-sheet-closing {
+  animation: sheetSlideDown 0.3s var(--ease-out) forwards;
+}
+
+/* ==========================================
+   MOBILE-ONLY BREAKPOINT (≤ 767px)
+   ========================================== */
+@media (max-width: 767px) {
+  .mobile-nav-container {
+    display: flex;
+  }
+
+  #site-header {
+    display: none;
+  }
+
+  main {
+    padding-bottom: 80px !important;
+    padding-top: 0 !important;
+  }
+}
+
+/* ==========================================
+   HORIZONTAL SWIPE CAROUSEL
+   ========================================== */
+.swipe-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 8px;
+}
+
+.swipe-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.swipe-carousel > * {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}

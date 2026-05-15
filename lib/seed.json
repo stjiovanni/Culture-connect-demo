@@ -1,0 +1,1328 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "company_id": 1,
+            "name": "Watercolour Painting Masterclass",
+            "description": "An immersive half-day watercolour session exploring loose, expressive mark-making. Participants work from still-life arrangements using professional-grade pigments and cold-press paper. Suitable for all levels.",
+            "cultural_benefits": "Builds patience, creative confidence and fine motor skills. Connects participants to a tradition of British landscape painting rooted in the region.",
+            "size_quantity": "Half day - 3 hrs, max 12 participants",
+            "price_tier_id": 1,
+            "price": "65.00",
+            "category": "Creative Workshops",
+            "type": "service",
+            "area_id": 1,
+            "awards": null,
+            "image_filename": "Watercolour painting close.jpeg",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 2,
+            "company_id": 1,
+            "name": "Watercolour Painting - Complete Starter Kit",
+            "description": "A curated set of professional watercolour supplies: 24-pigment pan set, two cold-press pads (A4 & A3), three kolinsky sable brushes, and a colour-mixing guide booklet. Perfect for home practice after a workshop.",
+            "cultural_benefits": "Encourages continued creative practice at home. Supports local arts suppliers and reduces barriers to entry for aspiring painters.",
+            "size_quantity": "Kit - 1 set",
+            "price_tier_id": 1,
+            "price": "89.00",
+            "category": "Creative Workshops",
+            "type": "product",
+            "area_id": 2,
+            "awards": null,
+            "image_filename": "Watercolour painting close.jpeg",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 3,
+            "company_id": 1,
+            "name": "Life Drawing Open Session",
+            "description": "A weekly open studio life drawing event with a professional model and optional tutor feedback. All media welcome - pencil, charcoal, ink. Easels and drawing boards provided.",
+            "cultural_benefits": "Develops observational drawing skills and body-positive art education. Creates a safe, inclusive creative community space.",
+            "size_quantity": "Weekly, 2.5 hrs, drop-in",
+            "price_tier_id": 1,
+            "price": "18.00",
+            "category": "Creative Workshops",
+            "type": "service",
+            "area_id": 3,
+            "awards": null,
+            "image_filename": "life drawing session.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 4,
+            "company_id": 1,
+            "name": "Community Mural Design Commission",
+            "description": "Verdigris Studio designs and paints a bespoke community mural for public or semi-public spaces. Includes community consultation sessions, concept design, and a two-day paint installation.",
+            "cultural_benefits": "Transforms public spaces with culturally meaningful imagery. Engages local residents in collaborative storytelling through visual art.",
+            "size_quantity": "Per project - up to 15m\u252c\u2593",
+            "price_tier_id": 3,
+            "price": "1200.00",
+            "category": "Cultural Experiences",
+            "type": "service",
+            "area_id": 1,
+            "awards": "Hertfordshire Arts Commission Award 2024",
+            "image_filename": "Iris flower armchair.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "premium"
+        },
+        {
+            "id": 5,
+            "company_id": 1,
+            "name": "Pottery Throwing Taster Session",
+            "description": "Get hands on the wheel in this 2-hour introductory pottery session. Learn to centre, open and pull clay into a small vessel. Firing and collection included in the price.",
+            "cultural_benefits": "Connects participants to one of humanity's oldest craft traditions. Develops tactile creativity and mindfulness through making.",
+            "size_quantity": "2 hrs, max 8 participants",
+            "price_tier_id": 1,
+            "price": "55.00",
+            "category": "Creative Workshops",
+            "type": "service",
+            "area_id": 2,
+            "awards": null,
+            "image_filename": "pottery making.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 6,
+            "company_id": 1,
+            "name": "Hand-Thrown Ceramic Vase - Painted Edition",
+            "description": "A signed, hand-thrown stoneware vase painted in a traditional botanical motif by Verdigris Studio artists. Each piece is one-of-a-kind, food safe, and kiln-fired to 1260\u252c\u2591C.",
+            "cultural_benefits": "Supports local ceramic craft tradition. Brings hand-made artisanal goods into everyday domestic life.",
+            "size_quantity": "H: 28cm approx, 1 unit",
+            "price_tier_id": 2,
+            "price": "145.00",
+            "category": "Handmade Goods",
+            "type": "product",
+            "area_id": 1,
+            "awards": null,
+            "image_filename": "vase painting.jpeg",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "moderate"
+        },
+        {
+            "id": 7,
+            "company_id": 2,
+            "name": "Open Mic Night - Monthly Event",
+            "description": "A curated open mic evening at a local venue, hosting up to 20 performers across spoken word, comedy, original music, and experimental performance. Doors open at 7 pm, first act at 7:30.",
+            "cultural_benefits": "Provides a platform for emerging local voices and performers. Builds community through live shared cultural experience.",
+            "size_quantity": "Monthly, eve. 3 hrs, 80 seats",
+            "price_tier_id": 1,
+            "price": "12.00",
+            "category": "Performing Arts",
+            "type": "service",
+            "area_id": 4,
+            "awards": null,
+            "image_filename": "Open mic field.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 8,
+            "company_id": 2,
+            "name": "Youth Drama & Devising Programme",
+            "description": "A 10-week after-school drama programme for ages 13-18. Participants devise, rehearse, and perform an original short piece at a public showcase. No experience necessary.",
+            "cultural_benefits": "Develops communication, teamwork and self-expression in young people. Keeps youth engaged with live performance and storytelling.",
+            "size_quantity": "10 weeks, 2 hrs\/session, max 16",
+            "price_tier_id": 1,
+            "price": "95.00",
+            "category": "Performing Arts",
+            "type": "service",
+            "area_id": 5,
+            "awards": "Herts Youth Arts Recognition 2023",
+            "image_filename": "Youth drama.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 9,
+            "company_id": 2,
+            "name": "Community Theatre Production - Spring Season",
+            "description": "Amplify Arts presents its biannual community theatre production. Ticket includes the performance, programme, and a post-show discussion with the cast and director.",
+            "cultural_benefits": "Brings high-quality theatre to local communities. Celebrates shared cultural narratives and regional stories.",
+            "size_quantity": "Single ticket, ~2 hrs",
+            "price_tier_id": 1,
+            "price": "22.00",
+            "category": "Performing Arts",
+            "type": "service",
+            "area_id": 3,
+            "awards": "Eastern Arts Award Nominee 2024",
+            "image_filename": "Community theatre.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 10,
+            "company_id": 2,
+            "name": "Butterfly Contemporary Dance Workshop",
+            "description": "A two-hour contemporary dance workshop exploring movement inspired by natural forms. Suitable for all abilities - no dance experience required. Led by award-winning choreographer Lola Eze.",
+            "cultural_benefits": "Promotes physical wellbeing alongside cultural participation. Explores movement as a language of cultural expression.",
+            "size_quantity": "2 hrs, max 20 participants",
+            "price_tier_id": 1,
+            "price": "35.00",
+            "category": "Performing Arts",
+            "type": "service",
+            "area_id": 2,
+            "awards": null,
+            "image_filename": "butterfly fancer.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 11,
+            "company_id": 2,
+            "name": "The Byrd Theatre Experience - Premium Ticket",
+            "description": "A premium seated ticket for Amplify Arts's flagship evening performance at The Byrd Theatre, including reserved seating, programme, and post-show champagne reception.",
+            "cultural_benefits": "Celebrates the live theatre tradition. Connects audiences to outstanding regional performance in a historic venue.",
+            "size_quantity": "1 ticket, eve. 3 hrs",
+            "price_tier_id": 2,
+            "price": "68.00",
+            "category": "Cultural Experiences",
+            "type": "service",
+            "area_id": 6,
+            "awards": null,
+            "image_filename": "the byrd.webp",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "moderate"
+        },
+        {
+            "id": 12,
+            "company_id": 2,
+            "name": "Professional Stage Lighting Hire",
+            "description": "Hire Amplify Arts's professional LED stage lighting rig for your community event or performance. Includes setup, operation, and breakdown by a qualified technician.",
+            "cultural_benefits": "Enables smaller community groups to stage professional-quality events. Builds technical capacity in the local arts sector.",
+            "size_quantity": "Per event, up to 6 hrs",
+            "price_tier_id": 2,
+            "price": "320.00",
+            "category": "Creative Services",
+            "type": "service",
+            "area_id": 4,
+            "awards": null,
+            "image_filename": "theatre with interesting lights.jpeg",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "moderate"
+        },
+        {
+            "id": 13,
+            "company_id": 3,
+            "name": "Self-Publishing Masterclass",
+            "description": "A full-day intensive workshop covering every stage of self-publishing: manuscript preparation, cover design briefing, formatting, ISBN registration, print-on-demand distribution, and marketing your book.",
+            "cultural_benefits": "Democratises publishing and amplifies marginalised voices. Supports the creation of local literary culture.",
+            "size_quantity": "Full day, 6 hrs, max 15",
+            "price_tier_id": 1,
+            "price": "120.00",
+            "category": "Literary & Media",
+            "type": "service",
+            "area_id": 1,
+            "awards": null,
+            "image_filename": "Self-publishing workshop.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 14,
+            "company_id": 3,
+            "name": "Hand-Stitched Zine - Collector's Edition",
+            "description": "A limited run of 50 hand-stitched zines produced by Inkwell Press, curating poetry, illustration, and essays by Hertfordshire-based creatives. Each copy individually numbered and signed.",
+            "cultural_benefits": "Celebrates grassroots print culture. Provides a tangible cultural artefact by and for the local community.",
+            "size_quantity": "A5, 48 pages, limited run 50",
+            "price_tier_id": 1,
+            "price": "18.00",
+            "category": "Literary & Media",
+            "type": "product",
+            "area_id": 3,
+            "awards": null,
+            "image_filename": "Hand-stitched zine laid open.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 15,
+            "company_id": 3,
+            "name": "The Picture of Dorian Gray - Annotated Study Edition",
+            "description": "A beautifully typeset annotated edition of Oscar Wilde's classic novel, with critical essays, historical context, and original illustrations commissioned by Inkwell Press.",
+            "cultural_benefits": "Encourages engagement with classic literature and its cultural legacy. Connects readers to themes of identity, art, and society.",
+            "size_quantity": "Hardback, 380pp, 1 unit",
+            "price_tier_id": 1,
+            "price": "32.00",
+            "category": "Literary & Media",
+            "type": "product",
+            "area_id": 5,
+            "awards": null,
+            "image_filename": "dorian gray.webp",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 16,
+            "company_id": 3,
+            "name": "The Great Gatsby - Limited Folio Edition",
+            "description": "A premium folio-format edition of F. Scott Fitzgerald's The Great Gatsby, printed on laid paper, cloth-bound, with a ribbon marker and slipcase. A statement collector's piece.",
+            "cultural_benefits": "Promotes literary appreciation and reading culture. A beautiful physical artefact celebrating great storytelling.",
+            "size_quantity": "Folio, 180pp, slipcased, 1 unit",
+            "price_tier_id": 2,
+            "price": "210.00",
+            "category": "Literary & Media",
+            "type": "product",
+            "area_id": 3,
+            "awards": null,
+            "image_filename": "The great gatsby.webp",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "moderate"
+        },
+        {
+            "id": 17,
+            "company_id": 3,
+            "name": "Monthly Poetry & Prose Reading Circle",
+            "description": "A facilitated monthly literary gathering exploring a different text each session. Includes a reading, guided discussion, and optional creative writing response exercise. Tea and biscuits provided.",
+            "cultural_benefits": "Fosters deep reading habits and community dialogue. Creates an accessible intellectual and social space for all.",
+            "size_quantity": "Monthly, 2 hrs, max 25, drop-in",
+            "price_tier_id": 1,
+            "price": "8.00",
+            "category": "Literary & Media",
+            "type": "service",
+            "area_id": 6,
+            "awards": null,
+            "image_filename": "dorian gray 2.webp",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 18,
+            "company_id": 4,
+            "name": "St Albans Roman Heritage Walk",
+            "description": "A two-hour guided walking tour of St Albans' Roman heritage, taking in Verulamium Park, the Roman mosaic floors, the hypocaust remains, and the city walls. Led by a qualified historian.",
+            "cultural_benefits": "Connects residents to the deep history of their locality. Builds civic pride and historical literacy.",
+            "size_quantity": "2 hrs, guided, max 20",
+            "price_tier_id": 1,
+            "price": "16.00",
+            "category": "Cultural Heritage",
+            "type": "service",
+            "area_id": 1,
+            "awards": null,
+            "image_filename": "natural history museum.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 19,
+            "company_id": 4,
+            "name": "York Shambles & Medieval Streets Guided Experience",
+            "description": "A curated experience recreating the atmosphere of a medieval market street, visiting preserved historic buildings, learning about craft guilds, and sampling heritage foods. Available as a day trip.",
+            "cultural_benefits": "Brings medieval history to life through immersive storytelling. Deepens understanding of British urban heritage.",
+            "size_quantity": "Full day, 5 hrs, max 15",
+            "price_tier_id": 2,
+            "price": "85.00",
+            "category": "Cultural Heritage",
+            "type": "service",
+            "area_id": 2,
+            "awards": "Visit England Quality Award 2023",
+            "image_filename": "product_19_1776984315.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "moderate"
+        },
+        {
+            "id": 20,
+            "company_id": 4,
+            "name": "Gothic Architecture & Mystery Trail",
+            "description": "An atmospheric evening heritage trail exploring Gothic architecture in the local area, weaving in folklore, legend, and architectural history. Lantern provided.",
+            "cultural_benefits": "Illuminates hidden layers of local cultural history. Engages participants in narrative-driven heritage exploration.",
+            "size_quantity": "Evening, 2 hrs, max 18",
+            "price_tier_id": 1,
+            "price": "22.00",
+            "category": "Cultural Heritage",
+            "type": "service",
+            "area_id": 3,
+            "awards": null,
+            "image_filename": "product_20_1776984351.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 21,
+            "company_id": 5,
+            "name": "Brand Identity Design Package",
+            "description": "Full brand identity development for a cultural organisation or creative SME: strategy session, logo suite (primary, secondary, icon), colour palette, typography guide, and brand usage document. Delivered in 3 weeks.",
+            "cultural_benefits": "Elevates the visual presence of local cultural organisations. Enables SMEs to compete professionally in a crowded marketplace.",
+            "size_quantity": "Per project, 3 wk delivery",
+            "price_tier_id": 3,
+            "price": "850.00",
+            "category": "Creative Services",
+            "type": "service",
+            "area_id": 8,
+            "awards": null,
+            "image_filename": "Brandiing.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "premium"
+        },
+        {
+            "id": 22,
+            "company_id": 5,
+            "name": "Brand Mood Board & Visual Strategy Session",
+            "description": "A half-day brand positioning and mood board workshop for cultural businesses. Pixel & Thread's creative team works with you to define your visual direction, audience, and tone.",
+            "cultural_benefits": "Gives small cultural businesses the strategic tools to communicate their identity effectively.",
+            "size_quantity": "Half day, 3 hrs, 1 client org",
+            "price_tier_id": 1,
+            "price": "175.00",
+            "category": "Creative Services",
+            "type": "service",
+            "area_id": 2,
+            "awards": null,
+            "image_filename": "Brand mood board flat lay.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 23,
+            "company_id": 5,
+            "name": "Event Photography - Full Day Coverage",
+            "description": "Professional event photography for cultural events, festivals, and community gatherings. Includes a fully edited gallery of 200+ images delivered within 5 working days.",
+            "cultural_benefits": "Creates a lasting visual record of community cultural moments. Supports documentation of local arts and heritage events.",
+            "size_quantity": "Full day, 8 hrs, 200+ edited images",
+            "price_tier_id": 2,
+            "price": "490.00",
+            "category": "Creative Services",
+            "type": "service",
+            "area_id": 5,
+            "awards": null,
+            "image_filename": "event photographer in action.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "moderate"
+        },
+        {
+            "id": 24,
+            "company_id": 5,
+            "name": "Graphic Design Retainer - Monthly",
+            "description": "A monthly graphic design retainer providing up to 20 hours of design support: social media graphics, posters, flyers, and digital assets for cultural organisations and SMEs.",
+            "cultural_benefits": "Gives cultural organisations consistent, professional visual communications without full-time design costs.",
+            "size_quantity": "Monthly, 20 hrs included",
+            "price_tier_id": 2,
+            "price": "400.00",
+            "category": "Creative Services",
+            "type": "service",
+            "area_id": 4,
+            "awards": null,
+            "image_filename": "Graphic design.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "moderate"
+        },
+        {
+            "id": 25,
+            "company_id": 5,
+            "name": "High-End Exhibition Display Furniture - Hire",
+            "description": "Hire Pixel & Thread's curated collection of high-end display furniture for exhibitions and cultural events: pedestals, vitrines, gallery benches, and mobile screens.",
+            "cultural_benefits": "Enables community galleries and pop-up cultural events to present work at a professional standard.",
+            "size_quantity": "Per item per event, see pricing",
+            "price_tier_id": 2,
+            "price": "250.00",
+            "category": "Creative Services",
+            "type": "service",
+            "area_id": 6,
+            "awards": null,
+            "image_filename": "high end furniture (1).jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "moderate"
+        },
+        {
+            "id": 26,
+            "company_id": 5,
+            "name": "High-End Ceramic Display Plinth - Purchase",
+            "description": "A beautifully crafted solid oak display plinth, ideal for sculpture, ceramics, or cultural artefacts. Available in three heights (30cm, 60cm, 90cm). Finished in raw, waxed, or painted white.",
+            "cultural_benefits": "Enhances the presentation of cultural and artistic objects in homes and public spaces.",
+            "size_quantity": "Per unit, 3 heights available",
+            "price_tier_id": 2,
+            "price": "195.00",
+            "category": "Handmade Goods",
+            "type": "product",
+            "area_id": 1,
+            "awards": null,
+            "image_filename": "high end furniture (2).jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "moderate"
+        },
+        {
+            "id": 27,
+            "company_id": 6,
+            "name": "Digital Illustration Portrait - Commission",
+            "description": "Signal & Noise creates a bespoke editorial-style digital illustration portrait, inspired by your brief, delivered as a high-resolution print-ready file and web-optimised version.",
+            "cultural_benefits": "Celebrates personal identity through a contemporary art form. Supports local digital artists in sustaining a creative practice.",
+            "size_quantity": "1 portrait, A3 hi-res + web",
+            "price_tier_id": 2,
+            "price": "220.00",
+            "category": "Literary & Media",
+            "type": "service",
+            "area_id": 6,
+            "awards": null,
+            "image_filename": "Digital illustration editorial esque potrait.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "moderate"
+        },
+        {
+            "id": 28,
+            "company_id": 6,
+            "name": "Digital Illustration Workshop - Introduction",
+            "description": "A beginner's digital illustration workshop using Procreate on iPad. Participants learn brushwork, layers, colour theory, and composition. iPads provided. Take your artwork home digitally.",
+            "cultural_benefits": "Opens digital creative tools to new audiences. Builds digital literacy alongside artistic skills.",
+            "size_quantity": "3 hrs, max 10, iPads provided",
+            "price_tier_id": 1,
+            "price": "75.00",
+            "category": "Creative Workshops",
+            "type": "service",
+            "area_id": 5,
+            "awards": null,
+            "image_filename": "Digital illustration.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "affordable"
+        },
+        {
+            "id": 29,
+            "company_id": 6,
+            "name": "Podcast Production - Full Episode Package",
+            "description": "End-to-end podcast production for cultural organisations: pre-production planning, studio recording (up to 2 hrs), professional editing, sound design, and mastered audio delivered in 48 hrs.",
+            "cultural_benefits": "Amplifies cultural voices and stories to digital audiences. Supports the growth of local content creation.",
+            "size_quantity": "Per episode, up to 2 hr raw",
+            "price_tier_id": 2,
+            "price": "380.00",
+            "category": "Literary & Media",
+            "type": "service",
+            "area_id": 3,
+            "awards": null,
+            "image_filename": "Podcast recording setup.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "moderate"
+        },
+        {
+            "id": 30,
+            "company_id": 6,
+            "name": "Animation Storyboard Commission",
+            "description": "Signal & Noise produces a full storyboard for a short animation project (up to 2 minutes): brief consultation, pencil thumbnails, refined digital storyboard panels, and animatic.",
+            "cultural_benefits": "Supports the creation of animated cultural content and visual storytelling. Builds capacity for digital arts production.",
+            "size_quantity": "Up to 2-min animation, 30-40 panels",
+            "price_tier_id": 3,
+            "price": "650.00",
+            "category": "Literary & Media",
+            "type": "service",
+            "area_id": 4,
+            "awards": null,
+            "image_filename": "product_30_1776982484.png",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "premium"
+        },
+        {
+            "id": 31,
+            "company_id": 6,
+            "name": "Content Creation Subscription - 3 Months",
+            "description": "Three months of social content creation for cultural organisations: 12 posts\/month across Instagram and Facebook, including photography, short video reels, and caption copywriting.",
+            "cultural_benefits": "Sustains digital engagement between in-person events. Helps cultural organisations grow local and regional audiences.",
+            "size_quantity": "3 months, 12 posts\/month",
+            "price_tier_id": 2,
+            "price": "450.00",
+            "category": "Creative Services",
+            "type": "service",
+            "area_id": 2,
+            "awards": null,
+            "image_filename": "Digital illustration.jfif",
+            "is_available": 1,
+            "created_at": "2026-04-23 02:07:02",
+            "pricing_category": "moderate"
+        }
+    ],
+    "companies": [
+        {
+            "id": 1,
+            "name": "Verdigris Studio",
+            "contact_email": "hello@verdigris.co.uk",
+            "contact_phone": "01727 000001",
+            "portfolio_url": "https:\/\/verdigris.co.uk",
+            "profile_image": null,
+            "description": "Contemporary visual arts studio offering workshops, life drawing, ceramics, and community mural commissions across Hertfordshire.",
+            "category": "Visual Arts",
+            "created_at": "2026-04-19 23:37:19",
+            "email": null,
+            "phone": null
+        },
+        {
+            "id": 2,
+            "name": "Amplify Arts",
+            "contact_email": "info@amplifyarts.com",
+            "contact_phone": "01923 000002",
+            "portfolio_url": "https:\/\/amplifyarts.com",
+            "profile_image": null,
+            "description": "Performing arts collective running live events, open mic nights, youth drama programmes, and community theatre productions.",
+            "category": "Performing Arts",
+            "created_at": "2026-04-19 23:37:19",
+            "email": null,
+            "phone": null
+        },
+        {
+            "id": 3,
+            "name": "Inkwell Press",
+            "contact_email": "press@inkwell.co.uk",
+            "contact_phone": "01992 000003",
+            "portfolio_url": "https:\/\/inkwellpress.co.uk",
+            "profile_image": null,
+            "description": "Independent literary publisher and creative writing facilitator. Producing zines, poetry chapbooks, and self-publishing masterclasses.",
+            "category": "Literature",
+            "created_at": "2026-04-19 23:37:19",
+            "email": null,
+            "phone": null
+        },
+        {
+            "id": 4,
+            "name": "Heritage Walks Herts",
+            "contact_email": "tours@heritageherts.com",
+            "contact_phone": "01438 000004",
+            "portfolio_url": null,
+            "profile_image": null,
+            "description": "Guided heritage and history tours across Hertfordshire. Specialising in architectural walks, local history storytelling, and cultural trail tours.",
+            "category": "Heritage",
+            "created_at": "2026-04-19 23:37:19",
+            "email": null,
+            "phone": null
+        },
+        {
+            "id": 5,
+            "name": "Pixel & Thread",
+            "contact_email": "studio@pixelthread.co.uk",
+            "contact_phone": "01727 000005",
+            "portfolio_url": "https:\/\/pixelthread.co.uk",
+            "profile_image": null,
+            "description": "Creative services studio offering branding, event photography, graphic design, and videography for cultural organisations and SMEs.",
+            "category": "Creative Services",
+            "created_at": "2026-04-19 23:37:19",
+            "email": null,
+            "phone": null
+        },
+        {
+            "id": 6,
+            "name": "Signal & Noise Collective",
+            "contact_email": "hello@signalnoise.co.uk",
+            "contact_phone": "01923 000006",
+            "portfolio_url": "https:\/\/signalnoise.co.uk",
+            "profile_image": null,
+            "description": "Digital media studio offering podcast production, digital illustration workshops, animation tasters, and content creation for community groups.",
+            "category": "Digital Media",
+            "created_at": "2026-04-19 23:37:19",
+            "email": null,
+            "phone": null
+        }
+    ],
+    "areas": [
+        {
+            "id": 1,
+            "name": "St Albans",
+            "region": "Hertfordshire",
+            "created_at": "2026-04-19 23:37:19"
+        },
+        {
+            "id": 2,
+            "name": "Watford",
+            "region": "Hertfordshire",
+            "created_at": "2026-04-19 23:37:19"
+        },
+        {
+            "id": 3,
+            "name": "Hertford",
+            "region": "Hertfordshire",
+            "created_at": "2026-04-19 23:37:19"
+        },
+        {
+            "id": 4,
+            "name": "Stevenage",
+            "region": "Hertfordshire",
+            "created_at": "2026-04-19 23:37:19"
+        },
+        {
+            "id": 5,
+            "name": "Luton",
+            "region": "Bedfordshire",
+            "created_at": "2026-04-19 23:37:19"
+        },
+        {
+            "id": 6,
+            "name": "London",
+            "region": "North",
+            "created_at": "2026-04-22 17:26:28"
+        },
+        {
+            "id": 7,
+            "name": "Greenwich",
+            "region": null,
+            "created_at": "2026-04-24 21:17:33"
+        },
+        {
+            "id": 8,
+            "name": "Fulham",
+            "region": null,
+            "created_at": "2026-05-01 09:07:09"
+        }
+    ],
+    "votes": [
+        {
+            "id": 1,
+            "resident_id": 6,
+            "product_id": 1,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 2,
+            "resident_id": 6,
+            "product_id": 7,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 3,
+            "resident_id": 6,
+            "product_id": 13,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 4,
+            "resident_id": 6,
+            "product_id": 19,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 5,
+            "resident_id": 7,
+            "product_id": 2,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 6,
+            "resident_id": 7,
+            "product_id": 8,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 7,
+            "resident_id": 7,
+            "product_id": 14,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 8,
+            "resident_id": 7,
+            "product_id": 20,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 9,
+            "resident_id": 7,
+            "product_id": 25,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 10,
+            "resident_id": 2,
+            "product_id": 3,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 11,
+            "resident_id": 2,
+            "product_id": 9,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 12,
+            "resident_id": 2,
+            "product_id": 21,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 13,
+            "resident_id": 3,
+            "product_id": 4,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 14,
+            "resident_id": 3,
+            "product_id": 10,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 15,
+            "resident_id": 3,
+            "product_id": 16,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 16,
+            "resident_id": 3,
+            "product_id": 22,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 17,
+            "resident_id": 3,
+            "product_id": 26,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 18,
+            "resident_id": 4,
+            "product_id": 5,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 19,
+            "resident_id": 4,
+            "product_id": 11,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 20,
+            "resident_id": 4,
+            "product_id": 17,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 21,
+            "resident_id": 4,
+            "product_id": 23,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 22,
+            "resident_id": 5,
+            "product_id": 6,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 23,
+            "resident_id": 5,
+            "product_id": 12,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 24,
+            "resident_id": 5,
+            "product_id": 18,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:07:02"
+        },
+        {
+            "id": 25,
+            "resident_id": 15,
+            "product_id": 1,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 26,
+            "resident_id": 15,
+            "product_id": 5,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 27,
+            "resident_id": 15,
+            "product_id": 10,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 28,
+            "resident_id": 16,
+            "product_id": 2,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 29,
+            "resident_id": 16,
+            "product_id": 15,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 30,
+            "resident_id": 17,
+            "product_id": 3,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 31,
+            "resident_id": 17,
+            "product_id": 20,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 32,
+            "resident_id": 17,
+            "product_id": 25,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 33,
+            "resident_id": 18,
+            "product_id": 4,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 34,
+            "resident_id": 18,
+            "product_id": 9,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 35,
+            "resident_id": 19,
+            "product_id": 18,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 36,
+            "resident_id": 19,
+            "product_id": 19,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 37,
+            "resident_id": 20,
+            "product_id": 8,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 38,
+            "resident_id": 20,
+            "product_id": 11,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 39,
+            "resident_id": 21,
+            "product_id": 13,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 40,
+            "resident_id": 21,
+            "product_id": 14,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 41,
+            "resident_id": 22,
+            "product_id": 7,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 42,
+            "resident_id": 23,
+            "product_id": 22,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 43,
+            "resident_id": 24,
+            "product_id": 6,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 44,
+            "resident_id": 24,
+            "product_id": 26,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:26:05"
+        },
+        {
+            "id": 45,
+            "resident_id": 7,
+            "product_id": 9,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:33:17"
+        },
+        {
+            "id": 46,
+            "resident_id": 7,
+            "product_id": 12,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 02:33:28"
+        },
+        {
+            "id": 47,
+            "resident_id": 14,
+            "product_id": 6,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 22:49:13"
+        },
+        {
+            "id": 48,
+            "resident_id": 14,
+            "product_id": 3,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 22:49:22"
+        },
+        {
+            "id": 49,
+            "resident_id": 25,
+            "product_id": 6,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 23:11:48"
+        },
+        {
+            "id": 50,
+            "resident_id": 25,
+            "product_id": 25,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 23:12:01"
+        },
+        {
+            "id": 51,
+            "resident_id": 7,
+            "product_id": 1,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 23:34:54"
+        },
+        {
+            "id": 52,
+            "resident_id": 7,
+            "product_id": 3,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 23:35:05"
+        },
+        {
+            "id": 53,
+            "resident_id": 14,
+            "product_id": 5,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 23:36:54"
+        },
+        {
+            "id": 54,
+            "resident_id": 14,
+            "product_id": 4,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 23:37:02"
+        },
+        {
+            "id": 55,
+            "resident_id": 7,
+            "product_id": 5,
+            "vote_value": "no",
+            "voted_at": "2026-04-23 23:40:17"
+        },
+        {
+            "id": 56,
+            "resident_id": 26,
+            "product_id": 11,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 23:43:03"
+        },
+        {
+            "id": 57,
+            "resident_id": 26,
+            "product_id": 16,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 23:43:15"
+        },
+        {
+            "id": 58,
+            "resident_id": 26,
+            "product_id": 4,
+            "vote_value": "yes",
+            "voted_at": "2026-04-23 23:59:24"
+        },
+        {
+            "id": 59,
+            "resident_id": 7,
+            "product_id": 10,
+            "vote_value": "yes",
+            "voted_at": "2026-04-24 00:42:48"
+        },
+        {
+            "id": 60,
+            "resident_id": 27,
+            "product_id": 30,
+            "vote_value": "yes",
+            "voted_at": "2026-04-24 21:13:06"
+        },
+        {
+            "id": 61,
+            "resident_id": 27,
+            "product_id": 11,
+            "vote_value": "yes",
+            "voted_at": "2026-04-24 21:13:40"
+        },
+        {
+            "id": 62,
+            "resident_id": 14,
+            "product_id": 29,
+            "vote_value": "yes",
+            "voted_at": "2026-04-25 02:53:54"
+        },
+        {
+            "id": 63,
+            "resident_id": 29,
+            "product_id": 13,
+            "vote_value": "yes",
+            "voted_at": "2026-05-01 09:04:48"
+        },
+        {
+            "id": 64,
+            "resident_id": 29,
+            "product_id": 18,
+            "vote_value": "yes",
+            "voted_at": "2026-05-01 09:05:00"
+        }
+    ],
+    "residents": [
+        {
+            "id": 1,
+            "first_name": "Admin",
+            "last_name": "User",
+            "username": "admin",
+            "role": "admin",
+            "area_id": 1
+        },
+        {
+            "id": 2,
+            "first_name": "Marcus",
+            "last_name": "Osei",
+            "username": "marcus.osei",
+            "role": "resident",
+            "area_id": 1
+        },
+        {
+            "id": 3,
+            "first_name": "Priya",
+            "last_name": "Sharma",
+            "username": "priya.sharma",
+            "role": "resident",
+            "area_id": 2
+        },
+        {
+            "id": 4,
+            "first_name": "Jade",
+            "last_name": "Williams",
+            "username": "jade.williams",
+            "role": "resident",
+            "area_id": 3
+        },
+        {
+            "id": 5,
+            "first_name": "River",
+            "last_name": "Chen",
+            "username": "river.chen",
+            "role": "resident",
+            "area_id": 4
+        },
+        {
+            "id": 6,
+            "first_name": "Zaylevel",
+            "last_name": "ten",
+            "username": "zaylevelten",
+            "role": "resident",
+            "area_id": 3
+        },
+        {
+            "id": 7,
+            "first_name": "Toluwalope Abayomi",
+            "last_name": "Opaleye",
+            "username": "topaleye",
+            "role": "resident",
+            "area_id": 1
+        },
+        {
+            "id": 14,
+            "first_name": "Admin",
+            "last_name": "Account",
+            "username": "admin_cul",
+            "role": "admin",
+            "area_id": 3
+        },
+        {
+            "id": 15,
+            "first_name": "Alex",
+            "last_name": "Turner",
+            "username": "artlover99",
+            "role": "resident",
+            "area_id": 1
+        },
+        {
+            "id": 16,
+            "first_name": "Sam",
+            "last_name": "Smith",
+            "username": "creative_soul",
+            "role": "resident",
+            "area_id": 2
+        },
+        {
+            "id": 17,
+            "first_name": "Jordan",
+            "last_name": "Lee",
+            "username": "culture_vulture",
+            "role": "resident",
+            "area_id": 3
+        },
+        {
+            "id": 18,
+            "first_name": "Taylor",
+            "last_name": "Swift",
+            "username": "design_guru",
+            "role": "resident",
+            "area_id": 4
+        },
+        {
+            "id": 19,
+            "first_name": "Morgan",
+            "last_name": "Freeman",
+            "username": "heritage_fan",
+            "role": "resident",
+            "area_id": 5
+        },
+        {
+            "id": 20,
+            "first_name": "Jamie",
+            "last_name": "Oliver",
+            "username": "theatre_kid",
+            "role": "resident",
+            "area_id": 6
+        },
+        {
+            "id": 21,
+            "first_name": "Casey",
+            "last_name": "Neistat",
+            "username": "lit_nerd",
+            "role": "resident",
+            "area_id": 1
+        },
+        {
+            "id": 22,
+            "first_name": "Drew",
+            "last_name": "Barrymore",
+            "username": "music_fan",
+            "role": "resident",
+            "area_id": 2
+        },
+        {
+            "id": 23,
+            "first_name": "Riley",
+            "last_name": "Reid",
+            "username": "photo_pro",
+            "role": "resident",
+            "area_id": 3
+        },
+        {
+            "id": 24,
+            "first_name": "Quinn",
+            "last_name": "Fabray",
+            "username": "craft_maker",
+            "role": "resident",
+            "area_id": 4
+        },
+        {
+            "id": 25,
+            "first_name": "Gyro",
+            "last_name": "Zepelli",
+            "username": "gyrozepelli",
+            "role": "resident",
+            "area_id": 6
+        },
+        {
+            "id": 26,
+            "first_name": "Giorno",
+            "last_name": "Giovanna",
+            "username": "giogio",
+            "role": "resident",
+            "area_id": 6
+        },
+        {
+            "id": 27,
+            "first_name": "jj",
+            "last_name": "c",
+            "username": "jjc",
+            "role": "resident",
+            "area_id": 6
+        },
+        {
+            "id": 28,
+            "first_name": "abby",
+            "last_name": "abby",
+            "username": "abby",
+            "role": "resident",
+            "area_id": 6
+        },
+        {
+            "id": 29,
+            "first_name": "Toluwalope",
+            "last_name": "Opaleye",
+            "username": "tuww",
+            "role": "resident",
+            "area_id": 6
+        }
+    ]
+}
