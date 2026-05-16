@@ -201,7 +201,7 @@ export default function FilterDrawer({
           className="text-[#FF7575] px-5 py-2 rounded-full text-[13px] font-bold hover:bg-[#FF7575]/10 transition-all pressable flex items-center gap-1"
         >
           <HugeiconsIcon icon={CancelCircleIcon} size={16} />
-          Clear Filters
+          Clear filters
         </button>
         <button
           onClick={() => {
@@ -211,7 +211,7 @@ export default function FilterDrawer({
           }}
           className="bg-[#6E5B98] text-white px-8 py-2.5 rounded-full text-[13px] font-bold hover:bg-[#5a4880] transition-all pressable"
         >
-          Apply Filters
+          Apply filters
         </button>
       </div>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback, useMemo } from 'react';
+import { useState, useRef, useCallback, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { type Product } from '@/lib/data';
@@ -110,6 +110,26 @@ export default function CategoryStack({ category, items, haptic, loop = true }: 
     }
   };
 
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const onWheel = (e: WheelEvent) => {
+      // isTrackpadSwipe logic
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 5) {
+        e.preventDefault();
+        if (e.deltaX > 30) {
+          handleNext();
+        } else if (e.deltaX < -30) {
+          handlePrev();
+        }
+      }
+    };
+
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, [handleNext, handlePrev]);
+
   const visibleItems = useMemo(() => {
     const stack = [];
     const maxItems = Math.min(3, items.length);
@@ -197,6 +217,7 @@ export default function CategoryStack({ category, items, haptic, loop = true }: 
                   <div className="absolute inset-0 z-30 bg-black/60 backdrop-blur-md flex items-center justify-center gap-6 rounded-[24px]">
                     <button
                       onClick={(e) => { e.stopPropagation(); toggleVote(product.id, 'yes'); setShowVoteAction(null); haptic.trigger('selection'); }}
+                      aria-label="Vote yes"
                       className={`w-14 h-14 rounded-full border-[1.5px] flex items-center justify-center transition-all pressable ${hasVoted(product.id) === 'yes' ? 'bg-white/20 border-white text-white' : 'border-white/10 text-white hover:scale-110'
                         }`}
                     >
@@ -204,6 +225,7 @@ export default function CategoryStack({ category, items, haptic, loop = true }: 
                     </button>
                     <button
                       onClick={(e) => { e.stopPropagation(); toggleVote(product.id, 'no'); setShowVoteAction(null); haptic.trigger('selection'); }}
+                      aria-label="Vote no"
                       className={`w-14 h-14 rounded-full border-[1.5px] flex items-center justify-center transition-all pressable ${hasVoted(product.id) === 'no' ? 'bg-white/20 border-white text-white' : 'border-white/10 text-white hover:scale-110'
                         }`}
                     >

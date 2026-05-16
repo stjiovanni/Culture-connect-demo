@@ -43,7 +43,7 @@ export default function TopNav() {
   };
 
   return (
-    <header id="site-header" className="font-sans sticky top-0 z-50 bg-[#0C0B0A]/80 backdrop-blur-xl border-b border-white/[0.03]">
+    <header id="site-header" className="font-sans sticky top-0 z-50 border-b border-white/[0.03] relative">
       <nav className="flex justify-center w-full px-4 py-3">
         <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 max-w-[1400px] w-full">
 
@@ -131,7 +131,7 @@ export default function TopNav() {
                 className="px-3 py-1.5 rounded-full bg-[#FF7575]/10 text-[#FF7575] text-[11px] font-bold hover:bg-[#FF7575]/20 transition-all shrink-0 pressable flex items-center gap-1"
               >
                 <HugeiconsIcon icon={CancelCircleIcon} size={12} />
-                Clear Filters
+                Clear filters
               </button>
             )}
 
