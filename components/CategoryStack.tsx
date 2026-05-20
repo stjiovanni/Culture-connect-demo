@@ -218,16 +218,22 @@ export default function CategoryStack({ category, items, haptic, loop = true }: 
                     <button
                       onClick={(e) => { e.stopPropagation(); toggleVote(product.id, 'yes'); setShowVoteAction(null); haptic.trigger('selection'); }}
                       aria-label="Vote yes"
-                      className={`w-14 h-14 rounded-full border-[1.5px] flex items-center justify-center transition-all pressable ${hasVoted(product.id) === 'yes' ? 'bg-white/20 border-white text-white' : 'border-white/10 text-white hover:scale-110'
-                        }`}
+                      className={`w-14 h-14 rounded-full border-[1.5px] flex items-center justify-center transition-all pressable ${
+                        hasVoted(product.id) === 'yes' 
+                          ? 'bg-[#4ade80]/20 border-[#4ade80] text-[#4ade80]' 
+                          : 'bg-[#4ade80]/5 border-[#4ade80]/10 text-[#4ade80]/60 hover:bg-[#4ade80]/10'
+                      }`}
                     >
                       <HugeiconsIcon icon={ThumbsUpIcon} size={24} />
                     </button>
                     <button
                       onClick={(e) => { e.stopPropagation(); toggleVote(product.id, 'no'); setShowVoteAction(null); haptic.trigger('selection'); }}
                       aria-label="Vote no"
-                      className={`w-14 h-14 rounded-full border-[1.5px] flex items-center justify-center transition-all pressable ${hasVoted(product.id) === 'no' ? 'bg-white/20 border-white text-white' : 'border-white/10 text-white hover:scale-110'
-                        }`}
+                      className={`w-14 h-14 rounded-full border-[1.5px] flex items-center justify-center transition-all pressable ${
+                        hasVoted(product.id) === 'no' 
+                          ? 'bg-[#FF7575]/20 border-[#FF7575] text-[#FF7575]' 
+                          : 'bg-[#FF7575]/5 border-[#FF7575]/10 text-[#FF7575]/60 hover:bg-[#FF7575]/10'
+                      }`}
                     >
                       <HugeiconsIcon icon={ThumbsDownIcon} size={24} />
                     </button>

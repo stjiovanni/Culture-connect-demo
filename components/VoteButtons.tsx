@@ -60,12 +60,12 @@ export default function VoteButtons({ productId, initialVotes }: VoteButtonsProp
         <button
           onClick={() => handleVote('yes')}
           disabled={voted !== null}
-          className={`flex flex-col items-center justify-center gap-2 py-6 rounded-[16px] border transition-all duration-500 pressable ${
+          className={`flex flex-col items-center justify-center gap-2 py-6 rounded-[16px] transition-all duration-500 pressable ${
             voted === 'yes' 
-              ? 'bg-white text-black border-white shadow-2xl shadow-white/10' 
+              ? 'liquid-glass-green text-[#4ade80]' 
               : voted !== null 
-                ? 'bg-transparent border-white/5 text-[#86847F] opacity-40 cursor-not-allowed' 
-                : 'bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/10 text-white'
+                ? 'liquid-glass text-[#86847F] opacity-40 cursor-not-allowed' 
+                : 'liquid-glass text-[#4ade80]/60 hover:text-[#4ade80]'
           }`}
         >
           <HugeiconsIcon icon={ThumbsUpIcon} size={24} className={`${voted === 'yes' ? 'scale-110' : ''} transition-transform duration-500`} />
@@ -76,12 +76,12 @@ export default function VoteButtons({ productId, initialVotes }: VoteButtonsProp
         <button
           onClick={() => handleVote('no')}
           disabled={voted !== null}
-          className={`flex flex-col items-center justify-center gap-2 py-6 rounded-[16px] border transition-all duration-500 pressable ${
+          className={`flex flex-col items-center justify-center gap-2 py-6 rounded-[16px] transition-all duration-500 pressable ${
             voted === 'no' 
-              ? 'bg-[#FF7575] text-white border-[#FF7575] shadow-2xl shadow-[#FF7575]/20' 
+              ? 'liquid-glass-red text-[#FF7575]' 
               : voted !== null 
-                ? 'bg-transparent border-white/5 text-[#86847F] opacity-40 cursor-not-allowed' 
-                : 'bg-white/5 border-white/5 hover:bg-red-500/10 hover:border-red-500/20 text-white hover:text-red-400'
+                ? 'liquid-glass text-[#86847F] opacity-40 cursor-not-allowed' 
+                : 'liquid-glass text-[#FF7575]/60 hover:text-[#FF7575]'
           }`}
         >
           <HugeiconsIcon icon={ThumbsDownIcon} size={24} className={`${voted === 'no' ? 'scale-110' : ''} transition-transform duration-500`} />

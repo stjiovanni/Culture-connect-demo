@@ -51,7 +51,7 @@ export default function MobileHeaderTabs() {
             tabIndex={0}
             className={`mobile-tab relative ${typeFilter === tab.value ? 'mobile-tab-active' : ''}`}
           >
-            <span className="text-[13px] font-bold">{tab.label}</span>
+            <span className={`text-[13px] ${typeFilter === tab.value ? 'font-semibold' : 'font-normal'}`}>{tab.label}</span>
             <span className="mobile-tab-count">{tab.count}</span>
           </div>
         ))}

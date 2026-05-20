@@ -38,7 +38,7 @@ export default function VotesPage() {
   }, [votedItems, activeTab]);
 
   return (
-    <div className="flex flex-col min-h-screen font-sans pb-20">
+    <div className="flex flex-col min-h-screen font-sans max-w-[1400px] mx-auto px-6 pt-6 pb-20">
       {/* Hero Section */}
       <div className="flex flex-col gap-10 pt-16 mb-16">
         <h1 className="text-7xl font-bold text-white tracking-tighter leading-none [text-wrap:balance]">

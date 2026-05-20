@@ -89,7 +89,7 @@ export default function FilterDrawer({
       
       <div
         ref={drawerRef}
-        className={`fixed top-[70px] left-0 right-0 z-40 w-full transition-all duration-500 ease-[var(--ease-drawer)] origin-top ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-4 pointer-events-none'} glass-pill rounded-[24px] p-8 shadow-2xl border border-white/5 font-sans tracking-[-0.5px]`}
+        className={`fixed top-[70px] left-0 right-0 z-40 w-full transition-all duration-500 ease-[var(--ease-drawer)] origin-top ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-4 pointer-events-none'} advanced-filter-glass rounded-[24px] p-8 shadow-2xl border border-white/5 font-sans tracking-[-0.5px]`}
       >
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
         {/* Categories */}
@@ -100,9 +100,9 @@ export default function FilterDrawer({
               <button
                 key={c}
                 onClick={() => handleCategoryToggle(c)}
-                className={`px-4 py-2 text-[11px] font-bold rounded-full border transition-all duration-300 pressable ${selectedCategories.includes(c)
-                  ? 'bg-white text-black border-white'
-                  : 'bg-white/5 text-[#9E9B96] border-white/10 hover:border-white/30 hover:text-white'
+                className={`rounded-full px-4 py-2 text-[11px] font-bold transition-all duration-300 pressable ${selectedCategories.includes(c)
+                  ? 'bg-white text-black'
+                  : 'liquid-glass text-[#9E9B96] hover:text-white'
                   }`}
               >
                 {c}
@@ -152,15 +152,15 @@ export default function FilterDrawer({
           <div className="flex gap-2 justify-center mb-4">
             <button 
               onClick={() => { setPriceMin(75); setPriceMax(2000); haptic.trigger('selection'); }}
-              className="px-4 py-2 rounded-full border border-white/10 text-[11px] font-bold text-[#9E9B96] hover:text-white hover:border-white/30 transition-all"
+              className="liquid-glass rounded-full px-4 py-2 text-[11px] font-bold text-[#9E9B96] hover:text-white transition-all pressable"
             >Over £75</button>
             <button 
               onClick={() => { setPriceMin(0); setPriceMax(200); haptic.trigger('selection'); }}
-              className="px-4 py-2 rounded-full border border-white/10 text-[11px] font-bold text-[#9E9B96] hover:text-white hover:border-white/30 transition-all"
+              className="liquid-glass rounded-full px-4 py-2 text-[11px] font-bold text-[#9E9B96] hover:text-white transition-all pressable"
             >Under £200</button>
             <button 
               onClick={() => { setPriceMin(0); setPriceMax(2000); haptic.trigger('selection'); }}
-              className="px-4 py-2 rounded-full border border-white/10 text-[11px] font-bold text-[#9E9B96] hover:text-white hover:border-white/30 transition-all"
+              className="liquid-glass rounded-full px-4 py-2 text-[11px] font-bold text-[#9E9B96] hover:text-white transition-all pressable"
             >Any</button>
           </div>
           <p className="text-[10px] text-[#86847F] font-medium text-center">Adjust the sliders to set your budget</p>
@@ -172,18 +172,18 @@ export default function FilterDrawer({
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => handleAreaToggle('')}
-              className={`px-4 py-2 text-[11px] font-bold rounded-full border transition-all duration-300 pressable ${selectedAreas.includes('')
-                ? 'bg-[#6E5B98] text-white border-[#6E5B98]'
-                : 'bg-white/5 text-[#9E9B96] border-white/10 hover:border-white/30 hover:text-white'
+              className={`rounded-full px-4 py-2 text-[11px] font-bold transition-all duration-300 pressable ${selectedAreas.includes('')
+                ? 'liquid-glass-strong-purple text-white'
+                : 'liquid-glass text-[#9E9B96] hover:text-white'
                 }`}
             >Global</button>
             {areas.map(a => (
               <button
                 key={a.id}
                 onClick={() => handleAreaToggle(a.id)}
-                className={`px-4 py-2 text-[11px] font-bold rounded-full border transition-all duration-300 pressable ${selectedAreas.includes(a.id)
-                  ? 'bg-white text-black border-white'
-                  : 'bg-white/5 text-[#9E9B96] border-white/10 hover:border-white/30 hover:text-white'
+                className={`rounded-full px-4 py-2 text-[11px] font-bold transition-all duration-300 pressable ${selectedAreas.includes(a.id)
+                  ? 'bg-white text-black'
+                  : 'liquid-glass text-[#9E9B96] hover:text-white'
                   }`}
               >{a.name}</button>
             ))}
@@ -198,9 +198,8 @@ export default function FilterDrawer({
             onClear();
             haptic.trigger('warning');
           }}
-          className="text-[#FF7575] px-5 py-2 rounded-full text-[13px] font-bold hover:bg-[#FF7575]/10 transition-all pressable flex items-center gap-1"
+          className="liquid-glass-red text-[#FF7575] px-6 py-2.5 rounded-full text-[13px] font-bold transition-all pressable"
         >
-          <HugeiconsIcon icon={CancelCircleIcon} size={16} />
           Clear filters
         </button>
         <button
@@ -209,7 +208,7 @@ export default function FilterDrawer({
             toggleDrawer();
             haptic.trigger('success');
           }}
-          className="bg-[#6E5B98] text-white px-8 py-2.5 rounded-full text-[13px] font-bold hover:bg-[#5a4880] transition-all pressable"
+          className="liquid-glass-strong-purple text-white px-8 py-2.5 rounded-full text-[13px] font-bold transition-all pressable"
         >
           Apply filters
         </button>

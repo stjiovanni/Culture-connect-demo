@@ -23,7 +23,7 @@ export default function RootLayout({
           <FilterProvider>
             <VoteProvider>
               <TopNav />
-              <main className="flex-1 w-full max-w-[1400px] mx-auto px-6 pt-6 pb-6">
+              <main className="flex-1 w-full">
                 {children}
               </main>
               <MobileBottomNav />

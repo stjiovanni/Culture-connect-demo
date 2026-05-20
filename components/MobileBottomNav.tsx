@@ -134,14 +134,14 @@ export default function MobileBottomNav() {
             if (isOpen) closeSearch();
             haptic.trigger('light');
           }}
-          className="flex items-center justify-center w-[20px] h-[20px] rounded-full overflow-hidden border border-white/20 transition-all pressable"
+          className={`flex items-center justify-center w-[22px] h-[22px] rounded-full overflow-hidden border transition-all pressable ${pathname === '/profile' ? 'border-[#6E5B98]' : 'border-white/20'}`}
           aria-label="Profile"
         >
           <Image
             src="/uploads/avatar_7_1776873674.jpeg"
-            alt="Profile"
-            width={20}
-            height={20}
+            alt="Profile avatar"
+            width={22}
+            height={22}
             className="object-cover w-full h-full"
           />
         </Link>

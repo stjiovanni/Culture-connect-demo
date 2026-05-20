@@ -21,17 +21,19 @@ export default function DiscoverPage() {
     selectedAreas, setSelectedAreas,
     priceMin, setPriceMin,
     priceMax, setPriceMax,
-    clearAllFilters
+    clearAllFilters,
+    appliedCategories,
+    appliedAreas,
+    appliedPriceMin,
+    appliedPriceMax,
+    isAdvancedFilterActive,
+    setAppliedCategories,
+    setAppliedAreas,
+    setAppliedPriceMin,
+    setAppliedPriceMax,
   } = useFilter();
   const allProducts = getProducts();
   const haptic = useWebHaptics();
-
-  const [appliedFilters, setAppliedFilters] = useState({
-    categories: [] as string[],
-    priceMin: 0,
-    priceMax: 2000,
-    areas: [] as (number | '')[],
-  });
   
   const [mounted, setMounted] = useState(false);
 
@@ -39,25 +41,6 @@ export default function DiscoverPage() {
     const t = setTimeout(() => setMounted(true), 0); 
     return () => clearTimeout(t); 
   }, []);
-
-  const applyFilters = () => {
-    setAppliedFilters({
-      categories: selectedCategories,
-      priceMin,
-      priceMax,
-      areas: selectedAreas,
-    });
-  };
-
-  const clearFilters = () => {
-    clearAllFilters();
-    setAppliedFilters({ categories: [], priceMin: 0, priceMax: 2000, areas: [] });
-  };
-
-  const isAppliedFilterActive = appliedFilters.categories.length > 0 || 
-    (appliedFilters.areas.length > 0 && !appliedFilters.areas.includes('')) || 
-    appliedFilters.priceMin !== 0 || 
-    appliedFilters.priceMax !== 2000;
 
   const filteredProducts = useMemo(() => {
     let result = allProducts;
@@ -75,27 +58,45 @@ export default function DiscoverPage() {
       );
     }
 
-    if (appliedFilters.categories.length > 0) {
-      result = result.filter(p => appliedFilters.categories.includes(p.category));
+    if (appliedCategories.length > 0) {
+      result = result.filter(p => appliedCategories.includes(p.category));
     }
     
-    if (appliedFilters.areas.length > 0 && !appliedFilters.areas.includes('')) {
-      result = result.filter(p => appliedFilters.areas.includes(p.area_id));
+    if (appliedAreas.length > 0 && !appliedAreas.includes('')) {
+      result = result.filter(p => appliedAreas.includes(p.area_id));
     }
     
-    result = result.filter(p => p.price >= appliedFilters.priceMin && p.price <= appliedFilters.priceMax);
+    result = result.filter(p => p.price >= appliedPriceMin && p.price <= appliedPriceMax);
 
     return result;
-  }, [allProducts, typeFilter, searchQuery, appliedFilters]);
+  }, [allProducts, typeFilter, searchQuery, appliedCategories, appliedAreas, appliedPriceMin, appliedPriceMax]);
 
-  const typeLabel = typeFilter === 'all' ? 'All' : typeFilter === 'product' ? 'Products' : 'Services';
+  const sectionContent = useMemo(() => {
+    switch (typeFilter) {
+      case 'product':
+        return {
+          title: 'Products',
+          copy: 'Browse items created and shared by makers and artisans across different cultural categories.'
+        };
+      case 'service':
+        return {
+          title: 'Services',
+          copy: 'Find specialised skills and experiences offered by professionals and community members.'
+        };
+      default:
+        return {
+          title: 'Discover',
+          copy: 'Explore the complete collection of products and services showcased by creators in the community.'
+        };
+    }
+  }, [typeFilter]);
 
   if (!mounted) return null;
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 max-w-[1400px] mx-auto px-6 pt-6 pb-6">
       {viewMode === 'admin' && (
-        <div className="glass-pill rounded-full px-6 py-3 text-[11px] text-center border border-[#6E5B98]/30 text-[#DDD6F3] font-bold tracking-tight animate-in fade-in slide-in-from-top-2 duration-500">
+        <div className="glass-pill rounded-full px-6 py-3 text-[11px] text-center border border-[#6E5B98]/30 text-[#DDD6F3] font-bold tracking-[-0.5px] animate-in fade-in slide-in-from-top-2 duration-500">
           <span className="opacity-60 mr-2">Mode:</span> Administrative Access — Read Only
         </div>
       )}
@@ -103,31 +104,15 @@ export default function DiscoverPage() {
       {/* Mobile Header Tabs */}
       <MobileHeaderTabs />
 
-
-
-      {/* Filter Drawer */}
-      <div className="relative">
-        <FilterDrawer
-          isOpen={isDrawerOpen}
-          selectedCategories={selectedCategories}
-          setSelectedCategories={setSelectedCategories}
-          priceMin={priceMin}
-          setPriceMin={setPriceMin}
-          priceMax={priceMax}
-          setPriceMax={setPriceMax}
-          selectedAreas={selectedAreas}
-          setSelectedAreas={setSelectedAreas}
-          onApply={applyFilters}
-          onClear={clearFilters}
-        />
-      </div>
-
-      {/* Heading — desktop only */}
-      <div className="hidden md:flex items-baseline justify-between animate-in fade-in slide-in-from-left-4 duration-500 ease-[var(--ease-out)]">
-        <h1 className="font-serif text-6xl text-white">
-          Discovering {typeLabel}
+      {/* Section Header */}
+      <div className="mt-4 text-left max-w-lg animate-in fade-in slide-in-from-top-4 duration-500">
+        <h1 className="text-4xl font-serif text-white tracking-tight mb-2">
+          {sectionContent.title}
         </h1>
-        <span className="text-[11px] font-bold text-[#86847F]">{filteredProducts.length} results</span>
+        <p className="text-[14px] text-[#86847F] font-medium leading-relaxed mb-1">
+          {sectionContent.copy}
+        </p>
+        <span className="text-[11px] font-bold text-[#86847F]/80">{filteredProducts.length} results</span>
       </div>
 
       {/* Product Grid — Desktop: standard grid, Mobile: Pinterest masonry */}
@@ -145,15 +130,15 @@ export default function DiscoverPage() {
       </div>
 
       {/* Selected Filters Bar - Bottom */}
-      {isAppliedFilterActive && (
+      {isAdvancedFilterActive && (
         <div className="fixed bottom-[84px] md:bottom-10 left-6 right-6 z-30 flex flex-wrap gap-2 pt-4 pb-0 justify-center animate-in fade-in slide-in-from-bottom-2 duration-300 pointer-events-none">
-          {appliedFilters.categories.map(cat => (
+          {appliedCategories.map(cat => (
             <div key={cat} className="glass-pill px-4 py-2 rounded-full text-[11px] font-bold text-white flex items-center gap-2 border border-white/10 backdrop-blur-md pointer-events-auto">
               {cat}
               <button
                 onClick={() => {
                   setSelectedCategories((prev: string[]) => prev.filter(c => c !== cat));
-                  setAppliedFilters(prev => ({ ...prev, categories: prev.categories.filter(c => c !== cat) }));
+                  setAppliedCategories((prev: string[]) => prev.filter(c => c !== cat));
                   haptic.trigger('light');
                 }}
                 className="hover:text-[#FF7575] transition-colors"
@@ -164,7 +149,7 @@ export default function DiscoverPage() {
             </div>
           ))}
           
-          {(appliedFilters.areas.length > 0 && !appliedFilters.areas.includes('')) && appliedFilters.areas.map(areaId => {
+          {(appliedAreas.length > 0 && !appliedAreas.includes('')) && appliedAreas.map(areaId => {
             const area = getAreas().find(a => a.id === areaId);
             if (!area) return null;
             return (
@@ -173,7 +158,7 @@ export default function DiscoverPage() {
                 <button
                   onClick={() => {
                     setSelectedAreas((prev: (number | '')[]) => prev.filter(a => a !== areaId));
-                    setAppliedFilters(prev => ({ ...prev, areas: prev.areas.filter(a => a !== areaId) }));
+                    setAppliedAreas((prev: (number | '')[]) => prev.filter(a => a !== areaId));
                     haptic.trigger('light');
                   }}
                   className="hover:text-[#FF7575] transition-colors"
@@ -185,14 +170,15 @@ export default function DiscoverPage() {
             );
           })}
 
-          {(appliedFilters.priceMin !== 0 || appliedFilters.priceMax !== 2000) && (
+          {(appliedPriceMin !== 0 || appliedPriceMax !== 2000) && (
             <div className="glass-pill px-4 py-2 rounded-full text-[11px] font-bold text-white flex items-center gap-2 border border-white/10 backdrop-blur-md pointer-events-auto">
-              £{appliedFilters.priceMin} - £{appliedFilters.priceMax}
+              £{appliedPriceMin} - £{appliedPriceMax}
               <button
                 onClick={() => {
                   setPriceMin(0);
                   setPriceMax(2000);
-                  setAppliedFilters(prev => ({ ...prev, priceMin: 0, priceMax: 2000 }));
+                  setAppliedPriceMin(0);
+                  setAppliedPriceMax(2000);
                   haptic.trigger('light');
                 }}
                 className="hover:text-[#FF7575] transition-colors"

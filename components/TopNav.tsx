@@ -10,6 +10,7 @@ import { useFilter } from '../context/FilterContext';
 import { useWebHaptics } from 'web-haptics/react';
 import { useViewMode } from '@/context/ViewModeContext';
 import { useVotes } from '@/context/VoteContext';
+import FilterDrawer from './FilterDrawer';
 
 const TABS = [
   { label: 'All', value: 'all' },
@@ -26,7 +27,16 @@ export default function TopNav() {
     typeFilter,
     setTypeFilter,
     isAdvancedFilterActive,
-    clearAllFilters
+    clearAllFilters,
+    selectedCategories,
+    setSelectedCategories,
+    priceMin,
+    setPriceMin,
+    priceMax,
+    setPriceMax,
+    selectedAreas,
+    setSelectedAreas,
+    applyFilters,
   } = useFilter();
   const { viewMode } = useViewMode();
   const { voteCount } = useVotes();
@@ -42,13 +52,26 @@ export default function TopNav() {
     }
   };
 
+  const handleApply = () => {
+    applyFilters();
+    haptic.trigger('success');
+    if (pathname !== '/discover') {
+      router.push('/discover');
+    }
+  };
+
+  const handleClear = () => {
+    clearAllFilters();
+    haptic.trigger('warning');
+  };
+
   return (
     <header id="site-header" className="font-sans sticky top-0 z-50 border-b border-white/[0.03] relative">
       <nav className="flex justify-center w-full px-4 py-3">
         <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 max-w-[1400px] w-full">
 
-          {/* Left Pill: Logo & Navigation */}
-          <div className="glass-pill flex items-center gap-2 px-6 h-[46px] shrink-0 min-w-max rounded-full">
+          {/* Left Pill: Logo + Tabs + Admin */}
+          <div className="glass-pill flex items-center h-[46px] pl-[10px] pr-[7px] shrink-0 min-w-max rounded-full">
             <Link
               href="/discover"
               className="flex items-center gap-2 pressable"
@@ -70,9 +93,9 @@ export default function TopNav() {
                 <button
                   key={tab.value}
                   onClick={() => handleTabClick(tab.value)}
-                  className={`px-3 py-1.5 text-[13px] font-bold transition-all rounded-full pressable ${typeFilter === tab.value
-                      ? 'text-white'
-                      : 'text-[#9E9B96] hover:text-white'
+                  className={`px-3 py-1.5 text-[13px] tracking-[-0.03em] transition-all rounded-full pressable ${typeFilter === tab.value
+                    ? 'bg-white text-black font-semibold shadow-sm'
+                    : 'text-[#9E9B96] font-normal hover:text-white'
                     }`}
                 >
                   {tab.label}
@@ -81,16 +104,16 @@ export default function TopNav() {
 
               {viewMode === 'admin' && (
                 <>
-                  <Link 
-                    href="/admin/manage" 
-                    className="px-3 py-1.5 text-[13px] font-bold text-[#9E9B96] hover:text-white transition-all rounded-full pressable"
+                  <Link
+                    href="/admin/manage"
+                    className="px-3 py-1.5 text-[13px] font-normal tracking-[-0.03em] text-[#9E9B96] hover:text-white transition-all rounded-full pressable"
                     onClick={() => haptic.trigger('selection')}
                   >
                     Manage
                   </Link>
-                  <Link 
-                    href="/admin/reports" 
-                    className="px-3 py-1.5 text-[13px] font-bold text-[#9E9B96] hover:text-white transition-all rounded-full pressable"
+                  <Link
+                    href="/admin/reports"
+                    className="px-3 py-1.5 text-[13px] font-normal tracking-[-0.03em] text-[#9E9B96] hover:text-white transition-all rounded-full pressable"
                     onClick={() => haptic.trigger('selection')}
                   >
                     Reports
@@ -101,7 +124,7 @@ export default function TopNav() {
           </div>
 
           {/* Center Pill: Search (Expanding) */}
-          <div className="glass-pill min-w-0 w-full flex items-center gap-2 px-4 h-[46px] rounded-full relative will-change-transform">
+          <div className="glass-pill min-w-0 w-full flex items-center gap-2 pl-[11px] pr-[6px] h-[46px] rounded-full relative will-change-transform">
             <HugeiconsIcon icon={Search01Icon} size={16} className="text-[#86847F] shrink-0" />
             <div className="flex-1 min-w-0 flex items-center relative">
               <input
@@ -109,7 +132,7 @@ export default function TopNav() {
                 placeholder="Search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="bg-transparent text-white text-[15px] outline-none w-full min-w-0 placeholder-[#86847F] font-medium"
+                className="bg-transparent text-white text-[15px] outline-none w-full min-w-0 placeholder-[#86847F] font-normal tracking-[-0.03em]"
               />
               {searchQuery && (
                 <button
@@ -128,7 +151,7 @@ export default function TopNav() {
                   clearAllFilters();
                   haptic.trigger('warning');
                 }}
-                className="px-3 py-1.5 rounded-full bg-[#FF7575]/10 text-[#FF7575] text-[11px] font-bold hover:bg-[#FF7575]/20 transition-all shrink-0 pressable flex items-center gap-1"
+                className="px-3 py-1.5 rounded-full bg-[#FF7575]/10 text-[#FF7575] text-[11px] font-normal tracking-[-0.03em] hover:bg-[#FF7575]/20 transition-all shrink-0 pressable flex items-center gap-1"
               >
                 <HugeiconsIcon icon={CancelCircleIcon} size={12} />
                 Clear filters
@@ -138,8 +161,8 @@ export default function TopNav() {
             <button
               onClick={() => { toggleDrawer(); haptic.trigger('selection'); }}
               className={`p-2 rounded-full transition-all shrink-0 pressable ${isDrawerOpen
-                  ? 'bg-[#6E5B98] text-white'
-                  : 'text-[#86847F] hover:text-white hover:bg-white/5'
+                ? 'bg-[#6E5B98] text-white'
+                : 'text-[#86847F] hover:text-white hover:bg-white/5'
                 }`}
               aria-label="Toggle filter drawer"
             >
@@ -148,23 +171,10 @@ export default function TopNav() {
           </div>
 
           {/* Right Pill: User Actions */}
-          <div className="glass-pill flex items-center gap-2 px-4 h-[46px] shrink-0 min-w-max rounded-full">
-            <Link
-              href="/votes"
-              className={`flex items-center gap-2 pressable cursor-pointer px-1 group ${pathname === '/votes' ? 'text-white' : ''}`}
-              onClick={() => haptic.trigger('light')}
-            >
-              <span className={`text-[11px] font-bold ${pathname === '/votes' ? 'text-white' : 'text-[#9E9B96] group-hover:text-white transition-colors'}`}>Votes</span>
-              <span className="bg-[#6E5B98] text-white text-[12px] font-black w-6 h-6 rounded-full flex items-center justify-center border border-white/5 shadow-inner tabular-nums">
-                {voteCount}
-              </span>
-            </Link>
-
-            <div className="w-px h-6 bg-white/10" />
-
+          <div className="glass-pill flex items-center gap-2 px-[10px] h-[46px] shrink-0 min-w-max rounded-full">
             <Link
               href="/profile"
-              className="w-8 h-8 rounded-full overflow-hidden border border-white/20 pressable cursor-pointer ml-[2px]"
+              className={`w-8 h-8 rounded-full overflow-hidden border pressable cursor-pointer transition-colors ${pathname === '/profile' ? 'border-[#6E5B98]' : 'border-white/20'}`}
               onClick={() => haptic.trigger('light')}
             >
               <Image
@@ -177,7 +187,7 @@ export default function TopNav() {
             </Link>
 
             <button
-              className="text-[#86847F] hover:text-[#FF7575] transition-all p-1 pressable hover:scale-110"
+              className="text-[#86847F] hover:text-[#FF7575] transition-all p-1 pressable hover:scale-110 ml-1"
               onClick={() => haptic.trigger('warning')}
               aria-label="Log out"
             >
@@ -187,6 +197,23 @@ export default function TopNav() {
 
         </div>
       </nav>
+
+      {/* Global Advanced Filter Drawer */}
+      <div className="relative max-w-[1400px] mx-auto w-full px-6">
+        <FilterDrawer
+          isOpen={isDrawerOpen}
+          selectedCategories={selectedCategories}
+          setSelectedCategories={setSelectedCategories}
+          priceMin={priceMin}
+          setPriceMin={setPriceMin}
+          priceMax={priceMax}
+          setPriceMax={setPriceMax}
+          selectedAreas={selectedAreas}
+          setSelectedAreas={setSelectedAreas}
+          onApply={handleApply}
+          onClear={handleClear}
+        />
+      </div>
     </header>
   );
 }
