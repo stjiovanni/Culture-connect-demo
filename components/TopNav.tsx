@@ -11,6 +11,7 @@ import { useWebHaptics } from 'web-haptics/react';
 import { useViewMode } from '@/context/ViewModeContext';
 import { useVotes } from '@/context/VoteContext';
 import FilterDrawer from './FilterDrawer';
+import { motion } from 'framer-motion';
 
 const TABS = [
   { label: 'All', value: 'all' },
@@ -88,19 +89,30 @@ export default function TopNav() {
               />
             </Link>
 
-            <div className="flex items-center gap-2">
-              {TABS.map((tab) => (
-                <button
-                  key={tab.value}
-                  onClick={() => handleTabClick(tab.value)}
-                  className={`px-3 py-1.5 text-[13px] tracking-[-0.03em] transition-all rounded-full pressable ${typeFilter === tab.value
-                    ? 'bg-white text-black font-semibold shadow-sm'
-                    : 'text-[#9E9B96] font-normal hover:text-white'
-                    }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
+            <div className="flex items-center gap-2 ml-1">
+              {TABS.map((tab) => {
+                const isActive = typeFilter === tab.value;
+                return (
+                  <button
+                    key={tab.value}
+                    onClick={() => handleTabClick(tab.value)}
+                    className={`relative px-3 py-1.5 text-[13px] tracking-[-0.03em] transition-colors rounded-full pressable ${isActive
+                      ? 'text-black font-semibold'
+                      : 'text-[#9E9B96] font-normal hover:text-white'
+                      }`}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeTabIndicator"
+                        className="absolute inset-0 bg-white rounded-full shadow-sm"
+                        initial={false}
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-10">{tab.label}</span>
+                  </button>
+                );
+              })}
 
               {viewMode === 'admin' && (
                 <>
@@ -125,7 +137,7 @@ export default function TopNav() {
 
           {/* Center Pill: Search (Expanding) */}
           <div className="glass-pill min-w-0 w-full flex items-center gap-2 pl-[11px] pr-[6px] h-[46px] rounded-full relative will-change-transform">
-            <HugeiconsIcon icon={Search01Icon} size={16} className="text-[#86847F] shrink-0" />
+            <HugeiconsIcon icon={Search01Icon} size={16} className="text-[#86847F] shrink-0 ml-1" />
             <div className="flex-1 min-w-0 flex items-center relative">
               <input
                 type="text"

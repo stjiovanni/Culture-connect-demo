@@ -6,6 +6,7 @@ import { FilterHorizontalIcon } from '@hugeicons/core-free-icons';
 import { useFilter } from '@/context/FilterContext';
 import { useWebHaptics } from 'web-haptics/react';
 import { getProducts } from '@/lib/data';
+import { motion } from 'framer-motion';
 
 export default function MobileHeaderTabs() {
   const { typeFilter, setTypeFilter, toggleDrawer, isDrawerOpen } = useFilter();
@@ -35,26 +36,24 @@ export default function MobileHeaderTabs() {
         <HugeiconsIcon icon={FilterHorizontalIcon} size={18} />
       </button>
 
-      <div className="flex-1 flex items-center justify-between">
-        {tabs.map((tab) => (
-          <div
-            key={tab.value}
-            onClick={() => { setTypeFilter(tab.value); haptic.trigger('selection'); }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                setTypeFilter(tab.value);
-                haptic.trigger('selection');
-              }
-            }}
-            role="button"
-            tabIndex={0}
-            className={`mobile-tab relative ${typeFilter === tab.value ? 'mobile-tab-active' : ''}`}
-          >
-            <span className={`text-[13px] ${typeFilter === tab.value ? 'font-semibold' : 'font-normal'}`}>{tab.label}</span>
-            <span className="mobile-tab-count">{tab.count}</span>
-          </div>
-        ))}
+      <div className="flex-1 flex items-center justify-between py-2">
+        {tabs.map((tab) => {
+          const isActive = typeFilter === tab.value;
+          return (
+            <button
+              key={tab.value}
+              onClick={() => { setTypeFilter(tab.value); haptic.trigger('selection'); }}
+              className={`text-[24px] transition-all pressable shrink-0 flex items-start gap-1 focus:outline-none border-none bg-transparent leading-none ${
+                isActive
+                  ? 'text-white font-black'
+                  : 'text-[#9E9B96] font-semibold'
+              }`}
+            >
+              <span>{tab.label}</span>
+              <span className="text-[10px] font-semibold text-[#86847F] pt-0.5">{tab.count}</span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );

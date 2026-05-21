@@ -88,9 +88,20 @@ export default function ProductDetailPage() {
   const handleTouchEnd = () => {
     if (sheetTranslateY.current > 120) {
       handleClose();
-    } else if (sheetRef.current) {
-      sheetRef.current.style.transform = 'translateY(0)';
-      sheetRef.current.style.opacity = '1';
+    } else {
+      if (sheetTranslateY.current > 0) {
+        haptic.trigger('selection');
+        if (sheetRef.current) {
+          sheetRef.current.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
+          sheetRef.current.style.transform = 'translateY(0)';
+          sheetRef.current.style.opacity = '1';
+          setTimeout(() => {
+            if (sheetRef.current) {
+              sheetRef.current.style.transition = '';
+            }
+          }, 300);
+        }
+      }
       sheetTranslateY.current = 0;
     }
   };
@@ -236,7 +247,7 @@ export default function ProductDetailPage() {
           ═══════════════════════════════════════ */}
       <div 
         ref={sheetRef}
-        className={`md:hidden fixed inset-0 z-50 flex flex-col [will-change:transform,opacity] [transition:transform_0.15s_ease-out,opacity_0.15s_ease-out] ${isClosing ? 'product-sheet-closing' : 'product-sheet'}`}
+        className={`md:hidden fixed inset-0 z-50 flex flex-col [will-change:transform,opacity] ${isClosing ? 'product-sheet-closing' : 'product-sheet'}`}
       >
         {/* Blurred bg for mobile */}
         <div 

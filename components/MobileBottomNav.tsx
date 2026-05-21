@@ -12,7 +12,7 @@ export default function MobileBottomNav() {
   const pathname = usePathname();
   const router = useRouter();
   const haptic = useWebHaptics();
-  
+
   const [isOpen, setIsOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [mounted, setMounted] = useState(false);
@@ -108,9 +108,8 @@ export default function MobileBottomNav() {
             if (isOpen) closeSearch();
             haptic.trigger('light');
           }}
-          className={`flex items-center justify-center w-10 h-10 rounded-full transition-all pressable ${
-            (pathname === '/discover' || pathname === '/') && !isOpen ? 'text-white' : 'text-[#86847F] hover:text-white'
-          }`}
+          className={`flex items-center justify-center w-10 h-10 rounded-full transition-all pressable ${(pathname === '/discover' || pathname === '/') && !isOpen ? 'text-white' : 'text-[#86847F] hover:text-white'
+            }`}
           aria-label="Home"
         >
           <HugeiconsIcon icon={Home01Icon} size={22} />
@@ -118,9 +117,8 @@ export default function MobileBottomNav() {
 
         <button
           onClick={openSearch}
-          className={`flex items-center justify-center w-10 h-10 rounded-full transition-all pressable ${
-            isOpen ? 'text-white' : 'text-[#86847F] hover:text-white'
-          }`}
+          className={`flex items-center justify-center w-10 h-10 rounded-full transition-all pressable ${isOpen ? 'text-white' : 'text-[#86847F] hover:text-white'
+            }`}
           aria-label="Search"
           type="button"
         >

@@ -25,6 +25,9 @@ export default function CategoryStack({ category, items, haptic, loop = true }: 
   const [showVoteAction, setShowVoteAction] = useState<number | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const topCardRef = useRef<HTMLDivElement>(null);
+  const dragXRef = useRef(0);
+  const rafRef = useRef<number>();
   const startX = useRef(0);
   const pressTimer = useRef<NodeJS.Timeout | null>(null);
   const { toggleVote, hasVoted } = useVotes();
@@ -41,7 +44,16 @@ export default function CategoryStack({ category, items, haptic, loop = true }: 
     setIsAnimating(true);
     setDragX(-400); // Fly off left
 
+    if (topCardRef.current) {
+      topCardRef.current.style.transition = 'transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)';
+      topCardRef.current.style.transform = 'translateX(-400px) rotate(-20deg)';
+    }
+
     setTimeout(() => {
+      if (topCardRef.current) {
+        topCardRef.current.style.transition = '';
+        topCardRef.current.style.transform = '';
+      }
       setDragX(0);
       setIsAnimating(false);
       setCurrentIndex(prev => {
@@ -57,7 +69,16 @@ export default function CategoryStack({ category, items, haptic, loop = true }: 
     setIsAnimating(true);
     setDragX(400); // Fly off right
 
+    if (topCardRef.current) {
+      topCardRef.current.style.transition = 'transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)';
+      topCardRef.current.style.transform = 'translateX(400px) rotate(20deg)';
+    }
+
     setTimeout(() => {
+      if (topCardRef.current) {
+        topCardRef.current.style.transition = '';
+        topCardRef.current.style.transform = '';
+      }
       setDragX(0);
       setIsAnimating(false);
       setCurrentIndex(prev => {
@@ -73,6 +94,7 @@ export default function CategoryStack({ category, items, haptic, loop = true }: 
     setIsDragging(true);
     isDraggingRef.current = true;
     startX.current = clientX;
+    dragXRef.current = 0;
 
     if (items.length > 0) {
       const topProduct = items[(currentIndex) % items.length];
@@ -81,7 +103,7 @@ export default function CategoryStack({ category, items, haptic, loop = true }: 
           navigator.vibrate(40);
         }
         setShowVoteAction(topProduct.id);
-      }, 500);
+      }, 550); // slight increase to prevent accidental show on fast swipes
     }
   };
 
@@ -92,7 +114,20 @@ export default function CategoryStack({ category, items, haptic, loop = true }: 
       clearTimer();
       setShowVoteAction(null);
     }
-    setDragX(diff);
+    dragXRef.current = diff;
+
+    if (topCardRef.current) {
+      const rotation = diff * 0.05;
+      const liftY = -Math.abs(diff) * 0.03;
+      topCardRef.current.style.transform = 
+        `translateX(${diff}px) translateY(${liftY}px) rotate(${rotation}deg)`;
+      topCardRef.current.style.transition = 'none';
+    }
+
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      setDragX(dragXRef.current);
+    });
   };
 
   const onEnd = () => {
@@ -101,13 +136,35 @@ export default function CategoryStack({ category, items, haptic, loop = true }: 
     setIsDragging(false);
     isDraggingRef.current = false;
 
-    if (dragX < -100) {
-      handleNext();
-    } else if (dragX > 100) {
-      handlePrev();
+    const finalDrag = dragXRef.current;
+
+    if (finalDrag < -80) {
+      if (topCardRef.current) {
+        topCardRef.current.style.transition = 'transform 0.25s cubic-bezier(0.32, 0.72, 0, 1)';
+        topCardRef.current.style.transform = `translateX(-120%) rotate(-8deg)`;
+      }
+      setTimeout(() => handleNext(), 250);
+    } else if (finalDrag > 80) {
+      if (topCardRef.current) {
+        topCardRef.current.style.transition = 'transform 0.25s cubic-bezier(0.32, 0.72, 0, 1)';
+        topCardRef.current.style.transform = `translateX(120%) rotate(8deg)`;
+      }
+      setTimeout(() => handlePrev(), 250);
     } else {
-      setDragX(0); // snap back only
+      if (topCardRef.current) {
+        topCardRef.current.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        topCardRef.current.style.transform = 'translateX(0) translateY(0) rotate(0deg)';
+        setTimeout(() => {
+          if (topCardRef.current) {
+            topCardRef.current.style.transition = '';
+            topCardRef.current.style.transform = '';
+          }
+        }, 400);
+      }
     }
+    dragXRef.current = 0;
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setDragX(0);
   };
 
   useEffect(() => {
@@ -154,7 +211,7 @@ export default function CategoryStack({ category, items, haptic, loop = true }: 
 
       if (items.length > 1) {
         if (isTop) {
-          translateX = dragX;
+          translateX = 0;
           opacity = 1;
         } else if (level === 1) {
           scale = 0.95 + progress * 0.05;
@@ -203,6 +260,7 @@ export default function CategoryStack({ category, items, haptic, loop = true }: 
             return (
               <div
                 key={product.id}
+                ref={isTop ? topCardRef : undefined}
                 className="category-stack-card shadow-2xl [will-change:transform,opacity] [transform:translateX(var(--tx))_translateY(var(--ty))_scale(var(--ts))] opacity-[var(--op)] z-[var(--z)] [transition:var(--trans)]"
                 style={stackStyles[index]}
               >

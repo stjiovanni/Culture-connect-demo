@@ -16,6 +16,7 @@ import ReactCrop, { type Crop, centerCrop, makeAspectCrop } from 'react-image-cr
 import 'react-image-crop/dist/ReactCrop.css';
 
 import CategoryStack from '@/components/CategoryStack';
+import { motion } from 'framer-motion';
 
 function CropUI({
   src,
@@ -163,6 +164,10 @@ export default function ProfilePage() {
   const [draft, setDraft] = useState({ ...profile });
   const [cropping, setCropping] = useState<{ src: string; type: 'avatar' | 'banner' } | null>(null);
 
+  const editSheetRef = useRef<HTMLDivElement>(null);
+  const editDragY = useRef(0);
+  const editTouchStartY = useRef(0);
+
   const displayName = mounted ? `${profile.firstName} ${profile.lastName}` : 'Admin Account';
   const bannerSrc = mounted ? profile.banner : '/uploads/cultural-textiles-craft.jpeg';
   const avatarSrc = mounted ? profile.avatar : '/uploads/avatar_7_1776873674.jpeg';
@@ -195,6 +200,48 @@ export default function ProfilePage() {
   };
   const cancelEditing = () => { if (hasDraftChanges) { setShowDiscard(true); } else { setIsEditing(false); haptic.trigger('light'); } };
   const confirmDiscard = () => { setDraft({ ...profile }); setIsEditing(false); setShowDiscard(false); haptic.trigger('warning'); };
+
+  const handleEditTouchStart = (e: React.TouchEvent) => {
+    editTouchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleEditTouchMove = (e: React.TouchEvent) => {
+    const deltaY = e.touches[0].clientY - editTouchStartY.current;
+    if (deltaY > 0 && editSheetRef.current) {
+      editDragY.current = deltaY;
+      editSheetRef.current.style.transform = `translateY(${deltaY}px)`;
+      editSheetRef.current.style.opacity = `${Math.max(0.4, 1 - deltaY / 400)}`;
+    }
+  };
+
+  const handleEditTouchEnd = () => {
+    if (editDragY.current > 120) {
+      if (hasDraftChanges) {
+        if (editSheetRef.current) {
+          editSheetRef.current.style.transform = 'translateY(0)';
+          editSheetRef.current.style.opacity = '1';
+        }
+        editDragY.current = 0;
+        setShowDiscard(true);
+      } else {
+        haptic.trigger('light');
+        setIsEditing(false);
+      }
+    } else {
+      haptic.trigger('selection');
+      if (editSheetRef.current) {
+        editSheetRef.current.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
+        editSheetRef.current.style.transform = 'translateY(0)';
+        editSheetRef.current.style.opacity = '1';
+        setTimeout(() => {
+          if (editSheetRef.current) {
+            editSheetRef.current.style.transition = '';
+          }
+        }, 300);
+      }
+      editDragY.current = 0;
+    }
+  };
 
   // Profile initialization is now handled in useEffect to avoid hydration mismatch and sync setState during render
 
@@ -323,18 +370,25 @@ export default function ProfilePage() {
         <div className="md:hidden fixed inset-0 z-50 flex flex-col justify-end">
           <div className="absolute inset-0 bg-black/60" onClick={cancelEditing} aria-hidden="true" />
 
-          <div className="relative bg-[#0C0B0A] border-t border-white/10 rounded-t-2xl z-50 animate-in slide-in-from-bottom duration-300 flex flex-col max-h-[90vh]">
-            {/* Drag handle */}
-            <div className="w-10 h-1 bg-white/20 rounded-full mx-auto mt-3 mb-2 shrink-0" />
+          <div ref={editSheetRef} className="relative bg-[#0C0B0A] border-t border-white/10 rounded-t-2xl z-50 animate-in slide-in-from-bottom duration-300 flex flex-col max-h-[90vh]">
+            <div
+              className="shrink-0"
+              onTouchStart={handleEditTouchStart}
+              onTouchMove={handleEditTouchMove}
+              onTouchEnd={handleEditTouchEnd}
+            >
+              {/* Drag handle */}
+              <div className="w-10 h-1 bg-white/20 rounded-full mx-auto mt-3 mb-2" />
 
-            {/* Top Action Bar */}
-            <div className="flex items-center justify-between px-4 py-3 shrink-0">
-              <button onClick={cancelEditing} className="liquid-glass-red px-5 py-2 rounded-full text-[#FF7575] font-bold text-[13px] pressable">
-                Cancel
-              </button>
-              <button onClick={saveProfile} className="liquid-glass-strong-purple px-5 py-2 rounded-full text-white font-bold text-[13px] pressable">
-                Save
-              </button>
+              {/* Top Action Bar */}
+              <div className="flex items-center justify-between px-4 py-3">
+                <button onClick={cancelEditing} className="liquid-glass-red px-5 py-2 rounded-full text-[#FF7575] font-bold text-[13px] pressable">
+                  Cancel
+                </button>
+                <button onClick={saveProfile} className="liquid-glass-strong-purple px-5 py-2 rounded-full text-white font-bold text-[13px] pressable">
+                  Save
+                </button>
+              </div>
             </div>
 
             {/* Banner — full width, no padding, no rounding, outside scroll container */}
@@ -515,7 +569,7 @@ export default function ProfilePage() {
                   </span>
                 </div>
               )}
-              <button onClick={startEditing} className="shrink-0 liquid-glass-strong-purple px-4 py-2 rounded-full text-[12px] font-bold text-white transition-all pressable">
+              <button onClick={startEditing} className="ml-auto shrink-0 liquid-glass-strong-purple px-4 py-2 rounded-full text-[12px] font-bold text-white transition-all pressable">
                 Edit profile
               </button>
             </div>
@@ -534,17 +588,25 @@ export default function ProfilePage() {
 
         {/* Filter Toggle */}
         <div className="flex justify-center mt-8 mb-10">
-          <div className="glass-pill p-1 rounded-full flex items-center">
+          <div className="glass-pill p-1 rounded-full flex items-center relative">
             {['all', 'products', 'services'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => { setActiveTab(tab); haptic.trigger('selection'); }}
-                className={`px-6 md:px-8 py-2 md:py-2.5 rounded-full text-[13px] md:text-[14px] transition-all ${activeTab === tab
-                    ? 'bg-white text-black font-semibold shadow-xl'
+                className={`relative px-6 md:px-8 py-2 md:py-2.5 rounded-full text-[13px] md:text-[14px] transition-colors pressable z-10 ${activeTab === tab
+                    ? 'text-black font-semibold'
                     : 'text-[#9E9B96] font-normal hover:text-white'
                   }`}
               >
-                {tab === 'products' ? 'Products' : tab === 'services' ? 'Services' : 'All'}
+                {activeTab === tab && (
+                  <motion.div
+                    layoutId="profileTabIndicator"
+                    className="absolute inset-0 bg-white rounded-full shadow-xl z-0"
+                    initial={false}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10 capitalize">{tab}</span>
               </button>
             ))}
           </div>

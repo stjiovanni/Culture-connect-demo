@@ -6,6 +6,7 @@ import { useWebHaptics } from 'web-haptics/react';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { CancelCircleIcon } from '@hugeicons/core-free-icons';
 import { useFilter } from '../context/FilterContext';
+import { motion } from 'framer-motion';
 
 interface FilterDrawerProps {
   isOpen: boolean;
@@ -100,12 +101,20 @@ export default function FilterDrawer({
               <button
                 key={c}
                 onClick={() => handleCategoryToggle(c)}
-                className={`rounded-full px-4 py-2 text-[11px] font-bold transition-all duration-300 pressable ${selectedCategories.includes(c)
-                  ? 'bg-white text-black'
+                className={`relative px-4 py-2 text-[11px] font-bold transition-colors rounded-full pressable overflow-hidden ${selectedCategories.includes(c)
+                  ? 'text-black'
                   : 'liquid-glass text-[#9E9B96] hover:text-white'
                   }`}
               >
-                {c}
+                {selectedCategories.includes(c) && (
+                  <motion.div
+                    className="absolute inset-0 bg-white"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{c}</span>
               </button>
             ))}
           </div>
@@ -172,20 +181,40 @@ export default function FilterDrawer({
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => handleAreaToggle('')}
-              className={`rounded-full px-4 py-2 text-[11px] font-bold transition-all duration-300 pressable ${selectedAreas.includes('')
-                ? 'liquid-glass-strong-purple text-white'
+              className={`relative px-4 py-2 text-[11px] font-bold transition-colors rounded-full pressable overflow-hidden ${selectedAreas.includes('')
+                ? 'text-white'
                 : 'liquid-glass text-[#9E9B96] hover:text-white'
                 }`}
-            >Global</button>
+            >
+              {selectedAreas.includes('') && (
+                 <motion.div
+                   className="absolute inset-0 liquid-glass-strong-purple"
+                   initial={{ opacity: 0, scale: 0.8 }}
+                   animate={{ opacity: 1, scale: 1 }}
+                   transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                 />
+              )}
+              <span className="relative z-10">Global</span>
+            </button>
             {areas.map(a => (
               <button
                 key={a.id}
                 onClick={() => handleAreaToggle(a.id)}
-                className={`rounded-full px-4 py-2 text-[11px] font-bold transition-all duration-300 pressable ${selectedAreas.includes(a.id)
-                  ? 'bg-white text-black'
+                className={`relative px-4 py-2 text-[11px] font-bold transition-colors rounded-full pressable overflow-hidden ${selectedAreas.includes(a.id)
+                  ? 'text-black'
                   : 'liquid-glass text-[#9E9B96] hover:text-white'
                   }`}
-              >{a.name}</button>
+              >
+                {selectedAreas.includes(a.id) && (
+                  <motion.div
+                    className="absolute inset-0 bg-white"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{a.name}</span>
+              </button>
             ))}
           </div>
         </div>

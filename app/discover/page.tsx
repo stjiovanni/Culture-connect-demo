@@ -105,7 +105,7 @@ export default function DiscoverPage() {
       <MobileHeaderTabs />
 
       {/* Section Header */}
-      <div className="mt-4 text-left max-w-lg animate-in fade-in slide-in-from-top-4 duration-500">
+      <div className="mt-[-12px] md:mt-4 text-left max-w-lg animate-in fade-in slide-in-from-top-4 duration-500">
         <h1 className="text-4xl font-serif text-white tracking-tight mb-2">
           {sectionContent.title}
         </h1>

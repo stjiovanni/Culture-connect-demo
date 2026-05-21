@@ -8,6 +8,7 @@ import { useVotes } from '@/context/VoteContext';
 import { useWebHaptics } from 'web-haptics/react';
 
 import CategoryStack from '@/components/CategoryStack';
+import { motion } from 'framer-motion';
 
 /* ─────────────────────────────────────────────
    VOTES PAGE
@@ -60,18 +61,26 @@ export default function VotesPage() {
 
         {/* Filter Toggle */}
         <div className="flex justify-start">
-          <div className="bg-[#161412]/85 backdrop-blur-xl border border-white/[0.08] p-1 rounded-full flex items-center">
+          <div className="bg-[#161412]/85 backdrop-blur-xl border border-white/[0.08] p-1 rounded-full flex items-center relative">
             {['all', 'products', 'services'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => { setActiveTab(tab); haptic.trigger('selection'); }}
-                className={`px-8 py-2.5 rounded-full text-[14px] font-bold transition-all ${
+                className={`relative px-8 py-2.5 rounded-full text-[14px] font-bold transition-all z-10 pressable ${
                   activeTab === tab 
-                  ? 'bg-white text-black shadow-xl' 
+                  ? 'text-black' 
                   : 'text-[#9E9B96] hover:text-white'
                 }`}
               >
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                {activeTab === tab && (
+                  <motion.div
+                    layoutId="votesTabIndicator"
+                    className="absolute inset-0 bg-white rounded-full shadow-xl z-0"
+                    initial={false}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{tab.charAt(0).toUpperCase() + tab.slice(1)}</span>
               </button>
             ))}
           </div>

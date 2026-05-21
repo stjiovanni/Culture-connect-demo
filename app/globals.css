@@ -9,6 +9,7 @@
   --muted-text: #9E9B96;
   --label-text: #86847F;
   --glass-base: rgba(12, 11, 10, 0.85);
+  --navbar-height: 64px;
   
   /* Emil Design Engineering Tokens */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -431,7 +432,7 @@ button:focus-visible {
 }
 
 .mobile-bottom-pill {
-  background: rgba(12, 11, 10, 0.40);
+  background: rgba(12, 11, 10, 0.90);
   background-blend-mode: luminosity;
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -511,7 +512,7 @@ button:focus-visible {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(12, 11, 10, 0.40);
+  background: rgba(12, 11, 10, 0.90);
   background-blend-mode: luminosity;
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -655,11 +656,21 @@ button:focus-visible {
 }
 
 .product-sheet {
-  animation: sheetSlideUp 0.4s var(--ease-out) forwards;
+  animation: slideInFromRight 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
 }
 
 .product-sheet-closing {
-  animation: sheetSlideDown 0.3s var(--ease-out) forwards;
+  animation: slideOutToRight 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+@keyframes slideInFromRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutToRight {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
 }
 
 /* ==========================================
