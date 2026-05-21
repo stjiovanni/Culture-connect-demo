@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
@@ -44,6 +44,32 @@ export default function TopNav() {
   const haptic = useWebHaptics();
   const pathname = usePathname();
   const router = useRouter();
+
+  const [navAvatar, setNavAvatar] = useState('/uploads/avatar_7_1776873674.jpeg');
+
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem('user_profile');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.avatar) setNavAvatar(parsed.avatar);
+      }
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    const handler = () => {
+      try {
+        const saved = sessionStorage.getItem('user_profile');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.avatar) setNavAvatar(parsed.avatar);
+        }
+      } catch {}
+    };
+    window.addEventListener('profile-updated', handler);
+    return () => window.removeEventListener('profile-updated', handler);
+  }, []);
 
   const handleTabClick = (value: string) => {
     setTypeFilter(value);
@@ -190,7 +216,7 @@ export default function TopNav() {
               onClick={() => haptic.trigger('light')}
             >
               <Image
-                src="/uploads/avatar_7_1776873674.jpeg"
+                src={navAvatar}
                 alt="Profile"
                 width={32}
                 height={32}

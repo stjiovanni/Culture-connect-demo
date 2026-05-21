@@ -50,11 +50,14 @@ export default function DiscoverPage() {
     }
 
     if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
+      const q = searchQuery.toLowerCase().trim();
       result = result.filter(p =>
         p.name.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        p.company_name.toLowerCase().includes(q) ||
+        p.area_name.toLowerCase().includes(q) ||
         p.description.toLowerCase().includes(q) ||
-        p.company_name.toLowerCase().includes(q)
+        p.price.toString().includes(q)
       );
     }
 

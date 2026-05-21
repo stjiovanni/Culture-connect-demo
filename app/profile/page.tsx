@@ -75,7 +75,10 @@ function CropUI({
   return (
     <div className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center p-6">
       <div className="max-w-2xl w-full flex flex-col gap-8">
-        <div className="relative bg-[#1A1814] rounded-2xl overflow-hidden border border-white/10 shadow-2xl flex items-center justify-center min-h-[300px]">
+        <div className="relative bg-[#1A1814] rounded-2xl overflow-hidden border border-white/10 shadow-2xl flex flex-col items-center justify-center p-6 min-h-[300px]">
+          <p className="text-[#9E9B96] text-[13px] text-center mb-3">
+            {circular ? 'Crop profile photo' : 'Crop header — 3:1 ratio'}
+          </p>
           <ReactCrop
             crop={crop}
             onChange={c => setCrop(c)}
@@ -231,6 +234,8 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [showDiscard, setShowDiscard] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
+  const [showAvatarLightbox, setShowAvatarLightbox] = useState(false);
+  const [showBannerLightbox, setShowBannerLightbox] = useState(false);
 
   const [mounted, setMounted] = useState(false);
   const [profile, setProfile] = useState({
@@ -284,6 +289,7 @@ export default function ProfilePage() {
       const { avatar, banner, ...rest } = draft;
       sessionStorage.setItem('user_profile', JSON.stringify({ ...rest, avatar: profile.avatar, banner: profile.banner }));
     }
+    window.dispatchEvent(new Event('profile-updated'));
     setIsEditing(false);
     haptic.trigger('success');
     setToast('Profile saved.');
@@ -552,7 +558,7 @@ export default function ProfilePage() {
         {cropping && (
           <CropUI
             src={cropping.src}
-            aspect={cropping.type === 'avatar' ? 1 : undefined}
+            aspect={cropping.type === 'avatar' ? 1 : 3}
             circular={cropping.type === 'avatar'}
             onConfirm={applyCrop}
             onCancel={() => setCropping(null)}
@@ -570,28 +576,40 @@ export default function ProfilePage() {
       <div className="relative">
         {/* Desktop Banner (md+) */}
         <div className="hidden md:block relative h-[55vh] w-full overflow-hidden shrink-0">
-          <Image
-            src={bannerSrc}
-            alt="Profile banner"
-            fill
-            className="object-cover"
-            priority
-          />
-          {/* High-fidelity dissolve gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0C0B0A] via-[#0C0B0A]/40 to-transparent" />
+          <div 
+            className="absolute inset-0 cursor-zoom-in z-0" 
+            onClick={() => setShowBannerLightbox(true)}
+            role="button"
+            tabIndex={0}
+            aria-label="View banner full screen"
+          >
+            <Image
+              src={bannerSrc}
+              alt="Profile banner"
+              fill
+              className="object-cover"
+              priority
+            />
+            {/* High-fidelity dissolve gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0B0A] via-[#0C0B0A]/40 to-transparent" />
+          </div>
 
           {/* Identity Overlay — anchored to bottom */}
           <div className="absolute bottom-8 left-10 right-10 z-20 flex items-end justify-between gap-8">
             <div className="flex items-center gap-8">
               {/* Avatar overlap */}
-              <div className="relative w-[100px] h-[100px] rounded-full border-[4px] border-[#0C0B0A] overflow-hidden shadow-2xl shrink-0">
+              <button
+                onClick={() => setShowAvatarLightbox(true)}
+                className="relative w-[100px] h-[100px] rounded-full border-[4px] border-[#0C0B0A] overflow-hidden shadow-2xl shrink-0 cursor-zoom-in hover:scale-105 transition-transform duration-300 pressable"
+                aria-label="View profile photo full screen"
+              >
                 <Image
                   src={avatarSrc}
                   alt="Profile avatar"
                   fill
                   className="object-cover"
                 />
-              </div>
+              </button>
 
               {/* Typography with mix-blend-mode for auto-contrast */}
               <div className="isolation-auto">
@@ -630,23 +648,35 @@ export default function ProfilePage() {
 
         {/* Mobile Banner Header */}
         <div className="md:hidden relative h-[55vh] w-full overflow-hidden shrink-0">
-          <Image
-            src={bannerSrc}
-            alt="Profile banner"
-            fill
-            className="object-cover"
-            priority
-          />
-          {/* High-fidelity dissolve gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0C0B0A] via-[#0C0B0A]/40 to-transparent" />
+          <div 
+            className="absolute inset-0 cursor-zoom-in z-0" 
+            onClick={() => setShowBannerLightbox(true)}
+            role="button"
+            tabIndex={0}
+            aria-label="View banner full screen"
+          >
+            <Image
+              src={bannerSrc}
+              alt="Profile banner"
+              fill
+              className="object-cover"
+              priority
+            />
+            {/* High-fidelity dissolve gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0B0A] via-[#0C0B0A]/40 to-transparent" />
+          </div>
 
           {/* Identity Overlay */}
           <div className="absolute bottom-6 left-4 right-4 z-20">
             {/* Row 1: Avatar + Name/Username */}
             <div className="flex items-center gap-3 mb-2">
-              <div className="relative w-[48px] h-[48px] shrink-0 rounded-full border-[3px] border-[#0C0B0A] overflow-hidden shadow-xl">
+              <button
+                onClick={() => setShowAvatarLightbox(true)}
+                className="relative w-[48px] h-[48px] shrink-0 rounded-full border-[3px] border-[#0C0B0A] overflow-hidden shadow-xl cursor-zoom-in active:scale-95 transition-transform pressable"
+                aria-label="View profile photo full screen"
+              >
                 <Image src={avatarSrc} alt="Profile avatar" fill className="object-cover" />
-              </div>
+              </button>
               <div>
                 <h1 className="text-xl font-serif tracking-tight leading-tight text-white">{displayName}</h1>
                 <p className="text-[12px] font-bold text-white/70">@{displayUsername}</p>
@@ -739,6 +769,30 @@ export default function ProfilePage() {
 
       {/* Global Overlays */}
       {toast && <Toast message={toast} onDone={() => setToast(null)} />}
+
+      {/* Avatar Lightbox */}
+      {showAvatarLightbox && (
+        <div 
+          className="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center p-6 cursor-zoom-out animate-in fade-in duration-200"
+          onClick={() => setShowAvatarLightbox(false)}
+        >
+          <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
+            <Image src={avatarSrc} alt="Profile photo" fill className="object-cover" />
+          </div>
+        </div>
+      )}
+
+      {/* Banner Lightbox */}
+      {showBannerLightbox && (
+        <div
+          className="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center p-4 cursor-zoom-out animate-in fade-in duration-200"
+          onClick={() => setShowBannerLightbox(false)}
+        >
+          <div className="relative w-full max-w-3xl aspect-[3/1] rounded-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
+            <Image src={bannerSrc} alt="Profile banner" fill className="object-cover" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

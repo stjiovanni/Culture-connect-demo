@@ -25,6 +25,32 @@ export default function MobileBottomNav() {
     return () => cancelAnimationFrame(t);
   }, []);
 
+  const [navAvatar, setNavAvatar] = useState('/uploads/avatar_7_1776873674.jpeg');
+
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem('user_profile');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.avatar) setNavAvatar(parsed.avatar);
+      }
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    const handler = () => {
+      try {
+        const saved = sessionStorage.getItem('user_profile');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.avatar) setNavAvatar(parsed.avatar);
+        }
+      } catch {}
+    };
+    window.addEventListener('profile-updated', handler);
+    return () => window.removeEventListener('profile-updated', handler);
+  }, []);
+
   const openSearch = useCallback(() => {
     haptic.trigger('light');
     setIsOpen(true);
@@ -132,16 +158,12 @@ export default function MobileBottomNav() {
             if (isOpen) closeSearch();
             haptic.trigger('light');
           }}
-          className={`flex items-center justify-center w-[22px] h-[22px] rounded-full overflow-hidden border transition-all pressable ${pathname === '/profile' ? 'border-[#6E5B98]' : 'border-white/20'}`}
+          className={`flex items-center justify-center rounded-full border transition-all pressable shrink-0 ${pathname === '/profile' ? 'border-[#6E5B98]' : 'border-white/20'}`}
           aria-label="Profile"
         >
-          <Image
-            src="/uploads/avatar_7_1776873674.jpeg"
-            alt="Profile avatar"
-            width={22}
-            height={22}
-            className="object-cover w-full h-full"
-          />
+          <div className="relative w-6 h-6 rounded-full overflow-hidden">
+            <Image src={navAvatar} alt="Profile" fill className="object-cover" />
+          </div>
         </Link>
       </nav>
     </div>
