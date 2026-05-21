@@ -1198,9 +1198,9 @@
         },
         {
             "id": 14,
-            "first_name": "Admin",
-            "last_name": "Account",
-            "username": "admin_cul",
+            "first_name": "User",
+            "last_name": "One",
+            "username": "user1",
             "role": "admin",
             "area_id": 3
         },
