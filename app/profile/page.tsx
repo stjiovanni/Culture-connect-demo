@@ -132,6 +132,96 @@ function Toast({ message, onDone }: { message: string; onDone: () => void }) {
   return <div className="toast">{message}</div>;
 }
 
+function LocationDropdown({
+  value,
+  onChange,
+  areas,
+  size = 'md',
+}: {
+  value: number;
+  onChange: (id: number) => void;
+  areas: { id: number; name: string }[];
+  size?: 'md' | 'lg';
+}) {
+  const [open, setOpen] = useState(false);
+  const [openUp, setOpenUp] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleToggle = () => {
+    if (!open && triggerRef.current) {
+      const rect = triggerRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const spaceNeeded = Math.min(areas.length * 44, 220);
+      setOpenUp(spaceBelow < spaceNeeded);
+    }
+    setOpen(prev => !prev);
+  };
+
+  useEffect(() => {
+    if (!open) return;
+    const handleOutside = (e: MouseEvent | TouchEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutside);
+    document.addEventListener('touchstart', handleOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleOutside);
+      document.removeEventListener('touchstart', handleOutside);
+    };
+  }, [open]);
+
+  const selected = areas.find(a => a.id === value);
+  const py = size === 'lg' ? 'py-3' : 'py-2.5';
+  const textSize = size === 'lg' ? 'text-[15px]' : 'text-[14px]';
+  const itemPy = size === 'lg' ? 'py-3' : 'py-2.5';
+
+  return (
+    <div ref={containerRef} className="relative">
+      <button
+        ref={triggerRef}
+        type="button"
+        onClick={handleToggle}
+        className={`w-full bg-white/5 border ${open ? 'border-[#6E5B98]' : 'border-white/10'} rounded-full px-4 ${py} text-white ${textSize} outline-none text-left flex items-center justify-between transition-colors hover:border-white/20`}
+      >
+        <span>{selected?.name ?? 'Select location'}</span>
+        <svg
+          className={`w-4 h-4 text-[#86847F] transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          fill="none" viewBox="0 0 24 24" stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {open && (
+        <div
+          className={`absolute left-0 right-0 z-[60] bg-[#1A1714] border border-white/10 rounded-2xl overflow-hidden shadow-2xl animate-in fade-in duration-150 ${
+            openUp ? 'bottom-[calc(100%+8px)] slide-in-from-bottom-2' : 'top-[calc(100%+8px)] slide-in-from-top-2'
+          }`}
+          style={{ maxHeight: '220px', overflowY: 'auto' }}
+        >
+          {areas.map(a => (
+            <button
+              key={a.id}
+              type="button"
+              onClick={() => { onChange(a.id); setOpen(false); }}
+              className={`w-full text-left px-4 ${itemPy} ${textSize} transition-colors pressable ${
+                a.id === value
+                  ? 'text-white font-semibold bg-[#6E5B98]/20'
+                  : 'text-[#9E9B96] hover:text-white hover:bg-white/5'
+              }`}
+            >
+              {a.name}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ProfilePage() {
   const haptic = useWebHaptics();
   const allProducts = getProducts();
@@ -141,8 +231,6 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [showDiscard, setShowDiscard] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
-  const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
-  const locationDropdownRef = useRef<HTMLDivElement>(null);
 
   const [mounted, setMounted] = useState(false);
   const [profile, setProfile] = useState({
@@ -187,7 +275,7 @@ export default function ProfilePage() {
 
   const hasDraftChanges = JSON.stringify(draft) !== JSON.stringify(profile);
 
-  const startEditing = () => { setDraft({ ...profile }); setIsEditing(true); setLocationDropdownOpen(false); haptic.trigger('light'); };
+  const startEditing = () => { setDraft({ ...profile }); setIsEditing(true); haptic.trigger('light'); };
   const saveProfile = () => {
     setProfile({ ...draft });
     try {
@@ -252,18 +340,6 @@ export default function ProfilePage() {
     window.addEventListener('keydown', h);
     return () => window.removeEventListener('keydown', h);
   }, [isEditing, showDiscard, cropping, hasDraftChanges]);
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    if (!locationDropdownOpen) return;
-    const handleClick = (e: MouseEvent) => {
-      if (locationDropdownRef.current && !locationDropdownRef.current.contains(e.target as Node)) {
-        setLocationDropdownOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
-  }, [locationDropdownOpen]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, type: 'avatar' | 'banner') => {
     const file = e.target.files?.[0];
@@ -371,36 +447,12 @@ export default function ProfilePage() {
 
                 <div className="flex flex-col gap-1.5">
                   <label className="text-[#86847F] text-[11px] font-bold tracking-[-0.5px]">Location</label>
-                  <div ref={locationDropdownRef} className="relative">
-                    <button
-                      type="button"
-                      onClick={() => { setLocationDropdownOpen(v => !v); haptic.trigger('selection'); }}
-                      className="w-full bg-white/5 border border-white/10 rounded-full px-4 py-2.5 text-white text-[14px] outline-none text-left flex items-center justify-between transition-colors hover:border-white/20 focus:border-[#6E5B98]"
-                    >
-                      <span>{areas.find(a => a.id === draft.locationId)?.name || 'Select location'}</span>
-                      <svg className={`w-4 h-4 text-[#86847F] transition-transform duration-200 ${locationDropdownOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-                    </button>
-                    {locationDropdownOpen && (
-                      <div className="absolute top-full left-0 right-0 mt-2 bg-[#161412] border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                        <div className="max-h-[200px] overflow-y-auto py-1">
-                          {areas.map(a => (
-                            <button
-                              key={a.id}
-                              type="button"
-                              onClick={() => { setDraft(p => ({ ...p, locationId: a.id })); setLocationDropdownOpen(false); haptic.trigger('selection'); }}
-                              className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors pressable ${
-                                draft.locationId === a.id
-                                  ? 'text-white bg-[#6E5B98]/20 font-semibold'
-                                  : 'text-[#9E9B96] hover:text-white hover:bg-white/5'
-                              }`}
-                            >
-                              {a.name}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                  <LocationDropdown
+                    value={draft.locationId}
+                    onChange={(id) => { setDraft(p => ({ ...p, locationId: id })); haptic.trigger('selection'); }}
+                    areas={areas}
+                    size="md"
+                  />
                 </div>
               </div>
             </div>
@@ -408,10 +460,10 @@ export default function ProfilePage() {
         </div>
 
         {/* Mobile: Bottom Sheet Layout */}
-        <div className="md:hidden fixed inset-0 z-50 flex flex-col justify-end">
+        <div className="md:hidden fixed inset-0 z-50 flex flex-col">
           <div className="absolute inset-0 bg-black/60" onClick={cancelEditing} aria-hidden="true" />
 
-          <div ref={editSheetRef} className="relative bg-[#0C0B0A] border-t border-white/10 rounded-t-2xl z-50 animate-in slide-in-from-bottom duration-300 flex flex-col max-h-[90vh]">
+          <div ref={editSheetRef} className="relative bg-[#0C0B0A] border-t border-white/10 rounded-t-2xl z-50 animate-in slide-in-from-bottom duration-300 flex flex-col h-full mt-auto">
             <div
               className="shrink-0"
               onTouchStart={handleEditTouchStart}
@@ -484,36 +536,12 @@ export default function ProfilePage() {
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label className="text-[#86847F] text-[11px] font-bold tracking-[-0.5px]">Location</label>
-                  <div ref={locationDropdownRef} className="relative">
-                    <button
-                      type="button"
-                      onClick={() => { setLocationDropdownOpen(v => !v); haptic.trigger('selection'); }}
-                      className="w-full bg-white/5 border border-white/10 rounded-full px-4 py-3 text-white text-[15px] outline-none text-left flex items-center justify-between transition-colors focus:border-[#6E5B98]"
-                    >
-                      <span>{areas.find(a => a.id === draft.locationId)?.name || 'Select location'}</span>
-                      <svg className={`w-4 h-4 text-[#86847F] transition-transform duration-200 ${locationDropdownOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-                    </button>
-                    {locationDropdownOpen && (
-                      <div className="absolute top-full left-0 right-0 mt-2 bg-[#161412] border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                        <div className="max-h-[200px] overflow-y-auto py-1">
-                          {areas.map(a => (
-                            <button
-                              key={a.id}
-                              type="button"
-                              onClick={() => { setDraft(p => ({ ...p, locationId: a.id })); setLocationDropdownOpen(false); haptic.trigger('selection'); }}
-                              className={`w-full text-left px-4 py-3 text-[15px] transition-colors pressable ${
-                                draft.locationId === a.id
-                                  ? 'text-white bg-[#6E5B98]/20 font-semibold'
-                                  : 'text-[#9E9B96] hover:text-white hover:bg-white/5'
-                              }`}
-                            >
-                              {a.name}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                  <LocationDropdown
+                    value={draft.locationId}
+                    onChange={(id) => { setDraft(p => ({ ...p, locationId: id })); haptic.trigger('selection'); }}
+                    areas={areas}
+                    size="lg"
+                  />
                 </div>
               </div>
             </div>
