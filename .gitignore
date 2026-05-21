@@ -44,7 +44,6 @@ next-env.d.ts
 
 # project specific
 /uploads/
-public/uploads/
 *.pem
 *.key
 scratch_profile_log.txt
