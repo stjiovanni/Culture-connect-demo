@@ -119,7 +119,7 @@ export default function CategoryStack({ category, items, haptic, loop = true }: 
     if (topCardRef.current) {
       const rotation = diff * 0.05;
       const liftY = -Math.abs(diff) * 0.03;
-      topCardRef.current.style.transform = 
+      topCardRef.current.style.transform =
         `translateX(${diff}px) translateY(${liftY}px) rotate(${rotation}deg)`;
       topCardRef.current.style.transition = 'none';
     }
@@ -276,22 +276,20 @@ export default function CategoryStack({ category, items, haptic, loop = true }: 
                     <button
                       onClick={(e) => { e.stopPropagation(); toggleVote(product.id, 'yes'); setShowVoteAction(null); haptic.trigger('selection'); }}
                       aria-label="Vote yes"
-                      className={`w-14 h-14 rounded-full border-[1.5px] flex items-center justify-center transition-all pressable ${
-                        hasVoted(product.id) === 'yes' 
-                          ? 'bg-[#4ade80]/20 border-[#4ade80] text-[#4ade80]' 
-                          : 'bg-[#4ade80]/5 border-[#4ade80]/10 text-[#4ade80]/60 hover:bg-[#4ade80]/10'
-                      }`}
+                      className={`w-14 h-14 rounded-full border-[1.5px] flex items-center justify-center transition-all pressable ${hasVoted(product.id) === 'yes'
+                        ? 'bg-[#4ade80]/20 border-[#4ade80] text-[#4ade80]'
+                        : 'bg-[#4ade80]/5 border-[#4ade80]/10 text-[#4ade80]/60 hover:bg-[#4ade80]/10'
+                        }`}
                     >
                       <HugeiconsIcon icon={ThumbsUpIcon} size={24} />
                     </button>
                     <button
                       onClick={(e) => { e.stopPropagation(); toggleVote(product.id, 'no'); setShowVoteAction(null); haptic.trigger('selection'); }}
                       aria-label="Vote no"
-                      className={`w-14 h-14 rounded-full border-[1.5px] flex items-center justify-center transition-all pressable ${
-                        hasVoted(product.id) === 'no' 
-                          ? 'bg-[#FF7575]/20 border-[#FF7575] text-[#FF7575]' 
-                          : 'bg-[#FF7575]/5 border-[#FF7575]/10 text-[#FF7575]/60 hover:bg-[#FF7575]/10'
-                      }`}
+                      className={`w-14 h-14 rounded-full border-[1.5px] flex items-center justify-center transition-all pressable ${hasVoted(product.id) === 'no'
+                        ? 'bg-[#FF7575]/20 border-[#FF7575] text-[#FF7575]'
+                        : 'bg-[#FF7575]/5 border-[#FF7575]/10 text-[#FF7575]/60 hover:bg-[#FF7575]/10'
+                        }`}
                     >
                       <HugeiconsIcon icon={ThumbsDownIcon} size={24} />
                     </button>

@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { getProducts, getAreas, type Product } from '@/lib/data';
 import { useWebHaptics } from 'web-haptics/react';
 import { useState, useMemo, useEffect, useRef } from 'react';
@@ -9,7 +10,8 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import {
   PencilEdit01Icon, Location01Icon, ArrowRight01Icon,
   Cancel01Icon, Tick01Icon, Camera01Icon,
-  ImageAdd01Icon, ImageUpload01Icon, Delete02Icon
+  ImageAdd01Icon, ImageUpload01Icon, Delete02Icon,
+  LogoutSquare01Icon
 } from '@hugeicons/core-free-icons';
 import { useVotes } from '@/context/VoteContext';
 import ReactCrop, { type Crop, centerCrop, makeAspectCrop } from 'react-image-crop';
@@ -227,6 +229,7 @@ function LocationDropdown({
 
 export default function ProfilePage() {
   const haptic = useWebHaptics();
+  const router = useRouter();
   const allProducts = getProducts();
   const areas = getAreas();
   const { votes, voteCount } = useVotes();
@@ -665,6 +668,20 @@ export default function ProfilePage() {
             {/* High-fidelity dissolve gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#0C0B0A] via-[#0C0B0A]/40 to-transparent" />
           </div>
+
+          {/* Mobile Logout Button (top right) */}
+          <button
+            onClick={() => {
+              haptic.trigger('warning');
+              router.push('/landing');
+            }}
+            className="absolute top-4 right-4 z-30 liquid-glass-strong-red text-white px-4 py-2 rounded-full text-[13px] font-bold pressable flex items-center gap-1.5"
+            style={{ position: 'absolute' }}
+            aria-label="Log out"
+          >
+            <HugeiconsIcon icon={LogoutSquare01Icon} size={15} />
+            <span>Logout</span>
+          </button>
 
           {/* Identity Overlay */}
           <div className="absolute bottom-6 left-4 right-4 z-20">

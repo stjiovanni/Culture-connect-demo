@@ -484,6 +484,8 @@ button:focus-visible {
 .mobile-search-bar {
   /* Full width minus 16px each side — container already spans 100vw */
   width: calc(100% - 32px);
+  position: relative;
+  z-index: 100;
   /* Closed state */
   transform-origin: center bottom;
   transform: scaleX(0.15) scaleY(0.3) translateY(28px);
@@ -849,6 +851,40 @@ button:focus-visible {
 .liquid-glass-red:hover {
   background: rgba(255, 117, 117, 0.20);
 }
+
+/* Glassmorphic Red Strong Filled Variant (for logout and filled red options) */
+.liquid-glass-strong-red {
+  background: rgba(255, 117, 117, 0.60);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  border: none;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.05), inset 0 1px 1px rgba(255,255,255,0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass-strong-red::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.50) 0%,
+    rgba(255,255,255,0.20) 20%,
+    rgba(255,255,255,0.00) 40%,
+    rgba(255,255,255,0.00) 60%,
+    rgba(255,255,255,0.20) 80%,
+    rgba(255,255,255,0.50) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.liquid-glass-strong-red:hover {
+  background: rgba(255, 117, 117, 0.70);
+}
+
 
 /* Glassmorphic Green Strong Variant (for Agree/Yes Votes) */
 .liquid-glass-green {

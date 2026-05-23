@@ -80,6 +80,8 @@ export default function MobileBottomNav() {
     closeSearch();
   }, [closeSearch]);
 
+  if (pathname === '/' || pathname === '/landing') return null;
+
   return (
     <div className="mobile-nav-container">
       {/* Invisible backdrop overlay — intercepts taps to dismiss */}

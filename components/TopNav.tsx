@@ -44,7 +44,6 @@ export default function TopNav() {
   const haptic = useWebHaptics();
   const pathname = usePathname();
   const router = useRouter();
-
   const [navAvatar, setNavAvatar] = useState('/uploads/avatar_7_1776873674.jpeg');
 
   useEffect(() => {
@@ -91,6 +90,8 @@ export default function TopNav() {
     clearAllFilters();
     haptic.trigger('warning');
   };
+
+  if (pathname === '/' || pathname === '/landing') return null;
 
   return (
     <header id="site-header" className="font-sans sticky top-0 z-50 border-b border-white/[0.03] relative">
@@ -226,7 +227,10 @@ export default function TopNav() {
 
             <button
               className="text-[#86847F] hover:text-[#FF7575] transition-all p-1 pressable hover:scale-110 ml-1"
-              onClick={() => haptic.trigger('warning')}
+              onClick={() => {
+                haptic.trigger('warning');
+                router.push('/landing');
+              }}
               aria-label="Log out"
             >
               <HugeiconsIcon icon={LogoutSquare01Icon} size={20} />
