@@ -19,8 +19,8 @@ export default function AdminDashboard() {
     return (
       <div className="flex items-center justify-center h-[60vh]">
         <div className="glass-pill p-8 rounded-[16px] text-center max-w-md">
-          <p className="text-lg text-[#DDD6F3] mb-4">Access Denied</p>
-          <p className="text-[#86847F]">Switch to Admin view in the navigation bar to see the dashboard.</p>
+          <p className="heading text-[#DDD6F3]">Access Denied</p>
+          <p className="body-text text-[#86847F]">Switch to Admin view in the navigation bar to see the dashboard.</p>
         </div>
       </div>
     );
@@ -46,8 +46,8 @@ export default function AdminDashboard() {
   return (
     <div className="flex flex-col gap-10 pb-20 max-w-[1400px] mx-auto animate-in fade-in duration-700">
       <div className="mb-2">
-        <h1 className="font-serif text-5xl text-white mb-3 tracking-normal">Intelligence Dashboard</h1>
-        <p className="text-[#86847F] text-sm font-medium tracking-tight">Strategic overview of platform metrics and rankings.</p>
+        <h1 className="heading font-serif text-white tracking-normal">Intelligence Dashboard</h1>
+        <p className="body-text text-[#86847F] font-medium">Strategic overview of platform metrics and rankings.</p>
       </div>
 
       {/* Bento Grid */}
@@ -68,7 +68,7 @@ export default function AdminDashboard() {
       {/* Ranked Products Table */}
       <div className="glass-pill rounded-[16px] overflow-hidden border border-white/5 shadow-3xl">
         <div className="px-8 py-6 border-b border-white/5 bg-white/[0.02] flex justify-between items-center">
-          <h2 className="text-xl font-bold text-white tracking-tight">Top Tier Rankings</h2>
+          <h2 className="heading font-bold text-white tracking-tight">Top Tier Rankings</h2>
           <span className="text-[10px] font-black text-[#86847F] tracking-tight">Based on Citizen Sentiment</span>
         </div>
         <div className="overflow-x-auto">
@@ -109,7 +109,7 @@ export default function AdminDashboard() {
       {/* Directory Table */}
       <div className="glass-pill rounded-[16px] overflow-hidden border border-white/5 shadow-3xl">
         <div className="px-8 py-6 border-b border-white/5 bg-white/[0.02]">
-          <h2 className="text-xl font-bold text-white tracking-tight">Heritage Directory</h2>
+          <h2 className="heading font-bold text-white tracking-tight">Heritage Directory</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm text-[#9E9B96]">

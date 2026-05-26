@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import TopNav from "../components/TopNav";
 import MobileBottomNav from "../components/MobileBottomNav";
+import AboutOverlay from "../components/AboutOverlay";
 import { ViewModeProvider } from "../context/ViewModeContext";
 import { FilterProvider } from "../context/FilterContext";
 import { VoteProvider } from "../context/VoteContext";
@@ -18,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased min-h-screen flex flex-col relative bg-[#0C0B0A]">
+      <body className="antialiased min-h-screen flex flex-col relative bg-[#0C0B0A]" suppressHydrationWarning>
         <ViewModeProvider>
           <FilterProvider>
             <VoteProvider>
@@ -26,6 +27,7 @@ export default function RootLayout({
               <main className="flex-1 w-full">
                 {children}
               </main>
+              <AboutOverlay />
               <MobileBottomNav />
             </VoteProvider>
           </FilterProvider>

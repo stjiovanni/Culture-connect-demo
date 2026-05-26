@@ -24,7 +24,7 @@ export function LiveTime() {
   return (
     <p
       style={{
-        fontFamily: "'Material Symbols Rounded', sans-serif",
+        fontFamily: "'Space Grotesk', sans-serif",
         fontSize: '1.5rem',
         letterSpacing: '-0.04rem',
         fontWeight: 700,

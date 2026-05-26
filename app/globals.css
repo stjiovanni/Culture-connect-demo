@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Libre+Caslon+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -917,4 +919,90 @@ button:focus-visible {
 
 .liquid-glass-green:hover {
   background: rgba(74, 222, 128, 0.20);
+}
+
+/* ==========================================
+   TYPOGRAPHY SYSTEM
+   ========================================== */
+
+/* Headings (h1, h2, h3) */
+.heading {
+  font-family: 'Stack Sans Notch', sans-serif;
+  font-size: 24px;
+  line-height: 32px;
+  margin-bottom: 12px;
+}
+
+/* Body text — fluid responsive */
+.body-text {
+  font-size: 14px;
+  line-height: 20px;
+  max-width: 40ch;
+}
+
+@media (min-width: 768px) {
+  .body-text {
+    font-size: 16px;
+    line-height: 24px;
+    max-width: 50ch;
+  }
+}
+
+@media (min-width: 1024px) {
+  .body-text {
+    font-size: 18px;
+    line-height: 24px;
+    max-width: 60ch;
+  }
+}
+
+@media (min-width: 1280px) {
+  .body-text {
+    max-width: 65ch;
+  }
+}
+
+@media (min-width: 1536px) {
+  .body-text {
+    max-width: 72ch;
+  }
+}
+
+/* About overlay label (reuses landing-link sizing, overrides colour for white bg) */
+.about-label {
+  color: #0C0B0A !important;
+}
+
+/* Team member name — Stack Sans Notch, responsive 16/24 → 18/24 */
+.team-name {
+  font-family: 'Stack Sans Notch', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@media (min-width: 1024px) {
+  .team-name {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+/* Button text — responsive */
+.btn-text {
+  font-size: 16px;
+  line-height: 21px;
+}
+
+@media (min-width: 768px) {
+  .btn-text {
+    line-height: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .btn-text {
+    font-size: 18px;
+    line-height: 24px;
+  }
 }

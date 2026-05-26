@@ -42,7 +42,7 @@ export default function VotesPage() {
     <div className="flex flex-col min-h-screen font-sans max-w-[1400px] mx-auto px-6 pt-6 pb-20">
       {/* Hero Section */}
       <div className="flex flex-col gap-10 pt-16 mb-16">
-        <h1 className="text-7xl font-bold text-white tracking-tighter leading-none [text-wrap:balance]">
+        <h1 className="heading font-bold text-white tracking-tighter [text-wrap:balance]">
           {["Your", "Votes"].map((word, i) => (
             <span 
               key={i} 
@@ -66,11 +66,11 @@ export default function VotesPage() {
               <button
                 key={tab}
                 onClick={() => { setActiveTab(tab); haptic.trigger('selection'); }}
-                className={`relative px-8 py-2.5 rounded-full text-[14px] font-bold transition-all z-10 pressable ${
-                  activeTab === tab 
-                  ? 'text-black' 
-                  : 'text-[#9E9B96] hover:text-white'
-                }`}
+                className={`btn-text relative px-8 py-2.5 rounded-full font-bold transition-all z-10 pressable ${
+                   activeTab === tab 
+                   ? 'text-black' 
+                   : 'text-[#9E9B96] hover:text-white'
+                 }`}
               >
                 {activeTab === tab && (
                   <motion.div
@@ -98,10 +98,10 @@ export default function VotesPage() {
 
       {categorizedVotes.length === 0 && (
         <div className="flex flex-col items-center justify-center py-20 gap-4 opacity-50">
-          <p className="text-white text-lg font-bold tracking-tight">No items found in this category.</p>
+          <p className="body-text text-white font-bold">No items found in this category.</p>
           <button 
             onClick={() => setActiveTab('all')}
-            className="text-[11px] font-bold text-[#6E5B98] hover:underline"
+            className="btn-text font-bold text-[#6E5B98] hover:underline"
           >
             View all votes
           </button>

@@ -193,37 +193,37 @@ export default function ProductDetailPage() {
                     <span className="text-sm font-bold text-white tabular-nums">{noCount}</span>
                   </div>
                 </div>
-                <h1 className="text-2xl font-bold text-white tracking-tight leading-[1.1] mt-4">{product.name}</h1>
+                <h1 className="heading font-bold text-white tracking-tight">{product.name}</h1>
               </div>
 
               {/* Description */}
-              <p className="text-[#C9C6C0] text-[15px] font-medium leading-relaxed">{product.description}</p>
+              <p className="body-text text-[#C9C6C0] font-medium">{product.description}</p>
 
               {/* Meta Sections */}
               <div className="flex flex-col gap-6 border-t border-white/5 pt-8">
                 {product.cultural_benefits && (
-                  <div className="flex flex-col gap-1.5">
-                    <h3 className="text-white text-[14px] font-bold">Cultural Benefits</h3>
-                    <p className="text-[#C9C6C0] text-[14px] leading-relaxed font-normal">{product.cultural_benefits}</p>
+                  <div>
+                    <h3 className="heading text-white font-bold">Cultural Benefits</h3>
+                    <p className="body-text text-[#C9C6C0] font-normal">{product.cultural_benefits}</p>
                   </div>
                 )}
                 {product.size_quantity && (
-                  <div className="flex flex-col gap-1.5">
-                    <h3 className="text-white text-[14px] font-bold">Size / Quantity</h3>
-                    <p className="text-[#C9C6C0] text-[14px] leading-relaxed font-normal">{product.size_quantity}</p>
+                  <div>
+                    <h3 className="heading text-white font-bold">Size / Quantity</h3>
+                    <p className="body-text text-[#C9C6C0] font-normal">{product.size_quantity}</p>
                   </div>
                 )}
-                <div className="flex flex-col gap-1.5">
-                  <h3 className="text-white text-[14px] font-bold">Location</h3>
-                  <div className="flex items-center gap-2 text-[#C9C6C0] text-[14px] font-normal">
+                <div>
+                  <h3 className="heading text-white font-bold">Location</h3>
+                  <div className="body-text flex items-center gap-2 text-[#C9C6C0] font-normal">
                     <HugeiconsIcon icon={Location01Icon} size={16} className="text-[#6E5B98]" />
                     {product.area_name}
                   </div>
                 </div>
                 {product.awards && (
-                  <div className="flex flex-col gap-1.5">
-                    <h3 className="text-white text-[14px] font-bold">Awards</h3>
-                    <p className="text-[#C9C6C0] text-[14px] leading-relaxed font-normal">{product.awards}</p>
+                  <div>
+                    <h3 className="heading text-white font-bold">Awards</h3>
+                    <p className="body-text text-[#C9C6C0] font-normal">{product.awards}</p>
                   </div>
                 )}
               </div>
@@ -232,7 +232,7 @@ export default function ProductDetailPage() {
               <div className="mt-8 pb-8">
                 <button 
                   onClick={() => haptic.trigger('success')}
-                  className="w-full liquid-glass-strong-purple text-white py-4 rounded-full font-bold text-base transition-all hover:scale-[1.02] active:scale-[0.96] pressable outline-none border-0"
+                  className="btn-text w-full liquid-glass-strong-purple text-white py-4 rounded-full font-bold transition-all hover:scale-[1.02] active:scale-[0.96] pressable outline-none border-0"
                 >
                   {ctaLabel}
                 </button>
@@ -311,7 +311,7 @@ export default function ProductDetailPage() {
           {/* Name, Price, and Vote Buttons (Mobile) */}
           <div className="bg-transparent pb-3 pt-2">
             <div className="flex items-start justify-between">
-              <h1 className="text-2xl font-bold text-white leading-tight flex-1 mr-4">{product.name}</h1>
+              <h1 className="heading font-bold text-white flex-1 mr-4">{product.name}</h1>
               <div className="flex flex-col items-end gap-2 shrink-0">
                 <span className="text-2xl font-bold text-white">{formattedPrice}</span>
                 <div className="flex items-center gap-2">
@@ -343,24 +343,24 @@ export default function ProductDetailPage() {
           </div>
 
           {/* Description */}
-          <p className="text-[#9E9B96] text-[14px] leading-relaxed mb-6">{product.description}</p>
+          <p className="body-text text-[#9E9B96] mb-6">{product.description}</p>
 
           {/* Meta */}
           {product.cultural_benefits && (
-            <div className="mb-4">
-              <h3 className="text-white text-[13px] font-bold mb-1">Cultural Benefits</h3>
-              <p className="text-[#9E9B96] text-[13px] leading-relaxed font-normal">{product.cultural_benefits}</p>
+            <div>
+              <h3 className="heading text-white font-bold">Cultural Benefits</h3>
+              <p className="body-text text-[#9E9B96] font-normal">{product.cultural_benefits}</p>
             </div>
           )}
 
           {product.size_quantity && (
-            <div className="mb-4">
-              <h3 className="text-white text-[13px] font-bold mb-1">Size / Quantity</h3>
-              <p className="text-[#9E9B96] text-[13px] leading-relaxed font-normal">{product.size_quantity}</p>
+            <div>
+              <h3 className="heading text-white font-bold">Size / Quantity</h3>
+              <p className="body-text text-[#9E9B96] font-normal">{product.size_quantity}</p>
             </div>
           )}
 
-          <div className="flex items-center gap-2 text-[#9E9B96] text-[13px] mb-3 font-normal">
+          <div className="body-text flex items-center gap-2 text-[#9E9B96] font-normal">
             <HugeiconsIcon icon={Location01Icon} size={14} className="text-[#6E5B98]" />
             {product.area_name}
           </div>
@@ -376,7 +376,7 @@ export default function ProductDetailPage() {
         >
           <button 
             onClick={() => haptic.trigger('success')}
-            className="w-full liquid-glass-strong-purple text-white py-4 rounded-full font-bold text-base transition-all active:scale-[0.96] pressable outline-none border-0"
+            className="btn-text w-full liquid-glass-strong-purple text-white py-4 rounded-full font-bold transition-all active:scale-[0.96] pressable outline-none border-0"
           >
             {ctaLabel}
           </button>

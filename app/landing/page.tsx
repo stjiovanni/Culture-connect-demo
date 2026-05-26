@@ -90,16 +90,28 @@ export default function LandingPage() {
           />
         </div>
 
-        {/* Desktop Big Ben — contained, centred */}
+        {/* Desktop — three-panel layout (London at night | Big Ben | London Underground) */}
         <div className="hidden md:block absolute inset-0 z-0">
-          <div className="relative w-full h-full flex items-center justify-center">
-            <Image
-              src="/home/big-ben.png"
-              alt=""
-              fill
-              className="object-contain object-center"
-              priority
-            />
+          <div className="flex w-full h-full">
+            <div className="relative w-1/3 h-full">
+              <Image
+                src="/home/london-night.png"
+                alt=""
+                fill
+                className="object-cover object-center"
+                priority
+              />
+            </div>
+            <div className="relative w-1/3 h-full">
+              <Image
+                src="/home/big-ben.png"
+                alt=""
+                fill
+                className="object-cover object-center"
+                priority
+              />
+            </div>
+            <div className="relative w-1/3 h-full" />
           </div>
         </div>
 
@@ -130,7 +142,7 @@ export default function LandingPage() {
             LIVE TIME BLOCK (TOP CENTERED)
             ══════════════════════════════════════════ */}
         <div className="absolute top-8 left-1/2 -translate-x-1/2 text-center z-20"
-          style={{ fontFamily: "'Material Symbols Rounded', sans-serif", fontWeight: 700 }}>
+          style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700 }}>
           <p className="text-white text-2xl">UK</p>
           <p className="text-white text-2xl">GMT +0</p>
           <LiveTime />

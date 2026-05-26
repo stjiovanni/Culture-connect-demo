@@ -109,10 +109,10 @@ export default function DiscoverPage() {
 
       {/* Section Header */}
       <div className="mt-[-12px] md:mt-4 text-left max-w-lg animate-in fade-in slide-in-from-top-4 duration-500">
-        <h1 className="text-4xl font-serif text-white tracking-tight mb-2">
+        <h1 className="heading font-serif text-white tracking-tight">
           {sectionContent.title}
         </h1>
-        <p className="text-[14px] text-[#86847F] font-medium leading-relaxed mb-1">
+        <p className="body-text text-[#86847F] font-medium">
           {sectionContent.copy}
         </p>
         <span className="text-[11px] font-bold text-[#86847F]/80">{filteredProducts.length} results</span>
@@ -262,7 +262,7 @@ function ProductCard({ p, i, haptic }: { p: Product, i: number, haptic: ReturnTy
         className="absolute inset-0 z-20 bg-black/40 p-6 flex flex-col justify-center opacity-0 group-hover:opacity-100 transition-all duration-[0.35s] rounded-[24px] overflow-hidden backdrop-blur-[18px]"
       >
         <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-[0.35s]">
-          <p className="text-[14px] leading-relaxed text-white/90 mb-6 line-clamp-4">{p.description}</p>
+          <p className="body-text text-white/90 mb-6 line-clamp-4">{p.description}</p>
           <div className="flex items-center gap-[4px]">
             <HugeiconsIcon icon={Location01Icon} size={16} className="text-[#6E5B98]" />
             <p className="text-[12px] font-bold text-white">{p.area_name}</p>

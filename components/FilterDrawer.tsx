@@ -227,7 +227,7 @@ export default function FilterDrawer({
             onClear();
             haptic.trigger('warning');
           }}
-          className="liquid-glass-red text-[#FF7575] px-6 py-2.5 rounded-full text-[13px] font-bold transition-all pressable"
+          className="btn-text liquid-glass-red text-[#FF7575] px-6 py-2.5 rounded-full font-bold transition-all pressable"
         >
           Clear filters
         </button>
@@ -237,7 +237,7 @@ export default function FilterDrawer({
             toggleDrawer();
             haptic.trigger('success');
           }}
-          className="liquid-glass-strong-purple text-white px-8 py-2.5 rounded-full text-[13px] font-bold transition-all pressable"
+          className="btn-text liquid-glass-strong-purple text-white px-8 py-2.5 rounded-full font-bold transition-all pressable"
         >
           Apply filters
         </button>

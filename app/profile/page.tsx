@@ -95,13 +95,13 @@ function CropUI({
         <div className="flex gap-4 justify-center">
           <button
             onClick={onCancel}
-            className="px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-bold text-[13px] hover:bg-white/10 backdrop-blur-md transition-all pressable"
+            className="btn-text px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 backdrop-blur-md transition-all pressable"
           >
             Cancel
           </button>
           <button
             onClick={handleApply}
-            className="px-8 py-3 rounded-full bg-[#6E5B98]/90 text-white font-bold text-[13px] hover:bg-[#6E5B98] backdrop-blur-md transition-all pressable"
+            className="btn-text px-8 py-3 rounded-full bg-[#6E5B98]/90 text-white font-bold hover:bg-[#6E5B98] backdrop-blur-md transition-all pressable"
           >
             Apply crop
           </button>
@@ -121,11 +121,11 @@ function ConfirmDialog({ onConfirm, onCancel }: { onConfirm: () => void; onCance
   return (
     <div className="fixed inset-0 z-[110] bg-black/60 backdrop-blur-md flex items-center justify-center p-6" onClick={onCancel}>
       <div className="liquid-glass-modal p-8 rounded-2xl max-w-sm w-full animate-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
-        <h3 className="text-white text-lg font-bold mb-2">Discard changes</h3>
-        <p className="text-[#9E9B96] text-[14px] mb-8 leading-relaxed">Unsaved changes will be lost. Select discard to proceed.</p>
+        <h3 className="heading text-white font-bold">Discard changes</h3>
+        <p className="body-text text-[#9E9B96] mb-8">Unsaved changes will be lost. Select discard to proceed.</p>
         <div className="flex gap-3">
-          <button onClick={onCancel} className="flex-1 px-6 py-3 rounded-full bg-[#6E5B98]/90 text-white text-[13px] font-bold hover:bg-[#6E5B98] backdrop-blur-md transition-all pressable">Keep editing</button>
-          <button onClick={onConfirm} className="flex-1 px-6 py-3 rounded-full bg-[#FF7575]/10 text-[#FF7575] text-[13px] font-bold hover:bg-[#FF7575]/20 border border-[#FF7575]/20 backdrop-blur-md transition-all pressable">Discard</button>
+          <button onClick={onCancel} className="btn-text flex-1 px-6 py-3 rounded-full bg-[#6E5B98]/90 text-white font-bold hover:bg-[#6E5B98] backdrop-blur-md transition-all pressable">Keep editing</button>
+          <button onClick={onConfirm} className="btn-text flex-1 px-6 py-3 rounded-full bg-[#FF7575]/10 text-[#FF7575] font-bold hover:bg-[#FF7575]/20 border border-[#FF7575]/20 backdrop-blur-md transition-all pressable">Discard</button>
         </div>
       </div>
     </div>
@@ -391,8 +391,8 @@ export default function ProfilePage() {
               <button onClick={cancelEditing} className="p-2 hover:bg-white/5 rounded-full transition-colors pressable" aria-label="Close">
                 <HugeiconsIcon icon={Cancel01Icon} size={20} className="text-[#86847F]" />
               </button>
-              <span className="text-[14px] font-bold text-white">Edit profile</span>
-              <button onClick={saveProfile} className="liquid-glass-strong-purple text-white px-5 py-1.5 rounded-full text-[13px] font-bold transition-all pressable">
+              <span className="btn-text font-bold text-white">Edit profile</span>
+              <button onClick={saveProfile} className="btn-text liquid-glass-strong-purple text-white px-5 py-1.5 rounded-full font-bold transition-all pressable">
                 Save
               </button>
             </div>
@@ -484,10 +484,10 @@ export default function ProfilePage() {
 
               {/* Top Action Bar */}
               <div className="flex items-center justify-between px-4 py-3">
-                <button onClick={cancelEditing} className="liquid-glass-red px-5 py-2 rounded-full text-[#FF7575] font-bold text-[13px] pressable">
+                <button onClick={cancelEditing} className="btn-text liquid-glass-red px-5 py-2 rounded-full text-[#FF7575] font-bold pressable">
                   Cancel
                 </button>
-                <button onClick={saveProfile} className="liquid-glass-strong-purple px-5 py-2 rounded-full text-white font-bold text-[13px] pressable">
+                <button onClick={saveProfile} className="btn-text liquid-glass-strong-purple px-5 py-2 rounded-full text-white font-bold pressable">
                   Save
                 </button>
               </div>
@@ -618,8 +618,8 @@ export default function ProfilePage() {
               <div className="isolation-auto">
                 {/* eslint-disable-next-line react/no-unknown-property */}
                 <div style={{ mixBlendMode: 'difference' }} className="text-white">
-                  <h1 className="text-5xl font-serif tracking-tight leading-tight mb-1">{displayName}</h1>
-                  <p className="text-lg font-bold opacity-90 tracking-tight">@{displayUsername}</p>
+                  <h1 className="heading font-serif text-white tracking-tight">{displayName}</h1>
+                  <p className="body-text font-bold opacity-90 tracking-tight">@{displayUsername}</p>
                 </div>
 
                 {/* Profile Details — Location & Occupation */}
@@ -641,7 +641,7 @@ export default function ProfilePage() {
             <div className="mb-2 shrink-0">
               <button
                 onClick={startEditing}
-                className="liquid-glass-strong-purple px-6 py-2.5 rounded-full text-[13px] font-bold text-white transition-all pressable"
+                className="btn-text liquid-glass-strong-purple px-6 py-2.5 rounded-full font-bold text-white transition-all pressable"
               >
                 Edit profile
               </button>
@@ -695,7 +695,7 @@ export default function ProfilePage() {
                 <Image src={avatarSrc} alt="Profile avatar" fill className="object-cover" />
               </button>
               <div>
-                <h1 className="text-xl font-serif tracking-tight leading-tight text-white">{displayName}</h1>
+                <h1 className="heading font-serif text-white">{displayName}</h1>
                 <p className="text-[12px] font-bold text-white/70">@{displayUsername}</p>
               </div>
             </div>
@@ -712,7 +712,7 @@ export default function ProfilePage() {
                   </span>
                 </div>
               )}
-              <button onClick={startEditing} className="ml-auto shrink-0 liquid-glass-strong-purple px-4 py-2 rounded-full text-[12px] font-bold text-white transition-all pressable">
+              <button onClick={startEditing} className="btn-text ml-auto shrink-0 liquid-glass-strong-purple px-4 py-2 rounded-full font-bold text-white transition-all pressable">
                 Edit profile
               </button>
             </div>
@@ -723,8 +723,8 @@ export default function ProfilePage() {
       <main className="flex-1 max-w-[1400px] mx-auto w-full px-6 md:px-10 pb-32">
         {/* Section Header */}
         <div className="mt-12 text-left max-w-lg">
-          <h2 className="text-3xl font-serif text-white tracking-tight mb-2">Votes</h2>
-          <p className="text-[14px] text-[#86847F] font-medium leading-relaxed">
+          <h2 className="heading font-serif text-white tracking-tight">Votes</h2>
+          <p className="body-text text-[#86847F] font-medium">
             Review and manage all items you selected across products and services within the community showcase.
           </p>
         </div>
