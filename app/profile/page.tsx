@@ -582,6 +582,7 @@ export default function ProfilePage() {
           <div 
             className="absolute inset-0 cursor-zoom-in z-0" 
             onClick={() => setShowBannerLightbox(true)}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setShowBannerLightbox(true); } }}
             role="button"
             tabIndex={0}
             aria-label="View banner full screen"
@@ -619,7 +620,7 @@ export default function ProfilePage() {
                 {/* eslint-disable-next-line react/no-unknown-property */}
                 <div style={{ mixBlendMode: 'difference' }} className="text-white">
                   <h1 className="heading font-serif text-white tracking-tight">{displayName}</h1>
-                  <p className="body-text font-bold opacity-90 tracking-tight">@{displayUsername}</p>
+                  <p className="body-text opacity-90 tracking-tight">@{displayUsername}</p>
                 </div>
 
                 {/* Profile Details — Location & Occupation */}
@@ -654,6 +655,7 @@ export default function ProfilePage() {
           <div 
             className="absolute inset-0 cursor-zoom-in z-0" 
             onClick={() => setShowBannerLightbox(true)}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setShowBannerLightbox(true); } }}
             role="button"
             tabIndex={0}
             aria-label="View banner full screen"
@@ -724,7 +726,7 @@ export default function ProfilePage() {
         {/* Section Header */}
         <div className="mt-12 text-left max-w-lg">
           <h2 className="heading font-serif text-white tracking-tight">Votes</h2>
-          <p className="body-text text-[#86847F] font-medium">
+          <p className="body-text text-[#86847F]">
             Review and manage all items you selected across products and services within the community showcase.
           </p>
         </div>
@@ -792,6 +794,12 @@ export default function ProfilePage() {
         <div 
           className="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center p-6 cursor-zoom-out animate-in fade-in duration-200"
           onClick={() => setShowAvatarLightbox(false)}
+          onKeyDown={(e) => { if (e.key === 'Escape') setShowAvatarLightbox(false); }}
+          tabIndex={-1}
+          ref={(el) => el?.focus()}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Avatar photo"
         >
           <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
             <Image src={avatarSrc} alt="Profile photo" fill className="object-cover" />
@@ -804,6 +812,12 @@ export default function ProfilePage() {
         <div
           className="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center p-4 cursor-zoom-out animate-in fade-in duration-200"
           onClick={() => setShowBannerLightbox(false)}
+          onKeyDown={(e) => { if (e.key === 'Escape') setShowBannerLightbox(false); }}
+          tabIndex={-1}
+          ref={(el) => el?.focus()}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Profile banner"
         >
           <div className="relative w-full max-w-3xl aspect-[3/1] rounded-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
             <Image src={bannerSrc} alt="Profile banner" fill className="object-cover" />

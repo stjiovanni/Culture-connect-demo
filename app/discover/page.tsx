@@ -112,7 +112,7 @@ export default function DiscoverPage() {
         <h1 className="heading font-serif text-white tracking-tight">
           {sectionContent.title}
         </h1>
-        <p className="body-text text-[#86847F] font-medium">
+        <p className="body-text text-[#86847F]">
           {sectionContent.copy}
         </p>
         <span className="text-[11px] font-bold text-[#86847F]/80">{filteredProducts.length} results</span>

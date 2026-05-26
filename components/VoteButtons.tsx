@@ -42,7 +42,7 @@ export default function VoteButtons({ productId, initialVotes }: VoteButtonsProp
   if (viewMode === 'admin') {
     return (
       <div className="bg-white/5 border border-white/10 rounded-[100px] p-6 text-center mt-8 backdrop-blur-md">
-        <p className="body-text text-[#86847F] font-medium">Admin view — voting disabled</p>
+        <p className="body-text text-[#86847F]">Admin view — voting disabled</p>
       </div>
     );
   }

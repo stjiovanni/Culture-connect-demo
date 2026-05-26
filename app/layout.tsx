@@ -8,8 +8,29 @@ import { FilterProvider } from "../context/FilterContext";
 import { VoteProvider } from "../context/VoteContext";
 
 export const metadata: Metadata = {
-  title: "CultureConnect Demo",
-  description: "A cultural discovery platform",
+  title: "Culture Connect",
+  description: "Discover, vote on, and shape community cultural offerings.",
+  openGraph: {
+    title: "Culture Connect",
+    description: "Discover, vote on, and shape community cultural offerings.",
+    url: "https://culture-connect-group19.vercel.app",
+    siteName: "Culture Connect",
+    images: [
+      {
+        url: "https://culture-connect-group19.vercel.app/og-image.png",
+        width: 512,
+        height: 512,
+      },
+    ],
+    locale: "en_GB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Culture Connect",
+    description: "Discover, vote on, and shape community cultural offerings.",
+    images: ["https://culture-connect-group19.vercel.app/og-image.png"],
+  },
 };
 
 export default function RootLayout({

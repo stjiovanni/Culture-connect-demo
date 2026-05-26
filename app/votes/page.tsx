@@ -98,7 +98,7 @@ export default function VotesPage() {
 
       {categorizedVotes.length === 0 && (
         <div className="flex flex-col items-center justify-center py-20 gap-4 opacity-50">
-          <p className="body-text text-white font-bold">No items found in this category.</p>
+          <p className="body-text text-white">No items found in this category.</p>
           <button 
             onClick={() => setActiveTab('all')}
             className="btn-text font-bold text-[#6E5B98] hover:underline"

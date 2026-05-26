@@ -146,7 +146,7 @@ export default function ProductDetailPage() {
                     {product.company_name.charAt(0).toUpperCase()}
                   </div>
                   <div>
-                    <p className="text-white font-bold text-base leading-none">{product.company_name}</p>
+                    <p className="text-white text-base leading-none">{product.company_name}</p>
                     <p className="text-white/50 text-xs mt-0.5">@{product.company_name.toLowerCase().replace(/\s+/g, '')}</p>
                   </div>
                 </div>
@@ -156,7 +156,7 @@ export default function ProductDetailPage() {
             {/* Right: Details */}
             <div className="flex flex-col gap-6">
               {/* Title, Vote Buttons, and Pills */}
-              <div className="pb-3 pt-2">
+              <div className="pt-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="liquid-glass pl-[9px] pr-3 py-1 rounded-full text-[11px] font-bold text-[#C9C6C0] tracking-[-0.5px]">
@@ -194,13 +194,11 @@ export default function ProductDetailPage() {
                   </div>
                 </div>
                 <h1 className="heading font-bold text-white tracking-tight">{product.name}</h1>
+                <p className="body-text text-[#C9C6C0] font-normal">{product.description}</p>
               </div>
 
-              {/* Description */}
-              <p className="body-text text-[#C9C6C0] font-medium">{product.description}</p>
-
               {/* Meta Sections */}
-              <div className="flex flex-col gap-6 border-t border-white/5 pt-8">
+              <div className="flex flex-col gap-6 lg:gap-8 border-t border-white/5 pt-8">
                 {product.cultural_benefits && (
                   <div>
                     <h3 className="heading text-white font-bold">Cultural Benefits</h3>
@@ -214,11 +212,11 @@ export default function ProductDetailPage() {
                   </div>
                 )}
                 <div>
-                  <h3 className="heading text-white font-bold">Location</h3>
-                  <div className="body-text flex items-center gap-2 text-[#C9C6C0] font-normal">
+                  <h3 className="heading text-white font-bold flex items-center gap-2 mb-0">
+                    <span>Location</span>
                     <HugeiconsIcon icon={Location01Icon} size={16} className="text-[#6E5B98]" />
-                    {product.area_name}
-                  </div>
+                  </h3>
+                  <p className="body-text text-[#C9C6C0] mt-3">{product.area_name}</p>
                 </div>
                 {product.awards && (
                   <div>
@@ -309,7 +307,7 @@ export default function ProductDetailPage() {
           </div>
 
           {/* Name, Price, and Vote Buttons (Mobile) */}
-          <div className="bg-transparent pb-3 pt-2">
+          <div className="bg-transparent pt-2">
             <div className="flex items-start justify-between">
               <h1 className="heading font-bold text-white flex-1 mr-4">{product.name}</h1>
               <div className="flex flex-col items-end gap-2 shrink-0">
@@ -340,29 +338,30 @@ export default function ProductDetailPage() {
                 </div>
               </div>
             </div>
+            <p className="body-text text-[#9E9B96] font-normal mb-6 lg:mb-8">{product.description}</p>
           </div>
-
-          {/* Description */}
-          <p className="body-text text-[#9E9B96] mb-6">{product.description}</p>
 
           {/* Meta */}
           {product.cultural_benefits && (
             <div>
               <h3 className="heading text-white font-bold">Cultural Benefits</h3>
-              <p className="body-text text-[#9E9B96] font-normal">{product.cultural_benefits}</p>
+              <p className="body-text text-[#9E9B96] font-normal mb-6 lg:mb-8">{product.cultural_benefits}</p>
             </div>
           )}
 
           {product.size_quantity && (
             <div>
               <h3 className="heading text-white font-bold">Size / Quantity</h3>
-              <p className="body-text text-[#9E9B96] font-normal">{product.size_quantity}</p>
+              <p className="body-text text-[#9E9B96] font-normal mb-6 lg:mb-8">{product.size_quantity}</p>
             </div>
           )}
 
-          <div className="body-text flex items-center gap-2 text-[#9E9B96] font-normal">
-            <HugeiconsIcon icon={Location01Icon} size={14} className="text-[#6E5B98]" />
-            {product.area_name}
+          <div>
+            <h3 className="heading text-white font-bold flex items-center gap-2 mb-0">
+              <span>Location</span>
+              <HugeiconsIcon icon={Location01Icon} size={14} className="text-[#6E5B98]" />
+            </h3>
+            <p className="body-text text-[#9E9B96] mt-3">{product.area_name}</p>
           </div>
 
           {/* Spacer for sticky CTA */}

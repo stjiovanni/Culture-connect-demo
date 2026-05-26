@@ -83,7 +83,7 @@ export default function LandingPage() {
         <div className="md:hidden absolute inset-0 z-0">
           <Image
             src="/home/big-ben.png"
-            alt=""
+            alt="Big Ben"
             fill
             className="object-cover object-center"
             priority
@@ -96,7 +96,7 @@ export default function LandingPage() {
             <div className="relative w-1/3 h-full">
               <Image
                 src="/home/london-night.png"
-                alt=""
+                alt="London at night"
                 fill
                 className="object-cover object-center"
                 priority
@@ -105,7 +105,7 @@ export default function LandingPage() {
             <div className="relative w-1/3 h-full">
               <Image
                 src="/home/big-ben.png"
-                alt=""
+                alt="Big Ben"
                 fill
                 className="object-cover object-center"
                 priority
@@ -126,6 +126,8 @@ export default function LandingPage() {
             alt="Group 19"
             className="h-full w-auto object-contain object-right-bottom"
           />
+          {/* Dark overlay on mobile to improve text readability */}
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 65%)' }} />
         </div>
 
         {/* Desktop Group 19 */}
@@ -136,6 +138,8 @@ export default function LandingPage() {
             alt="Group 19"
             className="h-full w-auto object-contain object-right"
           />
+          {/* Dark overlay on desktop to improve text readability */}
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 65%)' }} />
         </div>
 
         {/* ══════════════════════════════════════════
@@ -155,7 +159,7 @@ export default function LandingPage() {
         <div className="md:hidden absolute bottom-[160px] left-4 z-10 pointer-events-none">
           <Image
             src="/home/small-man.png"
-            alt=""
+            alt="Silhouette figure"
             width={48}
             height={96}
             className="object-contain"
@@ -166,7 +170,7 @@ export default function LandingPage() {
         <div className="hidden md:block absolute bottom-[140px] left-8 z-10 pointer-events-none">
           <Image
             src="/home/small-man.png"
-            alt=""
+            alt="Silhouette figure"
             width={80}
             height={160}
             className="object-contain"

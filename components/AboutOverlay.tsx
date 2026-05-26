@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter, usePathname } from 'next/navigation';
 import { useWebHaptics } from 'web-haptics/react';
@@ -13,11 +13,11 @@ const navBtnClass =
   "btn-text font-bold text-white inline-flex items-center gap-2 hover:opacity-70 transition-opacity";
 
 const teamMembers = [
-  { name: 'TOLU A. OPALEYE', role: 'DEVELOPER/DESIGNER' },
-  { name: 'TOMIWA M. OSUNSAKIN', role: 'PRODUCT OWNER' },
-  { name: 'ISHAKU LANNA', role: 'SCRUM MASTER' },
-  { name: 'CHIGOZILI D. OJUKWU', role: 'PROJECT MANAGER' },
-  { name: 'PRUDTHVI VIJAY SIMHA', role: 'SOFTWARE TESTER' },
+  { name: 'TOLU A. OPALEYE', role: 'DEVELOPER/DESIGNER', url: 'https://toluopaleye.xyz' },
+  { name: 'TOMIWA M. OSUNSAKIN', role: 'PRODUCT OWNER', url: 'https://www.linkedin.com/in/tomiwa-osunsakin' },
+  { name: 'ISHAKU LANNA', role: 'SCRUM MASTER', url: '' },
+  { name: 'CHIGOZILI D. OJUKWU', role: 'PROJECT MANAGER', url: '' },
+  { name: 'PRUDTHVI VIJAY SIMHA', role: 'SOFTWARE TESTER', url: '' },
 ];
 
 const revealFrom = { opacity: 0, y: 17, filter: 'blur(6px)' };
@@ -30,6 +30,7 @@ export default function AboutOverlay() {
   const router = useRouter();
   const pathname = usePathname();
   const haptic = useWebHaptics();
+  const aboutRef = useRef<HTMLSpanElement>(null);
 
   const handleCultureConnect = () => {
     haptic.trigger('success');
@@ -95,6 +96,12 @@ export default function AboutOverlay() {
     };
   }, [pathname]);
 
+  useEffect(() => {
+    if (aboutRef.current) {
+      aboutRef.current.style.setProperty('color', '#0C0B0A', 'important');
+    }
+  }, [isOpen]);
+
   const close = () => setIsOpen(false);
 
   return (
@@ -130,7 +137,7 @@ export default function AboutOverlay() {
               <div className="flex-1 overflow-y-auto">
                 {/* Section 1: ABOUT CULTURE CONNECT */}
                 <h2 className="heading uppercase text-white">ABOUT CULTURE CONNECT</h2>
-                <div className="overflow-hidden mt-3">
+                <div className="overflow-hidden">
                   <motion.p
                     className="body-text text-[#9E9B96] font-normal"
                     initial={revealFrom}
@@ -142,10 +149,10 @@ export default function AboutOverlay() {
                 </div>
 
                 {/* Section 2: TEAM */}
-                <div className="mt-8">
+                <div className="mt-6 lg:mt-8">
                   <h2 className="heading uppercase text-white">TEAM</h2>
                   <motion.div
-                    className="mt-3 flex flex-col gap-2"
+                    className="flex flex-col gap-2"
                     initial="hidden"
                     animate="visible"
                     variants={{
@@ -157,7 +164,9 @@ export default function AboutOverlay() {
                     {teamMembers.map((member) => (
                       <div key={member.name} className="overflow-hidden">
                         <motion.a
-                          href=""
+                          href={member.url}
+                          target={member.url ? '_blank' : undefined}
+                          rel={member.url ? 'noopener noreferrer' : undefined}
                           className="team-name text-white flex justify-between items-center"
                           variants={{
                             hidden: revealFrom,
@@ -186,7 +195,7 @@ export default function AboutOverlay() {
             exit={{ y: '100%' }}
             transition={transition}
           >
-            <span className="landing-link about-label">ABOUT</span>
+            <span ref={aboutRef} className="landing-link about-label">ABOUT</span>
           </motion.div>
         </div>
       )}

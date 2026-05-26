@@ -47,7 +47,7 @@ export default function AdminDashboard() {
     <div className="flex flex-col gap-10 pb-20 max-w-[1400px] mx-auto animate-in fade-in duration-700">
       <div className="mb-2">
         <h1 className="heading font-serif text-white tracking-normal">Intelligence Dashboard</h1>
-        <p className="body-text text-[#86847F] font-medium">Strategic overview of platform metrics and rankings.</p>
+        <p className="body-text text-[#86847F]">Strategic overview of platform metrics and rankings.</p>
       </div>
 
       {/* Bento Grid */}
