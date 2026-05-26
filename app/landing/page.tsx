@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowUpRight01Icon } from '@hugeicons/core-free-icons';
 import { LiveTime } from '@/components/LiveTime';
@@ -11,6 +12,15 @@ import { useWebHaptics } from 'web-haptics/react';
 export default function LandingPage() {
   const router = useRouter();
   const haptic = useWebHaptics();
+
+  useEffect(() => {
+    document.documentElement.classList.add('overflow-hidden', 'h-full');
+    document.body.classList.add('overflow-hidden', 'h-full');
+    return () => {
+      document.documentElement.classList.remove('overflow-hidden', 'h-full');
+      document.body.classList.remove('overflow-hidden', 'h-full');
+    };
+  }, []);
 
   const handleCultureConnectClick = (e: React.MouseEvent) => {
     e.preventDefault();
