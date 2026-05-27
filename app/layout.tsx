@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://culture-connect-group19.vercel.app/og-image.png",
-        width: 3420,
-        height: 1902,
+        width: 512,
+        height: 333,
       },
     ],
     locale: "en_GB",
