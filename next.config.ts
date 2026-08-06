@@ -14,6 +14,14 @@ const nextConfig: NextConfig = {
     // thumbnails to reduce transfer size without visible quality loss.
     qualities: [60, 75],
   },
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: securityHeaders,
+      },
+    ];
+  },
 };
 
 const securityHeaders = [
@@ -28,22 +36,13 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline'",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      "font-src 'self' data: https://fonts.gstatic.com",
+      "style-src 'self' 'unsafe-inline'",
+      "font-src 'self' data:",
       "img-src 'self' data: blob:",
       "connect-src 'self'",
       "frame-ancestors 'none'",
     ].join("; "),
   },
 ];
-
-export async function headers() {
-  return [
-    {
-      source: "/:path*",
-      headers: securityHeaders,
-    },
-  ];
-}
 
 export default nextConfig;
