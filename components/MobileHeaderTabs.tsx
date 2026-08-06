@@ -22,7 +22,7 @@ export default function MobileHeaderTabs({ tabsRef, dimmed }: { tabsRef?: RefObj
           <button
             key={tab.value}
             onClick={() => { setTypeFilter(tab.value); haptic.trigger('selection'); }}
-            className={`text-[24px] transition-all pressable shrink-0 flex items-start focus:outline-none border-none bg-transparent leading-none ${
+            className={`text-[24px] transition-all pressable flex-1 flex justify-center items-start focus:outline-none border-none bg-transparent leading-none ${
               isActive
                 ? 'text-white font-black'
                 : 'text-[#9E9B96] font-semibold'
