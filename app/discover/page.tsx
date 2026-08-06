@@ -12,6 +12,10 @@ import { useWebHaptics } from 'web-haptics/react';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Location01Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
 import Pill from '@/components/Pill';
+import { motion } from 'framer-motion';
+
+const gridContainer = { hidden: {}, show: { transition: { staggerChildren: 0.05 } } };
+const gridItem = { hidden: { opacity: 0, y: 12, rotate: -2 }, show: { opacity: 1, y: 0, rotate: 0 } };
 
 export default function DiscoverPage() {
   const { viewMode } = useViewMode();
@@ -115,22 +119,36 @@ export default function DiscoverPage() {
         <p className="body-text text-[#86847F]">
           {sectionContent.copy}
         </p>
-        <span className="text-[11px] font-bold text-[#86847F]/80">{filteredProducts.length} results</span>
+        <span className="text-[11px] font-bold text-[#9E9B96]">{filteredProducts.length} results</span>
       </div>
 
       {/* Product Grid — Desktop: standard grid, Mobile: Pinterest masonry */}
-      <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      <motion.div
+        className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
+        variants={gridContainer}
+        initial="hidden"
+        animate="show"
+      >
         {filteredProducts.map((p, i) => (
-          <ProductCard key={p.id} p={p} i={i} haptic={haptic} />
+          <motion.div key={p.id} variants={gridItem}>
+            <ProductCard p={p} i={i} haptic={haptic} />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Mobile masonry grid */}
-      <div className="md:hidden masonry-grid">
+      <motion.div
+        className="md:hidden masonry-grid"
+        variants={gridContainer}
+        initial="hidden"
+        animate="show"
+      >
         {filteredProducts.map((p, i) => (
-          <MobileProductCard key={p.id} p={p} i={i} haptic={haptic} />
+          <motion.div key={p.id} variants={gridItem}>
+            <MobileProductCard p={p} i={i} haptic={haptic} />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Selected Filters Bar - Bottom */}
       {isAdvancedFilterActive && (
@@ -146,6 +164,7 @@ export default function DiscoverPage() {
                 }}
                 className="hover:text-[#FF7575] transition-colors"
                 aria-label={`Remove ${cat} filter`}
+                data-cuelume-press
               >
                 <HugeiconsIcon icon={Cancel01Icon} size={12} />
               </button>
@@ -166,6 +185,7 @@ export default function DiscoverPage() {
                   }}
                   className="hover:text-[#FF7575] transition-colors"
                   aria-label={`Remove ${area.name} filter`}
+                  data-cuelume-press
                 >
                   <HugeiconsIcon icon={Cancel01Icon} size={12} />
                 </button>
@@ -186,6 +206,7 @@ export default function DiscoverPage() {
                 }}
                 className="hover:text-[#FF7575] transition-colors"
                 aria-label="Remove price filter"
+                data-cuelume-press
               >
                 <HugeiconsIcon icon={Cancel01Icon} size={12} />
               </button>
@@ -218,10 +239,8 @@ function ProductCard({ p, i, haptic }: { p: Product, i: number, haptic: ReturnTy
     <Link
       href={`/product/${p.id}`}
       onClick={() => haptic.trigger('light')}
-      className="group relative rounded-[24px] shadow-[#6E5B98]/10 pressable rainbow-border aspect-[1000/1414] animate-fadeInUp"
-      style={{ 
-        animationDelay: `${i * 0.05}s`,
-      }}
+      data-cuelume-hover="tick"
+      className="group relative block rounded-[24px] shadow-[#6E5B98]/10 pressable rainbow-border aspect-[1000/1414]"
     >
       {/* Background Image & Content Wrapper */}
       <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px]">
@@ -231,6 +250,7 @@ function ProductCard({ p, i, haptic }: { p: Product, i: number, haptic: ReturnTy
           fill 
           className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" 
           priority={i < 4}
+          sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
         />
         {/* Permanent bottom-heavy gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/4 to-black/82"></div>
@@ -243,14 +263,14 @@ function ProductCard({ p, i, haptic }: { p: Product, i: number, haptic: ReturnTy
             <Pill className="text-[11px] font-semibold border-white/10 bg-black/20 text-[#DDD6F3] backdrop-blur-md px-3 py-1">{p.category}</Pill>
           </div>
           
-          <h3 className="text-xl font-bold text-white leading-tight mt-1 line-clamp-2">
+          <h2 className="text-xl font-bold text-white leading-tight mt-1 line-clamp-2">
             {p.name}
-          </h3>
+          </h2>
         </div>
 
         <div className="mt-auto">
           <p className="text-base font-bold text-white leading-none">{p.company_name}</p>
-          <p className="text-[11px] font-bold text-[#86847F] mt-1 opacity-80">
+          <p className="text-[11px] font-bold text-[#9E9B96] mt-1">
             @{p.company_name.toLowerCase().replace(/\s+/g, '').replace(/&/g, '')}
           </p>
           <p className="absolute bottom-5 right-5 text-xl font-bold text-white">£{p.price.toFixed(0)}</p>
@@ -314,13 +334,14 @@ function MobileProductCard({ p, i, haptic }: { p: Product, i: number, haptic: Re
     <Link
       href={`/product/${p.id}`}
       onClick={() => haptic.trigger('light')}
-      className={`group relative rounded-[20px] overflow-hidden pressable ${aspectClass} block animate-fadeInUp`}
-      style={{ animationDelay: `${i * 0.04}s` }}
+      data-cuelume-hover="tick"
+      className={`group relative rounded-[20px] overflow-hidden pressable ${aspectClass} block`}
     >
       <Image 
         src={`/uploads/${p.image_filename}`} 
         alt={p.name} 
         fill 
+        sizes="50vw"
         className="object-cover" 
         priority={i < 4}
       />
@@ -329,7 +350,7 @@ function MobileProductCard({ p, i, haptic }: { p: Product, i: number, haptic: Re
       {/* Content */}
       <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
         <p className="text-[10px] font-bold text-[#DDD6F3] opacity-80 mb-0.5">{p.category}</p>
-        <h3 className="text-[13px] font-bold text-white leading-tight line-clamp-2">{p.name}</h3>
+        <h2 className="text-[13px] font-bold text-white leading-tight line-clamp-2">{p.name}</h2>
         <p className="text-[11px] font-bold text-white mt-1">£{p.price.toFixed(0)}</p>
       </div>
     </Link>

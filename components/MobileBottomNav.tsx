@@ -121,6 +121,7 @@ export default function MobileBottomNav() {
               className="mobile-search-clear"
               aria-label="Clear search"
               type="button"
+              data-cuelume-press
             >
               <HugeiconsIcon icon={Cancel01Icon} size={14} />
             </button>
@@ -139,12 +140,14 @@ export default function MobileBottomNav() {
           className={`flex items-center justify-center w-10 h-10 rounded-full transition-all pressable ${(pathname === '/discover' || pathname === '/') && !isOpen ? 'text-white' : 'text-[#86847F] hover:text-white'
             }`}
           aria-label="Home"
+          data-cuelume-hover="tick"
         >
           <HugeiconsIcon icon={Home01Icon} size={22} />
         </Link>
 
         <button
           onClick={openSearch}
+          data-cuelume-toggle
           className={`flex items-center justify-center w-10 h-10 rounded-full transition-all pressable ${isOpen ? 'text-white' : 'text-[#86847F] hover:text-white'
             }`}
           aria-label="Search"
@@ -162,6 +165,7 @@ export default function MobileBottomNav() {
           }}
           className={`flex items-center justify-center rounded-full border transition-all pressable shrink-0 ${pathname === '/profile' ? 'border-[#6E5B98]' : 'border-white/20'}`}
           aria-label="Profile"
+          data-cuelume-hover="tick"
         >
           <div className="relative w-6 h-6 rounded-full overflow-hidden">
             <Image src={navAvatar} alt="Profile" fill className="object-cover" />

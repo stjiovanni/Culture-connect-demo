@@ -44,8 +44,6 @@ export default function LandingPage() {
   return (
     <>
       {/* Scope font imports to landing page route only */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link
         href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap"
         rel="stylesheet"
@@ -85,6 +83,7 @@ export default function LandingPage() {
             src="/home/big-ben.png"
             alt="Big Ben"
             fill
+            sizes="100vw"
             className="object-cover object-center"
             priority
           />
@@ -98,6 +97,7 @@ export default function LandingPage() {
                 src="/home/london-night.png"
                 alt="London at night"
                 fill
+                sizes="100vw"
                 className="object-cover object-center"
                 priority
               />
@@ -107,6 +107,7 @@ export default function LandingPage() {
                 src="/home/big-ben.png"
                 alt="Big Ben"
                 fill
+                sizes="100vw"
                 className="object-cover object-center"
                 priority
               />
@@ -119,24 +120,26 @@ export default function LandingPage() {
             GROUP 19 COMPOSITE (RIGHT EDGE)
             ══════════════════════════════════════════ */}
         {/* Mobile Group 19 */}
-        <div className="md:hidden absolute bottom-0 right-0 z-10 h-[60vh] pointer-events-none">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+        <div className="md:hidden relative bottom-0 right-0 z-10 h-[60vh] pointer-events-none">
+          <Image
             src="/home/Group19.png"
             alt="Group 19"
-            className="h-full w-auto object-contain object-right-bottom"
+            fill
+            className="object-contain object-right-bottom"
+            sizes="50vw"
           />
           {/* Dark overlay on mobile to improve text readability */}
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 65%)' }} />
         </div>
 
         {/* Desktop Group 19 */}
-        <div className="hidden md:block absolute right-0 top-0 h-full z-10 pointer-events-none">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+        <div className="hidden md:block relative right-0 top-0 h-full z-10 pointer-events-none">
+          <Image
             src="/home/Group19.png"
             alt="Group 19"
-            className="h-full w-auto object-contain object-right"
+            fill
+            className="object-contain object-right"
+            sizes="40vw"
           />
           {/* Dark overlay on desktop to improve text readability */}
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 65%)' }} />
@@ -146,7 +149,7 @@ export default function LandingPage() {
             LIVE TIME BLOCK (TOP CENTERED)
             ══════════════════════════════════════════ */}
         <div className="absolute top-8 left-1/2 -translate-x-1/2 text-center z-20"
-          style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700 }}>
+          style={{ fontFamily: "var(--font-hanken), 'Hanken Grotesk', sans-serif", fontWeight: 700 }}>
           <p className="text-white text-2xl">UK</p>
           <p className="text-white text-2xl">GMT +0</p>
           <LiveTime />

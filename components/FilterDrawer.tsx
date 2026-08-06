@@ -101,6 +101,8 @@ export default function FilterDrawer({
               <button
                 key={c}
                 onClick={() => handleCategoryToggle(c)}
+                data-cuelume-toggle
+                data-cuelume-hover="tick"
                 className={`relative px-4 py-2 text-[11px] font-bold transition-colors rounded-full pressable overflow-hidden ${selectedCategories.includes(c)
                   ? 'text-black'
                   : 'liquid-glass text-[#9E9B96] hover:text-white'
@@ -111,7 +113,7 @@ export default function FilterDrawer({
                     className="absolute inset-0 bg-white"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                    transition={{ type: "spring", stiffness: 520, damping: 38 }}
                   />
                 )}
                 <span className="relative z-10">{c}</span>
@@ -162,14 +164,17 @@ export default function FilterDrawer({
             <button 
               onClick={() => { setPriceMin(75); setPriceMax(2000); haptic.trigger('selection'); }}
               className="liquid-glass rounded-full px-4 py-2 text-[11px] font-bold text-[#9E9B96] hover:text-white transition-all pressable"
+              data-cuelume-press
             >Over £75</button>
             <button 
               onClick={() => { setPriceMin(0); setPriceMax(200); haptic.trigger('selection'); }}
               className="liquid-glass rounded-full px-4 py-2 text-[11px] font-bold text-[#9E9B96] hover:text-white transition-all pressable"
+              data-cuelume-press
             >Under £200</button>
             <button 
               onClick={() => { setPriceMin(0); setPriceMax(2000); haptic.trigger('selection'); }}
               className="liquid-glass rounded-full px-4 py-2 text-[11px] font-bold text-[#9E9B96] hover:text-white transition-all pressable"
+              data-cuelume-press
             >Any</button>
           </div>
           <p className="text-[10px] text-[#86847F] font-medium text-center">Adjust the sliders to set your budget</p>
@@ -181,6 +186,7 @@ export default function FilterDrawer({
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => handleAreaToggle('')}
+              data-cuelume-toggle
               className={`relative px-4 py-2 text-[11px] font-bold transition-colors rounded-full pressable overflow-hidden ${selectedAreas.includes('')
                 ? 'text-white'
                 : 'liquid-glass text-[#9E9B96] hover:text-white'
@@ -190,8 +196,8 @@ export default function FilterDrawer({
                  <motion.div
                    className="absolute inset-0 liquid-glass-strong-purple"
                    initial={{ opacity: 0, scale: 0.8 }}
-                   animate={{ opacity: 1, scale: 1 }}
-                   transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                 animate={{ opacity: 1, scale: 1 }}
+                 transition={{ type: "spring", stiffness: 520, damping: 38 }}
                  />
               )}
               <span className="relative z-10">Global</span>
@@ -200,6 +206,7 @@ export default function FilterDrawer({
               <button
                 key={a.id}
                 onClick={() => handleAreaToggle(a.id)}
+                data-cuelume-toggle
                 className={`relative px-4 py-2 text-[11px] font-bold transition-colors rounded-full pressable overflow-hidden ${selectedAreas.includes(a.id)
                   ? 'text-black'
                   : 'liquid-glass text-[#9E9B96] hover:text-white'
@@ -210,7 +217,7 @@ export default function FilterDrawer({
                     className="absolute inset-0 bg-white"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                    transition={{ type: "spring", stiffness: 520, damping: 38 }}
                   />
                 )}
                 <span className="relative z-10">{a.name}</span>
@@ -227,6 +234,7 @@ export default function FilterDrawer({
             onClear();
             haptic.trigger('warning');
           }}
+          data-cuelume-press
           className="btn-text liquid-glass-red text-[#FF7575] px-6 py-2.5 rounded-full font-bold transition-all pressable"
         >
           Clear filters
@@ -237,6 +245,7 @@ export default function FilterDrawer({
             toggleDrawer();
             haptic.trigger('success');
           }}
+          data-cuelume-press
           className="btn-text liquid-glass-strong-purple text-white px-8 py-2.5 rounded-full font-bold transition-all pressable"
         >
           Apply filters

@@ -32,6 +32,7 @@ export default function MobileHeaderTabs() {
         onClick={(e) => { e.stopPropagation(); toggleDrawer(); haptic.trigger('selection'); }}
         className={`shrink-0 transition-colors ${isDrawerOpen ? 'text-[#6E5B98]' : 'text-[#86847F]'}`}
         aria-label="Toggle filters"
+        data-cuelume-toggle
       >
         <HugeiconsIcon icon={FilterHorizontalIcon} size={18} />
       </button>
@@ -48,6 +49,7 @@ export default function MobileHeaderTabs() {
                   ? 'text-white font-black'
                   : 'text-[#9E9B96] font-semibold'
               }`}
+              data-cuelume-toggle
             >
               <span>{tab.label}</span>
               <span className="text-[10px] font-semibold text-[#86847F] pt-0.5">{tab.count}</span>

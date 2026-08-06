@@ -1,7 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Libre+Caslon+Display&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
 @import "tailwindcss";
+
+:root {
+  --font-hanken: 'Hanken Grotesk', sans-serif;
+  --font-serif: 'Libre Caslon Display', serif;
+}
 
 :root {
   --background: #0C0B0A;
@@ -28,8 +31,8 @@ html:has(.landing-root), html:has(.landing-root) body {
 body {
   background-color: var(--background);
   color: var(--text-main);
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 600;
+  font-family: var(--font-hanken), 'Hanken Grotesk', sans-serif;
+  font-weight: 400;
   letter-spacing: -0.5px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -48,14 +51,18 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
+textarea {
+  field-sizing: content;
+}
+
 .font-serif {
-  font-family: 'Libre Caslon Display', serif;
+  font-family: var(--font-serif), 'Libre Caslon Display', serif;
   font-weight: 400;
   letter-spacing: normal;
 }
 
 .font-sans {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-hanken), 'Hanken Grotesk', sans-serif;
   letter-spacing: -0.5px;
 }
 
@@ -413,6 +420,19 @@ button:focus-visible {
   pointer-events: none;
 }
 
+.modal {
+  position: relative;
+}
+
+.modal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 0;
+}
+
 /* ==========================================
    MOBILE BOTTOM NAV CONTAINER
    Fixed to bottom; stacks search bar above nav pill.
@@ -614,7 +634,7 @@ button:focus-visible {
 }
 
 .mobile-tab {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-hanken), 'Hanken Grotesk', sans-serif;
   font-weight: 900;
   font-size: 20px;
   font-style: normal;
@@ -930,45 +950,47 @@ button:focus-visible {
    TYPOGRAPHY SYSTEM
    ========================================== */
 
-/* Headings (h1, h2, h3) */
+/* Headings (h1, h2, h3) — balances line breaks */
 .heading {
   font-family: 'Stack Sans Notch', sans-serif;
   font-size: 24px;
   line-height: 32px;
   margin-bottom: 12px;
+  text-wrap: balance;
+  max-width: 52ch;
 }
 
-/* Body text — fluid responsive */
+/* Body text — fluid responsive, pretty wrapped */
 .body-text {
+  font-family: var(--font-hanken), 'Hanken Grotesk', sans-serif;
   font-size: 14px;
   line-height: 20px;
+  font-weight: 400;
+  text-wrap: pretty;
+  max-width: 52ch;
 }
 
 @media (min-width: 768px) {
+  .heading,
+  .body-text {
+    max-width: 72ch;
+  }
+
   .body-text {
     font-size: 16px;
     line-height: 24px;
-    max-width: 75%;
   }
 }
 
 @media (min-width: 1024px) {
+  .heading,
+  .body-text {
+    max-width: 82ch;
+  }
+
   .body-text {
     font-size: 18px;
     line-height: 24px;
-    max-width: 65%;
-  }
-}
-
-@media (min-width: 1280px) {
-  .body-text {
-    max-width: 55%;
-  }
-}
-
-@media (min-width: 1536px) {
-  .body-text {
-    max-width: 50%;
   }
 }
 

@@ -60,6 +60,8 @@ export default function VoteButtons({ productId, initialVotes }: VoteButtonsProp
         <button
           onClick={() => handleVote('yes')}
           disabled={voted !== null}
+          data-cuelume-press
+          data-cuelume-hover="tick"
           className={`flex flex-col items-center justify-center gap-2 py-6 rounded-[16px] transition-all duration-500 pressable ${
             voted === 'yes' 
               ? 'liquid-glass-green text-[#4ade80]' 
@@ -76,6 +78,8 @@ export default function VoteButtons({ productId, initialVotes }: VoteButtonsProp
         <button
           onClick={() => handleVote('no')}
           disabled={voted !== null}
+          data-cuelume-press
+          data-cuelume-hover="tick"
           className={`flex flex-col items-center justify-center gap-2 py-6 rounded-[16px] transition-all duration-500 pressable ${
             voted === 'no' 
               ? 'liquid-glass-red text-[#FF7575]' 

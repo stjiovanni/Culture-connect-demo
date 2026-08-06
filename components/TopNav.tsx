@@ -96,26 +96,32 @@ export default function TopNav() {
   return (
     <header id="site-header" className="font-sans sticky top-0 z-50 border-b border-white/[0.03] relative">
       <nav className="flex justify-center w-full px-4 py-3">
-        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 max-w-[1400px] w-full">
+        <div className="grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 max-w-[1400px] w-full">
 
-          {/* Left Pill: Logo + Tabs + Admin */}
-          <div className="glass-pill flex items-center h-[46px] pl-[10px] pr-[7px] shrink-0 min-w-max rounded-full">
+          {/* Logo Pill — its own separate glass pill */}
+          <div className="glass-pill flex items-center justify-center h-[46px] w-14 rounded-full shrink-0">
             <Link
               href="/discover"
-              className="flex items-center gap-2 pressable"
+              className="flex items-center justify-center pressable"
               onClick={() => haptic.trigger('light')}
+              data-cuelume-hover="tick"
+              aria-label="Culture Connect home"
             >
-              <Image
-                src="/culture-connect.svg"
-                alt="Logo"
-                width={80}
-                height={20}
-                className="h-5 w-auto"
-                style={{ width: 'auto' }}
-                priority
-              />
+              <div className="relative w-[28px] h-[28px] flex items-center justify-center">
+                <Image
+                  src="/culture-connect.svg"
+                  alt="Logo"
+                  width={28}
+                  height={28}
+                  className="object-contain"
+                  priority
+                />
+              </div>
             </Link>
+          </div>
 
+          {/* Left Pill: Tabs + Admin */}
+          <div className="glass-pill flex items-center h-[46px] pl-[7px] pr-[7px] shrink-0 min-w-max rounded-full">
             <div className="flex items-center gap-2 ml-1">
               {TABS.map((tab) => {
                 const isActive = typeFilter === tab.value;
@@ -123,6 +129,8 @@ export default function TopNav() {
                   <button
                     key={tab.value}
                     onClick={() => handleTabClick(tab.value)}
+                    data-cuelume-toggle
+                    data-cuelume-hover="tick"
                     className={`relative px-3 py-1.5 text-[13px] tracking-[-0.03em] transition-colors rounded-full pressable ${isActive
                       ? 'text-black font-semibold'
                       : 'text-[#9E9B96] font-normal hover:text-white'
@@ -133,7 +141,7 @@ export default function TopNav() {
                         layoutId="activeTabIndicator"
                         className="absolute inset-0 bg-white rounded-full shadow-sm"
                         initial={false}
-                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                        transition={{ type: "spring", stiffness: 520, damping: 38 }}
                       />
                     )}
                     <span className="relative z-10">{tab.label}</span>
@@ -147,6 +155,7 @@ export default function TopNav() {
                     href="/admin/manage"
                     className="px-3 py-1.5 text-[13px] font-normal tracking-[-0.03em] text-[#9E9B96] hover:text-white transition-all rounded-full pressable"
                     onClick={() => haptic.trigger('selection')}
+                    data-cuelume-hover="tick"
                   >
                     Manage
                   </Link>
@@ -154,6 +163,7 @@ export default function TopNav() {
                     href="/admin/reports"
                     className="px-3 py-1.5 text-[13px] font-normal tracking-[-0.03em] text-[#9E9B96] hover:text-white transition-all rounded-full pressable"
                     onClick={() => haptic.trigger('selection')}
+                    data-cuelume-hover="tick"
                   >
                     Reports
                   </Link>
@@ -178,6 +188,7 @@ export default function TopNav() {
                   onClick={() => { setSearchQuery(''); haptic.trigger('light'); }}
                   className="p-1 hover:bg-white/10 rounded-full transition-colors"
                   aria-label="Clear search"
+                  data-cuelume-press
                 >
                   <HugeiconsIcon icon={Cancel01Icon} size={14} className="text-[#86847F]" />
                 </button>
@@ -191,6 +202,7 @@ export default function TopNav() {
                   haptic.trigger('warning');
                 }}
                 className="px-3 py-1.5 rounded-full bg-[#FF7575]/10 text-[#FF7575] text-[11px] font-normal tracking-[-0.03em] hover:bg-[#FF7575]/20 transition-all shrink-0 pressable flex items-center gap-1"
+                data-cuelume-press
               >
                 <HugeiconsIcon icon={CancelCircleIcon} size={12} />
                 Clear filters
@@ -199,6 +211,8 @@ export default function TopNav() {
 
             <button
               onClick={() => { toggleDrawer(); haptic.trigger('selection'); }}
+              data-cuelume-toggle
+              data-cuelume-hover="tick"
               className={`p-2 rounded-full transition-all shrink-0 pressable ${isDrawerOpen
                 ? 'bg-[#6E5B98] text-white'
                 : 'text-[#86847F] hover:text-white hover:bg-white/5'
@@ -215,6 +229,7 @@ export default function TopNav() {
               href="/profile"
               className={`w-8 h-8 rounded-full overflow-hidden border pressable cursor-pointer transition-colors ${pathname === '/profile' ? 'border-[#6E5B98]' : 'border-white/20'}`}
               onClick={() => haptic.trigger('light')}
+              data-cuelume-hover="tick"
             >
               <Image
                 src={navAvatar}
@@ -231,6 +246,7 @@ export default function TopNav() {
                 haptic.trigger('warning');
                 router.push('/landing');
               }}
+              data-cuelume-press
               aria-label="Log out"
             >
               <HugeiconsIcon icon={LogoutSquare01Icon} size={20} />

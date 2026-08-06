@@ -1,5 +1,18 @@
 import type { Metadata } from "next";
+import { Hanken_Grotesk, Libre_Caslon_Display } from "next/font/google";
 import "./globals.css";
+
+const hanken = Hanken_Grotesk({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-hanken",
+});
+
+const libre = Libre_Caslon_Display({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-serif",
+});
 import TopNav from "../components/TopNav";
 import MobileBottomNav from "../components/MobileBottomNav";
 import AboutOverlay from "../components/AboutOverlay";
@@ -31,6 +44,10 @@ export const metadata: Metadata = {
     description: "Discover, vote on, and shape community cultural offerings.",
     images: ["https://culture-connect-group19.vercel.app/og-image.png"],
   },
+  icons: {
+    icon: "/culture connect favicon.png",
+    apple: "/culture connect favicon.png",
+  },
 };
 
 export default function RootLayout({
@@ -39,7 +56,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${hanken.variable} ${libre.variable}`}>
       <body className="antialiased min-h-screen flex flex-col relative bg-[#0C0B0A]" suppressHydrationWarning>
         <ViewModeProvider>
           <FilterProvider>

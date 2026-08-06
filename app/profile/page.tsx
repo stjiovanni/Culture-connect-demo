@@ -189,6 +189,7 @@ function LocationDropdown({
         ref={triggerRef}
         type="button"
         onClick={handleToggle}
+        data-cuelume-press
         className={`w-full bg-white/5 border ${open ? 'border-[#6E5B98]' : 'border-white/10'} rounded-full px-4 ${py} text-white ${textSize} outline-none text-left flex items-center justify-between transition-colors hover:border-white/20`}
       >
         <span>{selected?.name ?? 'Select location'}</span>
@@ -212,6 +213,7 @@ function LocationDropdown({
               key={a.id}
               type="button"
               onClick={() => { onChange(a.id); setOpen(false); }}
+              data-cuelume-hover="tick"
               className={`w-full text-left px-4 ${itemPy} ${textSize} transition-colors pressable ${
                 a.id === value
                   ? 'text-white font-semibold bg-[#6E5B98]/20'
@@ -401,7 +403,7 @@ export default function ProfilePage() {
             <div className="overflow-y-auto max-h-[75vh]">
               {/* Banner Area */}
               <div className="relative h-36 w-full overflow-hidden">
-                <Image src={currentBanner} alt="Banner" fill className="object-cover" priority />
+                <Image src={currentBanner} alt="Banner" fill sizes="100vw" className="object-cover" priority />
                 <div className="absolute inset-0 bg-black/40" />
                 {/* Banner Controls */}
                 <div className="absolute inset-0 flex items-center justify-center gap-3">
@@ -419,8 +421,8 @@ export default function ProfilePage() {
               <div className="relative px-6 pt-0 pb-4">
                 <div className="absolute top-[-28px] left-6 z-30 group">
                   <div className="relative w-[84px] h-[84px] rounded-full border-[4px] border-[#0C0B0A] overflow-hidden shadow-2xl bg-[#161412]">
-                    <Image src={currentAvatar} alt="Avatar" fill className="object-cover" />
-                    <label className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer transition-opacity pressable">
+                    <Image src={currentAvatar} alt="Avatar" fill sizes="96px" className="object-cover" />
+                    <label data-cuelume-press className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer transition-opacity pressable">
                       <HugeiconsIcon icon={Camera01Icon} size={24} className="text-white" />
                       <input type="file" title="Upload avatar" accept="image/*" className="hidden" onChange={e => handleFileChange(e, 'avatar')} />
                     </label>
@@ -495,14 +497,14 @@ export default function ProfilePage() {
 
             {/* Banner — full width, no padding, no rounding, outside scroll container */}
             <div className="relative h-28 w-full overflow-hidden shrink-0">
-              <Image src={currentBanner} alt="Banner" fill className="object-cover" />
+              <Image src={currentBanner} alt="Banner" fill sizes="100vw" className="object-cover" />
               <div className="absolute inset-0 bg-black/40" />
               <div className="absolute inset-0 flex items-center justify-center gap-3">
-                <label className="p-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-full cursor-pointer pressable">
+                <label data-cuelume-press className="p-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-full cursor-pointer pressable">
                   <HugeiconsIcon icon={Camera01Icon} size={18} className="text-white" />
                   <input type="file" title="Upload banner" accept="image/*" className="hidden" onChange={e => handleFileChange(e, 'banner')} />
                 </label>
-                <button onClick={() => { setDraft(p => ({ ...p, banner: '/uploads/cultural-textiles-craft.jpeg' })); haptic.trigger('warning'); }} className="p-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-full pressable" aria-label="Remove banner">
+                <button onClick={() => { setDraft(p => ({ ...p, banner: '/uploads/cultural-textiles-craft.jpeg' })); haptic.trigger('warning'); }} data-cuelume-press className="p-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-full pressable" aria-label="Remove banner">
                   <HugeiconsIcon icon={Delete02Icon} size={18} className="text-white" />
                 </button>
               </div>
@@ -513,7 +515,7 @@ export default function ProfilePage() {
               <div className="absolute top-[-20px] left-4 z-30">
                 <div className="relative w-16 h-16 rounded-full border-[3px] border-[#0C0B0A] overflow-hidden shadow-2xl bg-[#161412]">
                   <Image src={currentAvatar} alt="Avatar" fill className="object-cover" />
-                  <label className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer pressable">
+                  <label data-cuelume-press className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer pressable">
                     <HugeiconsIcon icon={Camera01Icon} size={20} className="text-white" />
                     <input type="file" title="Upload avatar" accept="image/*" className="hidden" onChange={e => handleFileChange(e, 'avatar')} />
                   </label>
@@ -591,6 +593,7 @@ export default function ProfilePage() {
               src={bannerSrc}
               alt="Profile banner"
               fill
+              sizes="100vw"
               className="object-cover"
               priority
             />
@@ -611,6 +614,7 @@ export default function ProfilePage() {
                   src={avatarSrc}
                   alt="Profile avatar"
                   fill
+                  sizes="96px"
                   className="object-cover"
                 />
               </button>
@@ -664,6 +668,7 @@ export default function ProfilePage() {
               src={bannerSrc}
               alt="Profile banner"
               fill
+              sizes="100vw"
               className="object-cover"
               priority
             />
@@ -694,7 +699,7 @@ export default function ProfilePage() {
                 className="relative w-[48px] h-[48px] shrink-0 rounded-full border-[3px] border-[#0C0B0A] overflow-hidden shadow-xl cursor-zoom-in active:scale-95 transition-transform pressable"
                 aria-label="View profile photo full screen"
               >
-                <Image src={avatarSrc} alt="Profile avatar" fill className="object-cover" />
+                <Image src={avatarSrc} alt="Profile avatar" fill sizes="96px" className="object-cover" />
               </button>
               <div>
                 <h1 className="heading font-serif text-white">{displayName}</h1>
@@ -758,19 +763,30 @@ export default function ProfilePage() {
         </div>
 
         {/* Content - Category-Grouped Stacked Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
+        <motion.div
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8"
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.05 } },
+          }}
+          initial="hidden"
+          animate="show"
+        >
           {categorizedVotes.length > 0 ? (
-            categorizedVotes.map(([category, items], i) => (
-              <div
+            categorizedVotes.map(([category, items]) => (
+              <motion.div
                 key={category}
-                className={`animate-in fade-in slide-in-from-bottom-4 duration-500 animation-delay-${i * 100}`}
+                variants={{
+                  hidden: { opacity: 0, y: 12, rotate: -2 },
+                  show: { opacity: 1, y: 0, rotate: 0 },
+                }}
               >
                 <CategoryStack
                   category={category}
                   items={items}
                   haptic={haptic}
                 />
-              </div>
+              </motion.div>
             ))
           ) : (
             <div className="flex flex-col items-center justify-center py-20 text-center col-span-full">
@@ -783,7 +799,7 @@ export default function ProfilePage() {
               </Link>
             </div>
           )}
-        </div>
+        </motion.div>
       </main>
 
       {/* Global Overlays */}
@@ -802,7 +818,7 @@ export default function ProfilePage() {
           aria-label="Avatar photo"
         >
           <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
-            <Image src={avatarSrc} alt="Profile photo" fill className="object-cover" />
+            <Image src={avatarSrc} alt="Profile photo" fill sizes="100vw" className="object-cover" />
           </div>
         </div>
       )}
@@ -820,7 +836,7 @@ export default function ProfilePage() {
           aria-label="Profile banner"
         >
           <div className="relative w-full max-w-3xl aspect-[3/1] rounded-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
-            <Image src={bannerSrc} alt="Profile banner" fill className="object-cover" />
+            <Image src={bannerSrc} alt="Profile banner" fill sizes="100vw" className="object-cover" />
           </div>
         </div>
       )}
