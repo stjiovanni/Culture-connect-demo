@@ -263,7 +263,7 @@ function ProductCard({ p, i, haptic }: { p: Product, i: number, haptic: ReturnTy
             <Pill className="text-[11px] font-semibold border-white/10 bg-black/20 text-[#DDD6F3] backdrop-blur-md px-3 py-1">{p.category}</Pill>
           </div>
           
-          <h2 className="text-xl font-bold text-white leading-tight mt-1 line-clamp-2">
+          <h2 className="text-[18px] leading-[21px] font-bold text-white mt-1 line-clamp-2">
             {p.name}
           </h2>
         </div>
@@ -350,7 +350,7 @@ function MobileProductCard({ p, i, haptic }: { p: Product, i: number, haptic: Re
       {/* Content */}
       <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
         <p className="text-[10px] font-bold text-[#DDD6F3] opacity-80 mb-0.5">{p.category}</p>
-        <h2 className="text-[13px] font-bold text-white leading-tight line-clamp-2">{p.name}</h2>
+        <h2 className="text-[18px] leading-[21px] font-bold text-white line-clamp-2">{p.name}</h2>
         <p className="text-[11px] font-bold text-white mt-1">£{p.price.toFixed(0)}</p>
       </div>
     </Link>

@@ -129,7 +129,7 @@ export default function TopNav() {
                   <button
                     key={tab.value}
                     onClick={() => handleTabClick(tab.value)}
-                    data-cuelume-toggle
+                    data-cuelume-press
                     data-cuelume-hover="tick"
                     className={`relative px-3 py-1.5 text-[13px] tracking-[-0.03em] transition-colors rounded-full pressable ${isActive
                       ? 'text-black font-semibold'
@@ -211,7 +211,7 @@ export default function TopNav() {
 
             <button
               onClick={() => { toggleDrawer(); haptic.trigger('selection'); }}
-              data-cuelume-toggle
+              data-cuelume-press
               data-cuelume-hover="tick"
               className={`p-2 rounded-full transition-all shrink-0 pressable ${isDrawerOpen
                 ? 'bg-[#6E5B98] text-white'

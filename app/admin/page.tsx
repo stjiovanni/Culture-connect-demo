@@ -71,7 +71,7 @@ export default function AdminDashboard() {
           <h2 className="heading font-bold text-white tracking-tight">Top Tier Rankings</h2>
           <span className="text-[10px] font-black text-[#86847F] tracking-tight">Based on Citizen Sentiment</span>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto scroll-area">
           <table className="w-full text-left text-sm text-[#9E9B96]">
             <thead>
               <tr className="text-[10px] bg-white/[0.02] text-[#86847F] border-b border-white/5">
@@ -111,7 +111,7 @@ export default function AdminDashboard() {
         <div className="px-8 py-6 border-b border-white/5 bg-white/[0.02]">
           <h2 className="heading font-bold text-white tracking-tight">Heritage Directory</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto scroll-area">
           <table className="w-full text-left text-sm text-[#9E9B96]">
             <thead>
               <tr className="text-[10px] bg-white/[0.02] text-[#86847F] border-b border-white/5">

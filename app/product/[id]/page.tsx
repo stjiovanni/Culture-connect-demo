@@ -7,7 +7,7 @@ import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { ArrowLeft01Icon, Location01Icon, ThumbsUpIcon, ThumbsDownIcon, Cancel01Icon } from '@hugeicons/core-free-icons';
+import { ArrowLeft01Icon, ThumbsUpIcon, ThumbsDownIcon, Cancel01Icon } from '@hugeicons/core-free-icons';
 import { useVotes } from '@/context/VoteContext';
 import { play } from 'cuelume';
 
@@ -49,6 +49,17 @@ export default function ProductDetailPage() {
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
   }, [router, haptic, imageOpen]);
+
+  useEffect(() => {
+    if (imageOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [imageOpen]);
 
   if (!product) return null;
 
@@ -214,26 +225,25 @@ export default function ProductDetailPage() {
               <div className="flex flex-col gap-6 lg:gap-8 border-t border-white/5 pt-8">
                 {product.cultural_benefits && (
                   <div>
-                    <h2 className="heading text-white font-bold">Cultural Benefits</h2>
+<h2 className="heading heading-sm text-white font-bold">Cultural Benefits</h2>
                     <p className="body-text text-[#C9C6C0] font-normal">{product.cultural_benefits}</p>
                   </div>
                 )}
                 {product.size_quantity && (
                   <div>
-                    <h2 className="heading text-white font-bold">Size / Quantity</h2>
+<h2 className="heading heading-sm text-white font-bold">Size / Quantity</h2>
                     <p className="body-text text-[#C9C6C0] font-normal">{product.size_quantity}</p>
                   </div>
                 )}
                 <div>
-                  <h2 className="heading text-white font-bold flex items-center gap-2 mb-0">
+<h2 className="heading heading-sm text-white font-bold flex items-center gap-2 mb-0">
                     <span>Location</span>
-                    <HugeiconsIcon icon={Location01Icon} size={16} className="text-[#6E5B98]" />
                   </h2>
-                  <p className="body-text text-[#C9C6C0] mt-3">{product.area_name}</p>
+                  <p className="body-text text-[#C9C6C0] mt-1">{product.area_name}</p>
                 </div>
                 {product.awards && (
                   <div>
-                    <h2 className="heading text-white font-bold">Awards</h2>
+                    <h2 className="heading heading-sm text-white font-bold">Awards</h2>
                     <p className="body-text text-[#C9C6C0] font-normal">{product.awards}</p>
                   </div>
                 )}
@@ -293,7 +303,7 @@ export default function ProductDetailPage() {
         {/* Scrollable Content */}
         <div 
           ref={scrollRef}
-          className="flex-1 overflow-y-auto relative z-10 px-6"
+          className="flex-1 overflow-y-auto relative z-10 px-6 scroll-area"
         >
 
           {/* Outer div reserves space in flow — no sticky here */}
@@ -368,24 +378,23 @@ export default function ProductDetailPage() {
           {/* Meta */}
           {product.cultural_benefits && (
             <div>
-              <h2 className="heading text-white font-bold">Cultural Benefits</h2>
+              <h2 className="heading heading-sm text-white font-bold">Cultural Benefits</h2>
               <p className="body-text text-[#9E9B96] font-normal mb-6 lg:mb-8">{product.cultural_benefits}</p>
             </div>
           )}
 
           {product.size_quantity && (
             <div>
-              <h2 className="heading text-white font-bold">Size / Quantity</h2>
+              <h2 className="heading heading-sm text-white font-bold">Size / Quantity</h2>
               <p className="body-text text-[#9E9B96] font-normal mb-6 lg:mb-8">{product.size_quantity}</p>
             </div>
           )}
 
           <div>
-            <h2 className="heading text-white font-bold flex items-center gap-2 mb-0">
+            <h2 className="heading heading-sm text-white font-bold flex items-center gap-2 mb-0">
               <span>Location</span>
-              <HugeiconsIcon icon={Location01Icon} size={14} className="text-[#6E5B98]" />
             </h2>
-            <p className="body-text text-[#9E9B96] mt-3">{product.area_name}</p>
+            <p className="body-text text-[#9E9B96] mt-1">{product.area_name}</p>
           </div>
 
           {/* Spacer for sticky CTA */}
@@ -418,33 +427,40 @@ export default function ProductDetailPage() {
       {/* Product Image Lightbox */}
       {imageOpen && (
         <div
-          className="modal fixed inset-0 z-[150] bg-black flex items-center justify-center p-6"
+          className="fixed inset-0 z-[150] flex items-center justify-center p-6"
           style={{ overscrollBehavior: 'contain' }}
           onClick={() => setImageOpen(false)}
         >
+          <div className="gallery-backdrop" aria-hidden="true" />
           <button
             onClick={() => setImageOpen(false)}
-            className="absolute top-5 right-5 liquid-glass-modal w-11 h-11 flex items-center justify-center rounded-full text-white pressable"
+            className="absolute bottom-[calc(env(safe-area-inset-bottom)+16px)] left-1/2 -translate-x-1/2 liquid-glass-modal w-11 h-11 flex items-center justify-center rounded-full text-white pressable z-30 md:hidden"
             aria-label="Close image"
             data-cuelume-press
           >
             <HugeiconsIcon icon={Cancel01Icon} size={22} />
           </button>
           <div
-            className="relative w-full max-w-2xl"
+            className="relative z-10 w-full max-w-3xl max-h-[85vh] flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative w-full animate-in zoom-in-95 duration-200">
-              <div className="relative aspect-[1000/1414] w-full max-h-[85vh] mx-auto overflow-hidden">
-                <Image
-                  src={`/uploads/${product.image_filename}`}
-                  alt={product.name}
-                  fill
-                  sizes="90vw"
-                  className="object-contain"
-                  priority
-                />
-              </div>
+            <div className="relative w-full h-[85vh] animate-in zoom-in-95 duration-200">
+              <Image
+                src={`/uploads/${product.image_filename}`}
+                alt={product.name}
+                fill
+                sizes="90vw"
+                className="object-contain"
+                priority
+              />
+              <button
+                onClick={() => setImageOpen(false)}
+                className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 liquid-glass-modal w-11 h-11 hidden md:flex items-center justify-center rounded-full text-white pressable z-30"
+                aria-label="Close image"
+                data-cuelume-press
+              >
+                <HugeiconsIcon icon={Cancel01Icon} size={22} />
+              </button>
             </div>
           </div>
         </div>

@@ -134,7 +134,7 @@ export default function AboutOverlay() {
               <div className="h-6 md:h-8 lg:h-12" />
 
               {/* Scrollable content */}
-              <div className="flex-1 overflow-y-auto">
+              <div className="flex-1 overflow-y-auto scroll-area">
                 {/* Section 1: ABOUT CULTURE CONNECT */}
                 <h2 className="heading uppercase text-white">ABOUT CULTURE CONNECT</h2>
                 <div className="overflow-hidden">

@@ -571,7 +571,7 @@ export default function LandingPage({
               </div>
 
               {/* Scrollable Modal Markdown Content Area */}
-              <div className="overflow-y-auto p-6 md:p-8 flex-1 space-y-4 text-left custom-scrollbar scroll-smooth">
+              <div className="overflow-y-auto p-6 md:p-8 flex-1 space-y-4 text-left custom-scrollbar scroll-smooth scroll-area">
                 {activeTab === 'readme' && (
                   <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                     {parseMarkdown(readmeContent)}

@@ -51,7 +51,14 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-textarea {
+/* Grow text fields with their content instead of nested scrolling */
+textarea,
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="url"],
+input[type="tel"],
+input:not([type]) {
   field-sizing: content;
 }
 
@@ -428,9 +435,34 @@ textarea {
   content: "";
   position: absolute;
   inset: 0;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(12, 11, 10, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   z-index: 0;
+}
+
+/* Product image lightbox backdrop — pinned blur layer just behind the image */
+.gallery-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 11, 10, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 1;
+}
+
+/* Section heading (h2) — 16px / 18px line-height */
+.heading-sm {
+  font-size: 16px;
+  line-height: 18px;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+
+/* Physical scroll — native momentum + edge resistance, no scroll chaining */
+.scroll-area {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ==========================================

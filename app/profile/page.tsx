@@ -247,7 +247,7 @@ export default function ProfilePage() {
     firstName: 'User', lastName: 'One', username: 'user1',
     bio: '', occupation: 'Design Engineer', locationId: 1,
     avatar: '/uploads/avatar_7_1776873674.jpeg',
-    banner: '/uploads/cultural-textiles-craft.jpeg',
+    banner: '/uploads/header_7_1776873674.jpeg',
     interests: 12,
   });
 
@@ -269,7 +269,7 @@ export default function ProfilePage() {
   const editTouchStartY = useRef(0);
 
   const displayName = mounted ? `${profile.firstName} ${profile.lastName}` : 'User One';
-  const bannerSrc = mounted ? profile.banner : '/uploads/cultural-textiles-craft.jpeg';
+  const bannerSrc = mounted ? profile.banner : '/uploads/header_7_1776873674.jpeg';
   const avatarSrc = mounted ? profile.avatar : '/uploads/avatar_7_1776873674.jpeg';
   const displayUsername = mounted ? profile.username : 'user1';
   const locationName = areas.find(a => a.id === profile.locationId)?.name || 'Unknown';
@@ -400,7 +400,7 @@ export default function ProfilePage() {
             </div>
 
             {/* Scrollable Modal Content */}
-            <div className="overflow-y-auto max-h-[75vh]">
+            <div className="overflow-y-auto max-h-[75vh] scroll-area">
               {/* Banner Area */}
               <div className="relative h-36 w-full overflow-hidden">
                 <Image src={currentBanner} alt="Banner" fill sizes="100vw" className="object-cover" priority />
@@ -411,7 +411,7 @@ export default function ProfilePage() {
                     <HugeiconsIcon icon={Camera01Icon} size={20} className="text-white" />
                     <input type="file" title="Upload banner" accept="image/*" className="hidden" onChange={e => handleFileChange(e, 'banner')} />
                   </label>
-                  <button onClick={() => { setDraft(p => ({ ...p, banner: '/uploads/cultural-textiles-craft.jpeg' })); haptic.trigger('warning'); }} className="p-2.5 bg-white/10 backdrop-blur-md border border-white/10 rounded-full hover:bg-white/20 transition-all pressable" aria-label="Remove banner">
+                  <button onClick={() => { setDraft(p => ({ ...p, banner: '/uploads/header_7_1776873674.jpeg' })); haptic.trigger('warning'); }} className="p-2.5 bg-white/10 backdrop-blur-md border border-white/10 rounded-full hover:bg-white/20 transition-all pressable" aria-label="Remove banner">
                     <HugeiconsIcon icon={Delete02Icon} size={20} className="text-white" />
                   </button>
                 </div>
@@ -504,7 +504,7 @@ export default function ProfilePage() {
                   <HugeiconsIcon icon={Camera01Icon} size={18} className="text-white" />
                   <input type="file" title="Upload banner" accept="image/*" className="hidden" onChange={e => handleFileChange(e, 'banner')} />
                 </label>
-                <button onClick={() => { setDraft(p => ({ ...p, banner: '/uploads/cultural-textiles-craft.jpeg' })); haptic.trigger('warning'); }} data-cuelume-press className="p-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-full pressable" aria-label="Remove banner">
+                <button onClick={() => { setDraft(p => ({ ...p, banner: '/uploads/header_7_1776873674.jpeg' })); haptic.trigger('warning'); }} data-cuelume-press className="p-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-full pressable" aria-label="Remove banner">
                   <HugeiconsIcon icon={Delete02Icon} size={18} className="text-white" />
                 </button>
               </div>
@@ -524,7 +524,7 @@ export default function ProfilePage() {
             </div>
 
             {/* Scrollable form fields — no banner inside here */}
-            <div className="overflow-y-auto px-4" style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 80px)' }}>
+            <div className="overflow-y-auto px-4 scroll-area" style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 80px)' }}>
               <div className="space-y-6 pt-4">
                 <div className="flex flex-col gap-1.5">
                   <label className="text-[#86847F] text-[11px] font-bold tracking-[-0.5px]">First name</label>

@@ -24,6 +24,7 @@ export default function CardCoverFlow({ products, onOpen, onLongPress, className
   const [dragX, setDragX] = useState(0);
   const deckRef = useRef<HTMLDivElement>(null);
   const pressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const wheelAccum = useRef(0);
 
   const gesture = useRef({
     active: false,
@@ -47,8 +48,14 @@ export default function CardCoverFlow({ products, onOpen, onLongPress, className
     const onWheel = (e: WheelEvent) => {
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
         e.preventDefault();
-        if (e.deltaX > 40) goNext();
-        else if (e.deltaX < -40) goPrev();
+        wheelAccum.current += e.deltaX;
+        if (wheelAccum.current > SWIPE_THRESHOLD) {
+          wheelAccum.current = 0;
+          goNext();
+        } else if (wheelAccum.current < -SWIPE_THRESHOLD) {
+          wheelAccum.current = 0;
+          goPrev();
+        }
       }
     };
     el.addEventListener('wheel', onWheel, { passive: false });
