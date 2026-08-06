@@ -25,13 +25,14 @@ export default function MobileHeaderTabs({ tabsRef, dimmed }: { tabsRef?: RefObj
 
   return (
     <div ref={tabsRef} className={`mobile-header-tabs aps-bar ${dimmed ? 'mobile-header-tabs--dimmed' : ''}`}>
-      {tabs.map((tab) => {
+      {tabs.map((tab, index) => {
         const isActive = typeFilter === tab.value;
+        const align = index === 0 ? 'justify-start' : index === tabs.length - 1 ? 'justify-end' : 'justify-center';
         return (
           <button
             key={tab.value}
             onClick={() => { setTypeFilter(tab.value); haptic.trigger('selection'); }}
-            className={`mobile-tab-button text-[24px] transition-all pressable flex justify-center items-start focus:outline-none border-none bg-transparent leading-none ${
+            className={`mobile-tab-button text-[24px] transition-all pressable flex ${align} items-start focus:outline-none border-none bg-transparent leading-none ${
               isActive
                 ? 'text-white font-black'
                 : 'text-[#9E9B96] font-semibold'
