@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [320, 384, 480, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512, 640],
+    // q=75 is the default (kept for the LCP image); q=60 is used for grid
+    // thumbnails to reduce transfer size without visible quality loss.
+    qualities: [60, 75],
   },
 };
 

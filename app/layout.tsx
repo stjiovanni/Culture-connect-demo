@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Hanken_Grotesk, Libre_Caslon_Display } from "next/font/google";
+import { Hanken_Grotesk, Libre_Caslon_Display, Stack_Sans_Notch } from "next/font/google";
 import "./globals.css";
 
 const hanken = Hanken_Grotesk({
@@ -12,6 +12,12 @@ const libre = Libre_Caslon_Display({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-serif",
+});
+
+const stackSans = Stack_Sans_Notch({
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-stack",
 });
 import TopNav from "../components/TopNav";
 import MobileBottomNav from "../components/MobileBottomNav";
@@ -56,12 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${hanken.variable} ${libre.variable}`}>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap" />
-      </head>
+    <html lang="en" className={`${hanken.variable} ${libre.variable} ${stackSans.variable}`}>
       <body className="antialiased min-h-screen flex flex-col relative bg-[#0C0B0A]" suppressHydrationWarning>
         <ViewModeProvider>
           <FilterProvider>

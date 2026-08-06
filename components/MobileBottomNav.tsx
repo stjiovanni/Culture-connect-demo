@@ -4,37 +4,28 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Home01Icon, Search01Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
 import { useWebHaptics } from 'web-haptics/react';
-import MobileHeaderTabs from './MobileHeaderTabs';
+import { useFilter } from '@/context/FilterContext';
 
 export default function MobileBottomNav() {
   const pathname = usePathname();
   const router = useRouter();
   const haptic = useWebHaptics();
+  const { searchQuery, setSearchQuery } = useFilter();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
   const [mounted, setMounted] = useState(false);
-  const [hidden, setHidden] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const searchBarRef = useRef<HTMLDivElement>(null);
   const pillRef = useRef<HTMLDivElement>(null);
-  const tabsRef = useRef<HTMLDivElement>(null);
-  const isOpenRef = useRef(isOpen);
-
-  useEffect(() => {
-    isOpenRef.current = isOpen;
-  }, [isOpen]);
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)');
     if (!mq.matches) return;
     let restoreT: ReturnType<typeof setTimeout> | undefined;
     let ticking = false;
-    let lastY = window.scrollY;
 
     const webkit = (el: HTMLElement, v: string) => {
       (el.style as CSSStyleDeclaration & { webkitBackdropFilter?: string }).webkitBackdropFilter = v;
@@ -59,18 +50,10 @@ export default function MobileBottomNav() {
       window.requestAnimationFrame(() => {
         ticking = false;
         lowBlur(pillRef.current);
-        lowBlur(tabsRef.current);
         if (restoreT) clearTimeout(restoreT);
         restoreT = setTimeout(() => {
           restoreBlur(pillRef.current);
-          restoreBlur(tabsRef.current);
         }, 120);
-        const y = window.scrollY;
-        if (!isOpenRef.current) {
-          if (y > lastY && y > 60) setHidden(true);
-          else if (y < lastY) setHidden(false);
-        }
-        lastY = y;
       });
     };
 
@@ -80,10 +63,6 @@ export default function MobileBottomNav() {
       if (restoreT) clearTimeout(restoreT);
     };
   }, []);
-
-  useEffect(() => {
-    if (isOpen) setHidden(false);
-  }, [isOpen]);
 
   // Prevent animation on first render
   useEffect(() => {
@@ -129,10 +108,10 @@ export default function MobileBottomNav() {
     setIsOpen(false);
     // Clear + blur after close animation finishes (280ms)
     setTimeout(() => {
-      setSearchValue('');
+      setSearchQuery('');
       inputRef.current?.blur();
     }, 280);
-  }, []);
+  }, [setSearchQuery]);
 
   const handleClearAndClose = useCallback(() => {
     haptic.trigger('light');
@@ -159,11 +138,7 @@ export default function MobileBottomNav() {
         />
       )}
 
-      <motion.div
-        className="mobile-nav-stack"
-        animate={{ y: hidden && !isOpen ? '160%' : '0%' }}
-        transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
-      >
+      <div className="mobile-nav-stack">
         {/* Search bar — always in DOM, toggled via CSS class */}
         <div
           ref={searchBarRef}
@@ -171,22 +146,22 @@ export default function MobileBottomNav() {
         >
           <div className="mobile-search-bar-inner">
             <HugeiconsIcon icon={Search01Icon} size={18} className="text-[#86847F] shrink-0" />
-            <input
+            <textarea
               ref={inputRef}
-              type="text"
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
+              rows={1}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search…"
               title="Search"
               className="mobile-search-input"
               onKeyDown={(e) => {
-                if (e.key === 'Enter' && searchValue.trim()) {
-                  router.push(`/discover?search=${encodeURIComponent(searchValue)}`);
+                if (e.key === 'Enter' && searchQuery.trim()) {
+                  if (pathname !== '/discover') router.push('/discover');
                   closeSearch();
                 }
               }}
             />
-            {searchValue.length > 0 && (
+            {searchQuery.length > 0 && (
               <button
                 onClick={handleClearAndClose}
                 className="mobile-search-clear"
@@ -199,11 +174,6 @@ export default function MobileBottomNav() {
             )}
           </div>
         </div>
-
-        {/* All / Products / Services tabs */}
-        {pathname === '/discover' && (
-          <MobileHeaderTabs tabsRef={tabsRef} dimmed={isOpen} />
-        )}
 
         {/* Nav pill */}
         <div ref={pillRef} className="mobile-bottom-pill" role="navigation" aria-label="Mobile navigation">
@@ -244,11 +214,11 @@ export default function MobileBottomNav() {
             data-cuelume-hover="tick"
           >
             <div className="relative w-6 h-6 rounded-full overflow-hidden">
-              <Image src={navAvatar} alt="Profile" fill className="object-cover" />
+              <Image src={navAvatar} alt="Profile" fill sizes="24px" className="object-cover" />
             </div>
           </Link>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

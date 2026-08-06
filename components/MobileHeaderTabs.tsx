@@ -1,35 +1,45 @@
 "use client";
 
 import type { RefObject } from 'react';
+import { useMemo } from 'react';
 import { useFilter } from '@/context/FilterContext';
 import { useWebHaptics } from 'web-haptics/react';
+import { getProducts } from '@/lib/data';
 
 export default function MobileHeaderTabs({ tabsRef, dimmed }: { tabsRef?: RefObject<HTMLDivElement | null>; dimmed?: boolean }) {
   const { typeFilter, setTypeFilter } = useFilter();
   const haptic = useWebHaptics();
+  const products = getProducts();
+
+  const counts = useMemo(() => ({
+    all: products.length,
+    product: products.filter((product) => product.type === 'product').length,
+    service: products.filter((product) => product.type === 'service').length,
+  }), [products]);
 
   const tabs = [
-    { label: 'All', value: 'all' },
-    { label: 'Products', value: 'product' },
-    { label: 'Services', value: 'service' },
+    { label: 'All', value: 'all', count: counts.all },
+    { label: 'Products', value: 'product', count: counts.product },
+    { label: 'Services', value: 'service', count: counts.service },
   ];
 
   return (
-    <div ref={tabsRef} className={`mobile-header-tabs flex items-center justify-between ${dimmed ? 'mobile-header-tabs--dimmed' : ''}`}>
+    <div ref={tabsRef} className={`mobile-header-tabs aps-bar ${dimmed ? 'mobile-header-tabs--dimmed' : ''}`}>
       {tabs.map((tab) => {
         const isActive = typeFilter === tab.value;
         return (
           <button
             key={tab.value}
             onClick={() => { setTypeFilter(tab.value); haptic.trigger('selection'); }}
-            className={`text-[24px] transition-all pressable flex-1 flex justify-center items-start focus:outline-none border-none bg-transparent leading-none ${
+            className={`mobile-tab-button text-[24px] transition-all pressable flex justify-center items-start focus:outline-none border-none bg-transparent leading-none ${
               isActive
                 ? 'text-white font-black'
                 : 'text-[#9E9B96] font-semibold'
             }`}
             data-cuelume-toggle
           >
-            {tab.label}
+            <span>{tab.label}</span>
+            <span className="mobile-tab-count">{tab.count}</span>
           </button>
         );
       })}

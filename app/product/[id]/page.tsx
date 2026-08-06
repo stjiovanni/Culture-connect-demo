@@ -432,19 +432,11 @@ export default function ProductDetailPage() {
           onClick={() => setImageOpen(false)}
         >
           <div className="gallery-backdrop" aria-hidden="true" />
-          <button
-            onClick={() => setImageOpen(false)}
-            className="absolute bottom-[calc(env(safe-area-inset-bottom)+16px)] left-1/2 -translate-x-1/2 liquid-glass-modal w-11 h-11 flex items-center justify-center rounded-full text-white pressable z-30 md:hidden"
-            aria-label="Close image"
-            data-cuelume-press
-          >
-            <HugeiconsIcon icon={Cancel01Icon} size={22} />
-          </button>
           <div
-            className="relative z-10 w-full max-w-3xl max-h-[85vh] flex items-center justify-center"
+            className="relative z-10 flex max-h-[90vh] w-full max-w-[900px] flex-col items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative w-full h-[85vh] animate-in zoom-in-95 duration-200">
+            <div className="relative h-[78vh] w-[min(90vw,800px)] animate-in zoom-in-95 duration-200">
               <Image
                 src={`/uploads/${product.image_filename}`}
                 alt={product.name}
@@ -453,15 +445,15 @@ export default function ProductDetailPage() {
                 className="object-contain"
                 priority
               />
-              <button
-                onClick={() => setImageOpen(false)}
-                className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 liquid-glass-modal w-11 h-11 hidden md:flex items-center justify-center rounded-full text-white pressable z-30"
-                aria-label="Close image"
-                data-cuelume-press
-              >
-                <HugeiconsIcon icon={Cancel01Icon} size={22} />
-              </button>
             </div>
+            <button
+              onClick={() => setImageOpen(false)}
+              className="liquid-glass-modal mt-4 flex h-12 w-12 items-center justify-center rounded-full text-white pressable"
+              aria-label="Close image"
+              data-cuelume-press
+            >
+              <HugeiconsIcon icon={Cancel01Icon} size={22} />
+            </button>
           </div>
         </div>
       )}

@@ -43,11 +43,8 @@ export default function LandingPage() {
 
   return (
     <>
-      {/* Scope font imports to landing page route only */}
-      <link
-        href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap"
-        rel="stylesheet"
-      />
+      {/* Material Symbols scoped to landing page route only
+          (Stack Sans Notch is now served globally via next/font --font-stack) */}
       <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
         rel="stylesheet"
@@ -56,7 +53,7 @@ export default function LandingPage() {
       <style>{`
         /* Responsive font-size scaling for typography links */
         .landing-link {
-          font-family: 'Stack Sans Notch', sans-serif !important;
+          font-family: var(--font-stack), 'Stack Sans Notch', sans-serif !important;
           font-weight: 700 !important;
           font-style: normal !important;
           line-height: 1 !important;

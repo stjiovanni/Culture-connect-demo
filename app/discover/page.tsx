@@ -7,11 +7,12 @@ import { getProducts, getAreas, type Product } from '@/lib/data';
 import { useViewMode } from '@/context/ViewModeContext';
 import { useFilter } from '@/context/FilterContext';
 import FilterDrawer from '@/components/FilterDrawer';
+import MobileHeaderTabs from '@/components/MobileHeaderTabs';
 import { useWebHaptics } from 'web-haptics/react';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Location01Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
 import Pill from '@/components/Pill';
-import { motion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 
 const gridContainer = { hidden: {}, show: { transition: { staggerChildren: 0.05 } } };
 const gridItem = { hidden: { opacity: 1, y: 16, rotate: -3 }, show: { opacity: 1, y: 0, rotate: 0 } };
@@ -92,6 +93,9 @@ export default function DiscoverPage() {
 
   return (
     <div className="flex flex-col gap-6 max-w-[1400px] mx-auto px-6 pt-6 pb-6">
+      <div className="md:hidden sticky top-0 z-20 -mx-6 -mt-6">
+        <MobileHeaderTabs />
+      </div>
       {viewMode === 'admin' && (
         <div className="glass-pill rounded-full px-6 py-3 text-[11px] text-center border border-[#6E5B98]/30 text-[#DDD6F3] font-bold tracking-[-0.5px] animate-in fade-in slide-in-from-top-2 duration-500">
           <span className="opacity-60 mr-2">Mode:</span> Administrative Access — Read Only
@@ -99,7 +103,7 @@ export default function DiscoverPage() {
       )}
 
       {/* Section Header */}
-      <div className="mt-0 md:mt-4 text-left max-w-lg animate-in fade-in slide-in-from-top-4 duration-500">
+      <div className="hidden md:block mt-0 md:mt-4 text-left max-w-lg animate-in fade-in slide-in-from-top-4 duration-500">
         <h1 className="heading font-serif text-white tracking-tight">
           {sectionContent.title}
         </h1>
@@ -109,33 +113,35 @@ export default function DiscoverPage() {
         <span className="text-[11px] font-bold text-[#9E9B96]">{filteredProducts.length} results</span>
       </div>
 
+      <LazyMotion features={domAnimation} strict>
       {/* Product Grid — Desktop: standard grid, Mobile: Pinterest masonry */}
-      <motion.div
+      <m.div
         className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
         variants={gridContainer}
         initial="hidden"
         animate="show"
       >
         {filteredProducts.map((p, i) => (
-          <motion.div key={p.id} variants={gridItem}>
+          <m.div key={p.id} variants={gridItem}>
             <ProductCard p={p} i={i} haptic={haptic} />
-          </motion.div>
+          </m.div>
         ))}
-      </motion.div>
+      </m.div>
 
       {/* Mobile masonry grid */}
-      <motion.div
+      <m.div
         className="md:hidden masonry-grid"
         variants={gridContainer}
         initial="hidden"
         animate="show"
       >
         {filteredProducts.map((p, i) => (
-          <motion.div key={p.id} variants={gridItem}>
-            <MobileProductCard p={p} i={i} haptic={haptic} />
-          </motion.div>
+          <m.div key={p.id} variants={gridItem}>
+            <MobileProductCard p={p} i={i} haptic={haptic} priority={i === 0} />
+          </m.div>
         ))}
-      </motion.div>
+      </m.div>
+      </LazyMotion>
 
       {/* Selected Filters Bar - Bottom */}
       {isAdvancedFilterActive && (
@@ -231,13 +237,13 @@ function ProductCard({ p, i, haptic }: { p: Product, i: number, haptic: ReturnTy
     >
       {/* Background Image & Content Wrapper */}
       <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px]">
-        <Image 
-          src={`/uploads/${p.image_filename}`} 
-          alt={p.name} 
-          fill 
-          className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" 
-          priority={i < 4}
-          sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+        <Image
+          src={`/uploads/${p.image_filename}`}
+          alt={p.name}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+          sizes="(min-width: 1400px) 323px, (min-width: 1280px) calc((100vw - 108px) / 4), (min-width: 1024px) calc((100vw - 88px) / 3), calc((100vw - 68px) / 2)"
+          quality={60}
         />
         {/* Permanent bottom-heavy gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/4 to-black/82"></div>
@@ -312,7 +318,7 @@ function ProductCard({ p, i, haptic }: { p: Product, i: number, haptic: ReturnTy
 /* ─────────────────────────────────────────────
    Mobile Product Card (Pinterest / Staggered)
    ───────────────────────────────────────────── */
-function MobileProductCard({ p, i, haptic }: { p: Product, i: number, haptic: ReturnType<typeof useWebHaptics> }) {
+function MobileProductCard({ p, i, haptic, priority = false }: { p: Product, i: number, haptic: ReturnType<typeof useWebHaptics>, priority?: boolean }) {
   // Staggered heights for Pinterest effect
   const heights = ['aspect-[3/4]', 'aspect-[4/5]', 'aspect-[2/3]', 'aspect-[5/6]'];
   const aspectClass = heights[i % heights.length];
@@ -324,13 +330,18 @@ function MobileProductCard({ p, i, haptic }: { p: Product, i: number, haptic: Re
       data-cuelume-hover="tick"
       className={`group relative rounded-[20px] overflow-hidden pressable ${aspectClass} block`}
     >
-      <Image 
-        src={`/uploads/${p.image_filename}`} 
-        alt={p.name} 
-        fill 
+      <Image
+        src={`/uploads/${p.image_filename}`}
+        alt={p.name}
+        fill
         sizes="50vw"
-        className="object-cover" 
-        priority={i < 4}
+        className="object-cover"
+        // First mobile masonry card is the LCP element on mobile: preload it,
+        // fetch it at high priority and never lazy-load it. Other cards use
+        // q=60 thumbnails to cut transfer size (LCP image stays at default q=75).
+        priority={priority}
+        fetchPriority={priority ? 'high' : undefined}
+        quality={priority ? 75 : 60}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70" />
       
