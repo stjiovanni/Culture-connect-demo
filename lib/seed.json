@@ -49,7 +49,7 @@
             "type": "service",
             "area_id": 3,
             "awards": null,
-            "image_filename": "life drawing session.jfif",
+            "image_filename": "life drawing session.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "affordable"
@@ -67,7 +67,7 @@
             "type": "service",
             "area_id": 1,
             "awards": "Hertfordshire Arts Commission Award 2024",
-            "image_filename": "Iris flower armchair.jfif",
+            "image_filename": "Iris flower armchair.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "premium"
@@ -85,7 +85,7 @@
             "type": "service",
             "area_id": 2,
             "awards": null,
-            "image_filename": "pottery making.jfif",
+            "image_filename": "pottery making.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "affordable"
@@ -121,7 +121,7 @@
             "type": "service",
             "area_id": 4,
             "awards": null,
-            "image_filename": "Open mic field.jfif",
+            "image_filename": "Open mic field.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "affordable"
@@ -139,7 +139,7 @@
             "type": "service",
             "area_id": 5,
             "awards": "Herts Youth Arts Recognition 2023",
-            "image_filename": "Youth drama.jfif",
+            "image_filename": "Youth drama.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "affordable"
@@ -157,7 +157,7 @@
             "type": "service",
             "area_id": 3,
             "awards": "Eastern Arts Award Nominee 2024",
-            "image_filename": "Community theatre.jfif",
+            "image_filename": "Community theatre.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "affordable"
@@ -175,7 +175,7 @@
             "type": "service",
             "area_id": 2,
             "awards": null,
-            "image_filename": "butterfly fancer.jfif",
+            "image_filename": "butterfly fancer.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "affordable"
@@ -229,7 +229,7 @@
             "type": "service",
             "area_id": 1,
             "awards": null,
-            "image_filename": "Self-publishing workshop.jfif",
+            "image_filename": "Self-publishing workshop.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "affordable"
@@ -247,7 +247,7 @@
             "type": "product",
             "area_id": 3,
             "awards": null,
-            "image_filename": "Hand-stitched zine laid open.jfif",
+            "image_filename": "Hand-stitched zine laid open.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "affordable"
@@ -319,7 +319,7 @@
             "type": "service",
             "area_id": 1,
             "awards": null,
-            "image_filename": "natural history museum.jfif",
+            "image_filename": "natural history museum.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "affordable"
@@ -337,7 +337,7 @@
             "type": "service",
             "area_id": 2,
             "awards": "Visit England Quality Award 2023",
-            "image_filename": "product_19_1776984315.jfif",
+            "image_filename": "product_19_1776984315.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "moderate"
@@ -355,7 +355,7 @@
             "type": "service",
             "area_id": 3,
             "awards": null,
-            "image_filename": "product_20_1776984351.jfif",
+            "image_filename": "product_20_1776984351.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "affordable"
@@ -373,7 +373,7 @@
             "type": "service",
             "area_id": 8,
             "awards": null,
-            "image_filename": "Brandiing.jfif",
+            "image_filename": "Brandiing.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "premium"
@@ -391,7 +391,7 @@
             "type": "service",
             "area_id": 2,
             "awards": null,
-            "image_filename": "Brand mood board flat lay.jfif",
+            "image_filename": "Brand mood board flat lay.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "affordable"
@@ -409,7 +409,7 @@
             "type": "service",
             "area_id": 5,
             "awards": null,
-            "image_filename": "event photographer in action.jfif",
+            "image_filename": "event photographer in action.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "moderate"
@@ -427,7 +427,7 @@
             "type": "service",
             "area_id": 4,
             "awards": null,
-            "image_filename": "Graphic design.jfif",
+            "image_filename": "Graphic design.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "moderate"
@@ -445,7 +445,7 @@
             "type": "service",
             "area_id": 6,
             "awards": null,
-            "image_filename": "high end furniture (1).jfif",
+            "image_filename": "high end furniture (1).jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "moderate"
@@ -463,7 +463,7 @@
             "type": "product",
             "area_id": 1,
             "awards": null,
-            "image_filename": "high end furniture (2).jfif",
+            "image_filename": "high end furniture (2).jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "moderate"
@@ -481,7 +481,7 @@
             "type": "service",
             "area_id": 6,
             "awards": null,
-            "image_filename": "Digital illustration editorial esque potrait.jfif",
+            "image_filename": "Digital illustration editorial esque potrait.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "moderate"
@@ -499,7 +499,7 @@
             "type": "service",
             "area_id": 5,
             "awards": null,
-            "image_filename": "Digital illustration.jfif",
+            "image_filename": "Digital illustration.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "affordable"
@@ -517,7 +517,7 @@
             "type": "service",
             "area_id": 3,
             "awards": null,
-            "image_filename": "Podcast recording setup.jfif",
+            "image_filename": "Podcast recording setup.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "moderate"
@@ -553,7 +553,7 @@
             "type": "service",
             "area_id": 2,
             "awards": null,
-            "image_filename": "Digital illustration.jfif",
+            "image_filename": "Digital illustration.jpg",
             "is_available": 1,
             "created_at": "2026-04-23 02:07:02",
             "pricing_category": "moderate"

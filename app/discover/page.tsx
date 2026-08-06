@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getProducts, getAreas, type Product } from '@/lib/data';
@@ -15,7 +15,7 @@ import Pill from '@/components/Pill';
 import { motion } from 'framer-motion';
 
 const gridContainer = { hidden: {}, show: { transition: { staggerChildren: 0.05 } } };
-const gridItem = { hidden: { opacity: 0, y: 12, rotate: -2 }, show: { opacity: 1, y: 0, rotate: 0 } };
+const gridItem = { hidden: { opacity: 1, y: 16, rotate: -3 }, show: { opacity: 1, y: 0, rotate: 0 } };
 
 export default function DiscoverPage() {
   const { viewMode } = useViewMode();
@@ -38,13 +38,6 @@ export default function DiscoverPage() {
   } = useFilter();
   const allProducts = getProducts();
   const haptic = useWebHaptics();
-  
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => { 
-    const t = setTimeout(() => setMounted(true), 0); 
-    return () => clearTimeout(t); 
-  }, []);
 
   const filteredProducts = useMemo(() => {
     let result = allProducts;
@@ -97,8 +90,6 @@ export default function DiscoverPage() {
         };
     }
   }, [typeFilter]);
-
-  if (!mounted) return null;
 
   return (
     <div className="flex flex-col gap-6 max-w-[1400px] mx-auto px-6 pt-6 pb-6">
@@ -250,6 +241,7 @@ function ProductCard({ p, i, haptic }: { p: Product, i: number, haptic: ReturnTy
           fill 
           className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" 
           priority={i < 4}
+          fetchPriority="high"
           sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
         />
         {/* Permanent bottom-heavy gradient */}

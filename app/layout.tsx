@@ -57,6 +57,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${hanken.variable} ${libre.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap" />
+      </head>
       <body className="antialiased min-h-screen flex flex-col relative bg-[#0C0B0A]" suppressHydrationWarning>
         <ViewModeProvider>
           <FilterProvider>
