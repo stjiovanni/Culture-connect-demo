@@ -177,6 +177,8 @@ export default function TopNav() {
             <HugeiconsIcon icon={Search01Icon} size={16} className="text-[#86847F] shrink-0 ml-1" />
             <div className="flex-1 min-w-0 flex items-center relative">
               <input
+                id="site-search"
+                name="search"
                 type="text"
                 placeholder="Search"
                 value={searchQuery}

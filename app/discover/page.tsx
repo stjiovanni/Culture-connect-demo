@@ -7,7 +7,6 @@ import { getProducts, getAreas, type Product } from '@/lib/data';
 import { useViewMode } from '@/context/ViewModeContext';
 import { useFilter } from '@/context/FilterContext';
 import FilterDrawer from '@/components/FilterDrawer';
-import MobileHeaderTabs from '@/components/MobileHeaderTabs';
 import { useWebHaptics } from 'web-haptics/react';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Location01Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
@@ -99,11 +98,8 @@ export default function DiscoverPage() {
         </div>
       )}
 
-      {/* Mobile Header Tabs */}
-      <MobileHeaderTabs />
-
       {/* Section Header */}
-      <div className="mt-[-12px] md:mt-4 text-left max-w-lg animate-in fade-in slide-in-from-top-4 duration-500">
+      <div className="mt-0 md:mt-4 text-left max-w-lg animate-in fade-in slide-in-from-top-4 duration-500">
         <h1 className="heading font-serif text-white tracking-tight">
           {sectionContent.title}
         </h1>
@@ -241,7 +237,6 @@ function ProductCard({ p, i, haptic }: { p: Product, i: number, haptic: ReturnTy
           fill 
           className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" 
           priority={i < 4}
-          fetchPriority="high"
           sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
         />
         {/* Permanent bottom-heavy gradient */}

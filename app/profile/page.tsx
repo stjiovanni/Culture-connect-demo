@@ -528,22 +528,22 @@ export default function ProfilePage() {
               <div className="space-y-6 pt-4">
                 <div className="flex flex-col gap-1.5">
                   <label className="text-[#86847F] text-[11px] font-bold tracking-[-0.5px]">First name</label>
-                  <input type="text" aria-label="First name" value={draft.firstName} onChange={e => setDraft(p => ({ ...p, firstName: e.target.value }))} className="bg-white/5 border border-white/10 rounded-full px-4 py-3 text-white text-[15px] outline-none" />
+                  <input id="profile-fn" name="firstName" type="text" aria-label="First name" value={draft.firstName} onChange={e => setDraft(p => ({ ...p, firstName: e.target.value }))} className="bg-white/5 border border-white/10 rounded-full px-4 py-3 text-white text-[15px] outline-none" />
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label className="text-[#86847F] text-[11px] font-bold tracking-[-0.5px]">Last name</label>
-                  <input type="text" aria-label="Last name" value={draft.lastName} onChange={e => setDraft(p => ({ ...p, lastName: e.target.value }))} className="bg-white/5 border border-white/10 rounded-full px-4 py-3 text-white text-[15px] outline-none" />
+                  <input id="profile-ln" name="lastName" type="text" aria-label="Last name" value={draft.lastName} onChange={e => setDraft(p => ({ ...p, lastName: e.target.value }))} className="bg-white/5 border border-white/10 rounded-full px-4 py-3 text-white text-[15px] outline-none" />
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label className="text-[#86847F] text-[11px] font-bold tracking-[-0.5px]">Username</label>
                   <div className="relative">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#86847F]">@</span>
-                    <input type="text" aria-label="Username" value={draft.username} onChange={e => setDraft(p => ({ ...p, username: e.target.value }))} className="w-full bg-white/5 border border-white/10 rounded-full pl-8 pr-4 py-3 text-white text-[15px] outline-none" />
+                    <input id="profile-un" name="username" type="text" aria-label="Username" value={draft.username} onChange={e => setDraft(p => ({ ...p, username: e.target.value }))} className="w-full bg-white/5 border border-white/10 rounded-full pl-8 pr-4 py-3 text-white text-[15px] outline-none" />
                   </div>
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label className="text-[#86847F] text-[11px] font-bold tracking-[-0.5px]">Occupation</label>
-                  <input type="text" aria-label="Occupation" value={draft.occupation} onChange={e => setDraft(p => ({ ...p, occupation: e.target.value }))} className="bg-white/5 border border-white/10 rounded-full px-4 py-3 text-white text-[15px] outline-none" />
+                  <input id="profile-occ" name="occupation" type="text" aria-label="Occupation" value={draft.occupation} onChange={e => setDraft(p => ({ ...p, occupation: e.target.value }))} className="bg-white/5 border border-white/10 rounded-full px-4 py-3 text-white text-[15px] outline-none" />
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label className="text-[#86847F] text-[11px] font-bold tracking-[-0.5px]">Location</label>

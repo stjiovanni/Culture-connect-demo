@@ -4,9 +4,11 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Home01Icon, Search01Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
 import { useWebHaptics } from 'web-haptics/react';
+import MobileHeaderTabs from './MobileHeaderTabs';
 
 export default function MobileBottomNav() {
   const pathname = usePathname();
@@ -16,8 +18,72 @@ export default function MobileBottomNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [mounted, setMounted] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const searchBarRef = useRef<HTMLDivElement>(null);
+  const pillRef = useRef<HTMLDivElement>(null);
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const isOpenRef = useRef(isOpen);
+
+  useEffect(() => {
+    isOpenRef.current = isOpen;
+  }, [isOpen]);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    if (!mq.matches) return;
+    let restoreT: ReturnType<typeof setTimeout> | undefined;
+    let ticking = false;
+    let lastY = window.scrollY;
+
+    const webkit = (el: HTMLElement, v: string) => {
+      (el.style as CSSStyleDeclaration & { webkitBackdropFilter?: string }).webkitBackdropFilter = v;
+    };
+
+    const restoreBlur = (el: HTMLElement | null) => {
+      if (!el) return;
+      const v = el === pillRef.current ? 'blur(20px) saturate(180%)' : 'blur(20px)';
+      el.style.backdropFilter = v;
+      webkit(el, v);
+    };
+
+    const lowBlur = (el: HTMLElement | null) => {
+      if (!el) return;
+      el.style.backdropFilter = 'blur(8px)';
+      webkit(el, 'blur(8px)');
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        ticking = false;
+        lowBlur(pillRef.current);
+        lowBlur(tabsRef.current);
+        if (restoreT) clearTimeout(restoreT);
+        restoreT = setTimeout(() => {
+          restoreBlur(pillRef.current);
+          restoreBlur(tabsRef.current);
+        }, 120);
+        const y = window.scrollY;
+        if (!isOpenRef.current) {
+          if (y > lastY && y > 60) setHidden(true);
+          else if (y < lastY) setHidden(false);
+        }
+        lastY = y;
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (restoreT) clearTimeout(restoreT);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) setHidden(false);
+  }, [isOpen]);
 
   // Prevent animation on first render
   useEffect(() => {
@@ -93,85 +159,96 @@ export default function MobileBottomNav() {
         />
       )}
 
-      {/* Search bar — always in DOM, toggled via CSS class */}
-      <div
-        ref={searchBarRef}
-        className={`mobile-search-bar ${isOpen ? 'mobile-search-bar--open' : ''} ${!mounted ? 'mobile-search-bar--no-transition' : ''}`}
+      <motion.div
+        className="mobile-nav-stack"
+        animate={{ y: hidden && !isOpen ? '160%' : '0%' }}
+        transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
       >
-        <div className="mobile-search-bar-inner">
-          <HugeiconsIcon icon={Search01Icon} size={18} className="text-[#86847F] shrink-0" />
-          <input
-            ref={inputRef}
-            type="text"
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            placeholder="Search…"
-            title="Search"
-            className="mobile-search-input"
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && searchValue.trim()) {
-                router.push(`/discover?search=${encodeURIComponent(searchValue)}`);
-                closeSearch();
-              }
-            }}
-          />
-          {searchValue.length > 0 && (
-            <button
-              onClick={handleClearAndClose}
-              className="mobile-search-clear"
-              aria-label="Clear search"
-              type="button"
-              data-cuelume-press
-            >
-              <HugeiconsIcon icon={Cancel01Icon} size={14} />
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* Nav pill */}
-      <nav className="mobile-bottom-pill" aria-label="Mobile navigation">
-        <Link
-          href="/discover"
-          onClick={() => {
-            if (isOpen) closeSearch();
-            haptic.trigger('light');
-          }}
-          className={`flex items-center justify-center w-10 h-10 rounded-full transition-all pressable ${(pathname === '/discover' || pathname === '/') && !isOpen ? 'text-white' : 'text-[#86847F] hover:text-white'
-            }`}
-          aria-label="Home"
-          data-cuelume-hover="tick"
+        {/* Search bar — always in DOM, toggled via CSS class */}
+        <div
+          ref={searchBarRef}
+          className={`mobile-search-bar ${isOpen ? 'mobile-search-bar--open' : ''} ${!mounted ? 'mobile-search-bar--no-transition' : ''}`}
         >
-          <HugeiconsIcon icon={Home01Icon} size={22} />
-        </Link>
-
-        <button
-          onClick={openSearch}
-          data-cuelume-toggle
-          className={`flex items-center justify-center w-10 h-10 rounded-full transition-all pressable ${isOpen ? 'text-white' : 'text-[#86847F] hover:text-white'
-            }`}
-          aria-label="Search"
-          type="button"
-        >
-          <HugeiconsIcon icon={Search01Icon} size={22} />
-        </button>
-
-        {/* Profile avatar link */}
-        <Link
-          href="/profile"
-          onClick={() => {
-            if (isOpen) closeSearch();
-            haptic.trigger('light');
-          }}
-          className={`flex items-center justify-center rounded-full border transition-all pressable shrink-0 ${pathname === '/profile' ? 'border-[#6E5B98]' : 'border-white/20'}`}
-          aria-label="Profile"
-          data-cuelume-hover="tick"
-        >
-          <div className="relative w-6 h-6 rounded-full overflow-hidden">
-            <Image src={navAvatar} alt="Profile" fill className="object-cover" />
+          <div className="mobile-search-bar-inner">
+            <HugeiconsIcon icon={Search01Icon} size={18} className="text-[#86847F] shrink-0" />
+            <input
+              ref={inputRef}
+              type="text"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              placeholder="Search…"
+              title="Search"
+              className="mobile-search-input"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && searchValue.trim()) {
+                  router.push(`/discover?search=${encodeURIComponent(searchValue)}`);
+                  closeSearch();
+                }
+              }}
+            />
+            {searchValue.length > 0 && (
+              <button
+                onClick={handleClearAndClose}
+                className="mobile-search-clear"
+                aria-label="Clear search"
+                type="button"
+                data-cuelume-press
+              >
+                <HugeiconsIcon icon={Cancel01Icon} size={14} />
+              </button>
+            )}
           </div>
-        </Link>
-      </nav>
+        </div>
+
+        {/* All / Products / Services tabs */}
+        {pathname === '/discover' && (
+          <MobileHeaderTabs tabsRef={tabsRef} dimmed={isOpen} />
+        )}
+
+        {/* Nav pill */}
+        <div ref={pillRef} className="mobile-bottom-pill" role="navigation" aria-label="Mobile navigation">
+          <Link
+            href="/discover"
+            onClick={() => {
+              if (isOpen) closeSearch();
+              haptic.trigger('light');
+            }}
+            className={`flex items-center justify-center w-10 h-10 rounded-full transition-all pressable ${(pathname === '/discover' || pathname === '/') && !isOpen ? 'text-white' : 'text-[#86847F] hover:text-white'
+              }`}
+            aria-label="Home"
+            data-cuelume-hover="tick"
+          >
+            <HugeiconsIcon icon={Home01Icon} size={22} />
+          </Link>
+
+          <button
+            onClick={openSearch}
+            data-cuelume-toggle
+            className={`flex items-center justify-center w-10 h-10 rounded-full transition-all pressable ${isOpen ? 'text-white' : 'text-[#86847F] hover:text-white'
+              }`}
+            aria-label="Search"
+            type="button"
+          >
+            <HugeiconsIcon icon={Search01Icon} size={22} />
+          </button>
+
+          {/* Profile avatar link */}
+          <Link
+            href="/profile"
+            onClick={() => {
+              if (isOpen) closeSearch();
+              haptic.trigger('light');
+            }}
+            className={`flex items-center justify-center rounded-full border transition-all pressable shrink-0 ${pathname === '/profile' ? 'border-[#6E5B98]' : 'border-white/20'}`}
+            aria-label="Profile"
+            data-cuelume-hover="tick"
+          >
+            <div className="relative w-6 h-6 rounded-full overflow-hidden">
+              <Image src={navAvatar} alt="Profile" fill className="object-cover" />
+            </div>
+          </Link>
+        </div>
+      </motion.div>
     </div>
   );
 }

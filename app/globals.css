@@ -480,13 +480,19 @@ input:not([type]) {
   display: none;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
   /* Pointer events only on children, not the transparent wrapper */
   pointer-events: none;
 }
 
 .mobile-nav-container > * {
   pointer-events: auto;
+}
+
+.mobile-nav-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .mobile-bottom-pill {
@@ -544,6 +550,7 @@ input:not([type]) {
   width: calc(100% - 32px);
   position: relative;
   z-index: 100;
+  margin-bottom: 12px;
   /* Closed state */
   transform-origin: center bottom;
   transform: scaleX(0.15) scaleY(0.3) translateY(28px);
@@ -641,27 +648,47 @@ input:not([type]) {
 }
 
 /* ==========================================
-   MOBILE HEADER TABS — sticky with blur
+   MOBILE HEADER TABS — bottom glass pill above nav pill
    ========================================== */
 .mobile-header-tabs {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  background: rgba(12, 11, 10, 0.8);
-  -webkit-backdrop-filter: blur(20px);
+  position: relative;
+  z-index: 2;
+  margin-bottom: 4px;
+  background: rgba(12, 11, 10, 0.90);
+  background-blend-mode: luminosity;
   backdrop-filter: blur(20px);
-  padding: 12px 6px 8px;
+  -webkit-backdrop-filter: blur(20px);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+  border-radius: 0;
+  width: 100%;
+  height: 44px;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: opacity 300ms ease;
 }
 
-.mobile-header-tabs::after {
-  content: '';
+.mobile-header-tabs::before {
+  content: "";
   position: absolute;
-  bottom: -20px;
   left: 0;
   right: 0;
-  height: 20px;
-  background: linear-gradient(to bottom, rgba(12, 11, 10, 0.6), transparent);
+  bottom: -24px;
+  height: 130px;
+  background: rgba(12, 11, 10, 0.90);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 35%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 35%);
+  z-index: -1;
+  border-radius: 0;
   pointer-events: none;
+}
+
+.mobile-header-tabs--dimmed {
+  opacity: 0.35;
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
 }
 
 .mobile-tab {
@@ -746,7 +773,7 @@ input:not([type]) {
   }
 
   main {
-    padding-bottom: 80px !important;
+    padding-bottom: 130px !important;
     padding-top: 0 !important;
   }
 }
