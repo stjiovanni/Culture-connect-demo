@@ -107,7 +107,13 @@ export default function AboutOverlay() {
   return (
     <AnimatePresence onExitComplete={() => { if (pendingNav) { router.push(pendingNav); setPendingNav(null); } }}>
       {isOpen && (
-        <div className="fixed inset-0 z-50 overflow-hidden">
+        <div
+          id="about-dialog"
+          className="fixed inset-0 z-50 overflow-hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="about-dialog-title"
+        >
           {/* Black content panel */}
           <motion.div
             className="absolute inset-x-0 top-0 bottom-[80px] bg-[#0C0B0A]"
@@ -119,7 +125,7 @@ export default function AboutOverlay() {
             <div className="flex flex-col h-full p-8 md:p-12 pt-12 md:pt-14">
               {/* Navigation row: BACK | CULTURE CONNECT ↗ */}
               <div className="flex justify-between items-center">
-                <button onClick={close} className={navBtnClass}>
+                <button type="button" onClick={close} className={navBtnClass}>
                   BACK
                 </button>
                 <button
@@ -136,7 +142,7 @@ export default function AboutOverlay() {
               {/* Scrollable content */}
               <div className="flex-1 overflow-y-auto scroll-area">
                 {/* Section 1: ABOUT CULTURE CONNECT */}
-                <h2 className="heading uppercase text-white">ABOUT CULTURE CONNECT</h2>
+                <h2 id="about-dialog-title" className="heading uppercase text-white">ABOUT CULTURE CONNECT</h2>
                 <div className="overflow-hidden">
                   <motion.p
                     className="body-text text-[#9E9B96] font-normal"
@@ -163,10 +169,7 @@ export default function AboutOverlay() {
                   >
                     {teamMembers.map((member) => (
                       <div key={member.name} className="overflow-hidden">
-                        <motion.a
-                          href={member.url}
-                          target={member.url ? '_blank' : undefined}
-                          rel={member.url ? 'noopener noreferrer' : undefined}
+                        <motion.div
                           className="team-name text-white flex justify-between items-center"
                           variants={{
                             hidden: revealFrom,
@@ -176,9 +179,20 @@ export default function AboutOverlay() {
                             },
                           }}
                         >
-                          <span>{member.name} — {member.role}</span>
-                          <HugeiconsIcon icon={ArrowUpRight01Icon} size={18} strokeWidth={3} className="shrink-0" />
-                        </motion.a>
+                          {member.url ? (
+                            <a
+                              href={member.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex justify-between items-center w-full"
+                            >
+                              <span>{member.name} — {member.role}</span>
+                              <HugeiconsIcon icon={ArrowUpRight01Icon} size={18} strokeWidth={3} className="shrink-0" />
+                            </a>
+                          ) : (
+                            <span>{member.name} — {member.role}</span>
+                          )}
+                        </motion.div>
                       </div>
                     ))}
                   </motion.div>

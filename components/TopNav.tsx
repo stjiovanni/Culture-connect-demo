@@ -114,7 +114,6 @@ export default function TopNav() {
                   width={28}
                   height={28}
                   className="object-contain"
-                  priority
                 />
               </div>
             </Link>
@@ -181,6 +180,7 @@ export default function TopNav() {
                 name="search"
                 type="text"
                 placeholder="Search"
+                aria-label="Search products and services"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="bg-transparent text-white text-[15px] outline-none w-full min-w-0 placeholder-[#86847F] font-normal tracking-[-0.03em]"

@@ -17,7 +17,7 @@ export default function MobileBottomNav() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const searchBarRef = useRef<HTMLDivElement>(null);
   const pillRef = useRef<HTMLDivElement>(null);
 
@@ -146,13 +146,14 @@ export default function MobileBottomNav() {
         >
           <div className="mobile-search-bar-inner">
             <HugeiconsIcon icon={Search01Icon} size={18} className="text-[#86847F] shrink-0" />
-            <textarea
+            <input
               ref={inputRef}
-              rows={1}
+              type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search…"
               title="Search"
+              aria-label="Search products and services"
               className="mobile-search-input"
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && searchQuery.trim()) {

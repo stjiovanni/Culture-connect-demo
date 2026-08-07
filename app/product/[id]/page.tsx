@@ -124,13 +124,6 @@ export default function ProductDetailPage() {
 
   return (
     <div className="min-h-screen bg-transparent font-sans">
-      {/* Background: blurred product image + dark overlay */}
-      <div 
-        className="fixed inset-0 z-[-2] bg-cover bg-center product-bg-blur bg-[image:var(--bg-image)]"
-        style={{ '--bg-image': `url(/uploads/${product.image_filename})` } as React.CSSProperties}
-      />
-      <div className="fixed inset-0 z-[-1] bg-[#0C0B0A]/70" />
-
       {/* ═══════════════════════════════════════
           DESKTOP LAYOUT (md+)
           ═══════════════════════════════════════ */}
@@ -275,13 +268,6 @@ export default function ProductDetailPage() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: 'spring', stiffness: 320, damping: 30, mass: 1 }}
       >
-        {/* Blurred bg for mobile */}
-        <div 
-          className="fixed inset-0 z-[-2] bg-cover bg-center product-bg-blur bg-[image:var(--bg-image)]"
-          style={{ '--bg-image': `url(/uploads/${product.image_filename})` } as React.CSSProperties}
-        />
-        <div className="fixed inset-0 z-[-1] bg-[#0C0B0A]/80" />
-
         {/* Drag Handle + Close */}
         <div 
           className="relative z-[5] flex items-center justify-between px-4 pt-3 pb-2 bg-transparent"

@@ -28,6 +28,11 @@ html:has(.landing-root), html:has(.landing-root) body {
   height: 100%;
 }
 
+html {
+  /* Keep content from moving when a page starts/stops scrolling. */
+  scrollbar-gutter: stable;
+}
+
 body {
   background-color: var(--background);
   color: var(--text-main);
@@ -36,6 +41,18 @@ body {
   letter-spacing: -0.5px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Keep optional entrance effects from competing with the initial render. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Global button reset — strips browser-default outline/border that
@@ -107,6 +124,11 @@ input:not([type]) {
   top: 0;
   z-index: 100;
   width: 100%;
+  min-height: var(--navbar-height);
+}
+
+#site-header > nav {
+  min-height: var(--navbar-height);
 }
 
 /* Progressive Blur Effect */
@@ -212,16 +234,6 @@ input:not([type]) {
 
 .animate-fadeInUp {
   animation: fadeInUp 0.5s var(--ease-out) backwards;
-}
-
-/* Product detail page – dynamic background blur */
-.product-bg-blur {
-  filter: blur(28px) brightness(0.3);
-  transform: scale(1.2);
-}
-
-.product-img-blur {
-  filter: blur(48px);
 }
 
 /* Staggered animation delay utilities for card grids */
@@ -690,7 +702,7 @@ input:not([type]) {
   box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
   border-radius: 0;
   width: 100%;
-  height: auto;
+  min-height: 50px;
   padding-left: 16px;
   padding-right: 16px;
   box-sizing: border-box;

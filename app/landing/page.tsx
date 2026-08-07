@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowUpRight01Icon } from '@hugeicons/core-free-icons';
@@ -43,13 +42,6 @@ export default function LandingPage() {
 
   return (
     <>
-      {/* Material Symbols scoped to landing page route only
-          (Stack Sans Notch is now served globally via next/font --font-stack) */}
-      <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
-        rel="stylesheet"
-      />
-
       <style>{`
         /* Responsive font-size scaling for typography links */
         .landing-link {
@@ -70,6 +62,7 @@ export default function LandingPage() {
 
       {/* ─── ROOT CONTAINER ─── */}
       <div className="relative w-full h-screen bg-[#010101] overflow-hidden select-none landing-root">
+        <h1 className="sr-only">Culture Connect</h1>
 
         {/* ══════════════════════════════════════════
             BACKGROUND (BIG BEN)
@@ -96,7 +89,6 @@ export default function LandingPage() {
                 fill
                 sizes="100vw"
                 className="object-cover object-center"
-                priority
               />
             </div>
             <div className="relative w-1/3 h-full">
@@ -199,7 +191,11 @@ export default function LandingPage() {
           </a>
 
           {/* ABOUT — layout placeholder, disabled/mocked */}
-          <div
+          <button
+            type="button"
+            id="about-trigger"
+            aria-haspopup="dialog"
+            aria-controls="about-dialog"
             className="landing-link flex items-center gap-3 opacity-50 select-none cursor-not-allowed"
           >
             <span>ABOUT</span>
@@ -211,7 +207,7 @@ export default function LandingPage() {
             <span className="md:hidden inline-flex items-center">
               <HugeiconsIcon icon={ArrowUpRight01Icon} size={36} strokeWidth={3} />
             </span>
-          </div>
+          </button>
         </div>
 
       </div>

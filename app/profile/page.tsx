@@ -14,102 +14,10 @@ import {
   LogoutSquare01Icon
 } from '@hugeicons/core-free-icons';
 import { useVotes } from '@/context/VoteContext';
-import ReactCrop, { type Crop, centerCrop, makeAspectCrop } from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
+import ImageEditor from '@/components/ImageEditor';
 
 import CategoryStack from '@/components/CategoryStack';
 import { motion } from 'framer-motion';
-
-function CropUI({
-  src,
-  aspect,
-  circular,
-  onConfirm,
-  onCancel
-}: {
-  src: string;
-  aspect?: number;
-  circular?: boolean;
-  onConfirm: (dataUrl: string) => void;
-  onCancel: () => void
-}) {
-  const [crop, setCrop] = useState<Crop>();
-  const [imgRef, setImgRef] = useState<HTMLImageElement | null>(null);
-
-  function onImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
-    if (aspect) {
-      const { width, height } = e.currentTarget;
-      setCrop(centerCrop(
-        makeAspectCrop({ unit: '%', width: 90 }, aspect, width, height),
-        width,
-        height
-      ));
-    }
-    setImgRef(e.currentTarget);
-  }
-
-  const handleApply = () => {
-    if (!imgRef || !crop) return;
-
-    const canvas = document.createElement('canvas');
-    const scaleX = imgRef.naturalWidth / imgRef.width;
-    const scaleY = imgRef.naturalHeight / imgRef.height;
-    canvas.width = crop.width * scaleX;
-    canvas.height = crop.height * scaleY;
-    const ctx = canvas.getContext('2d');
-
-    if (ctx) {
-      ctx.drawImage(
-        imgRef,
-        crop.x * scaleX,
-        crop.y * scaleY,
-        crop.width * scaleX,
-        crop.height * scaleY,
-        0,
-        0,
-        crop.width * scaleX,
-        crop.height * scaleY
-      );
-      onConfirm(canvas.toDataURL('image/jpeg', 0.9));
-    }
-  };
-
-  return (
-    <div className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center p-6">
-      <div className="max-w-2xl w-full flex flex-col gap-8">
-        <div className="relative bg-[#1A1814] rounded-2xl overflow-hidden border border-white/10 shadow-2xl flex flex-col items-center justify-center p-6 min-h-[300px]">
-          <p className="text-[#9E9B96] text-[13px] text-center mb-3">
-            {circular ? 'Crop profile photo' : 'Crop header — 3:1 ratio'}
-          </p>
-          <ReactCrop
-            crop={crop}
-            onChange={c => setCrop(c)}
-            aspect={aspect}
-            circularCrop={circular}
-            className="max-h-[60vh]"
-          >
-            <img src={src} onLoad={onImageLoad} alt="Crop" className="max-h-[60vh] object-contain" />
-          </ReactCrop>
-        </div>
-
-        <div className="flex gap-4 justify-center">
-          <button
-            onClick={onCancel}
-            className="btn-text px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 backdrop-blur-md transition-all pressable"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleApply}
-            className="btn-text px-8 py-3 rounded-full bg-[#6E5B98]/90 text-white font-bold hover:bg-[#6E5B98] backdrop-blur-md transition-all pressable"
-          >
-            Apply crop
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function ConfirmDialog({ onConfirm, onCancel }: { onConfirm: () => void; onCancel: () => void }) {
   useEffect(() => {
@@ -561,10 +469,11 @@ export default function ProfilePage() {
 
         {/* Edit Flow Modals */}
         {cropping && (
-          <CropUI
+          <ImageEditor
             src={cropping.src}
             aspect={cropping.type === 'avatar' ? 1 : 3}
             circular={cropping.type === 'avatar'}
+            label={cropping.type === 'avatar' ? 'Profile photo' : 'Profile header'}
             onConfirm={applyCrop}
             onCancel={() => setCropping(null)}
           />

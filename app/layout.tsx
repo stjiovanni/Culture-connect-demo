@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Hanken_Grotesk, Libre_Caslon_Display, Stack_Sans_Notch } from "next/font/google";
 import "./globals.css";
 
@@ -6,18 +6,21 @@ const hanken = Hanken_Grotesk({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-hanken",
+  display: "optional",
 });
 
 const libre = Libre_Caslon_Display({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-serif",
+  display: "optional",
 });
 
 const stackSans = Stack_Sans_Notch({
   subsets: ["latin"],
   weight: "variable",
   variable: "--font-stack",
+  display: "optional",
 });
 import TopNav from "../components/TopNav";
 import MobileBottomNav from "../components/MobileBottomNav";
@@ -54,6 +57,12 @@ export const metadata: Metadata = {
     icon: "/culture connect favicon.png",
     apple: "/culture connect favicon.png",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
